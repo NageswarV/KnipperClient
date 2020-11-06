@@ -1,0 +1,40 @@
+.input-group-addon, .input-group-btn {
+  width: 4%;
+  /*float:right;*/
+  border: 0px;
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    width: 5%;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 10%;
+  }
+}
+
+.material-icons{
+  font-size:30px;
+}
+
+.star-rating {
+  .to-rate {
+    cursor: pointer;
+    padding: 0 1px;
+  }
+
+  .fa-star-o {
+    /*color: orange;*/
+  }
+
+  .fa-star {
+    color: orange;
+  }
+
+  .fa-star-half-o {
+    color: orange;
+  }
+
+  .to-display {
+    padding: 0 2px;
+  }
+}

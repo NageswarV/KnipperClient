@@ -1,0 +1,255 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/styles';
+
+@mixin sort-caret {
+  display: flex;
+  align-self: center;
+  font-family: 'Material Icons';
+  font-size: 1rem;
+  font-size: 1.5rem;
+  margin-right: -1.5rem;
+}
+
+.custom-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+th {
+  cursor: pointer;
+  font-weight: 600;
+  vertical-align: text-top !important;
+  border: none !important;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  &.select-header {
+    max-width: 8rem;
+    overflow: hidden;
+
+    &.check-box {
+      white-space: nowrap;
+    }
+  }
+
+  &.checkbox-container {
+    width: 1rem !important;
+
+    .mat-checkbox {
+      margin-right: 0;
+    }
+  }
+
+  .header-content {
+    padding-right: 1.5rem;
+
+    .standard-header-container {
+      justify-content: space-between;
+    }
+
+    &.sort-asc {
+      div.standard-header-container:after, div.fixed-header-container:after {
+        @include sort-caret;
+        content: '\E5CE';
+      }
+    }
+
+    &.sort-desc {
+      div.standard-header-container:after, div.fixed-header-container:after {
+        @include sort-caret;
+        content: '\E5CF';
+      }
+    }
+  }
+
+  .standard-header-container {
+    width: 100%;
+  }
+
+  .fixed-header-container {
+    position: fixed;
+    height: 3.75rem;
+    top: $navbar-height-desktop;
+    z-index: 1;
+    padding-top: 0.75rem;
+
+    @media screen and (max-width: 1199px) {
+      top: $navbar-height-tablet;
+    }
+  }
+
+  &:first-of-type {
+    padding-left: 1.5rem;
+  }
+
+  &:last-of-type {
+    padding-right: 1.5rem;
+  }
+
+  &.column-visibility-collapsed {
+    display: none;
+  }
+
+  &.column-visibility-xs1 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xs1) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-sm {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-sm) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-sm1 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-sm1) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-md {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-md) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-md1 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-md1) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-md2 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-md2) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-md3 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-md3) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-lg {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-lg) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-lg1 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-lg1) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-lg2 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-lg2) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-lg3 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-lg3) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xl {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xl) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xl1 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xl1) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xl2 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xl2) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xl3 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xl3) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xxl {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xxl) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xxl1 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xxl1) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xxl2 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xxl2) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xxl3 {
+    display: none;
+
+    @media screen and (min-width: $table-breakpoint-xxl3) {
+      display: table-cell;
+    }
+  }
+
+  &.column-visibility-xxl4 {
+    display: none;
+
+    @media (min-width: $table-breakpoint-xxl4) {
+      display: table-cell;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div class="row" [ngBusy]="busyPromises.Reports">
+  <div class="col-xs-12 col-md-6 col-xl-2">
+    <h1>Uploaded Reports({{collection?.length}})</h1>
+  </div>
+  <div class="col-xs-12 col-md-6 col-xl-2 text-right">
+    <button class="btn btn-default" (click)="openDialog()">UPLOAD REPORTS</button>
+    <p class="Supported-formats">Supported formats: .CSV, .PDF, .XLSX</p>
+  </div>
+</div>
+<div class="row reports">
+  <div class="col-sm-12 col-xs-9">
+    <sg-grid [columns]="columns" emptyText="No Reports" [items]="collection" [totalRecordCount]="collection?.length"
+      [pageSize]="pageSize" [currentPage]="currentPage" [fromReport]="fromReport" [pages]="pages"
+      [disablePaginationFloating]="true" (emitPageChange)="paginate($event)" [loadMorePagination]="true" class="uploadedReports">
+      <ng-template let-report>
+        <td class="col-xs-2 Cell-Text"><a [href]="reportToExport" (click)="setReportPath(report.reportDefinition.name)" download><u>{{report.reportName || " "}}</u></a> </td>
+        <td class="col-xs-2 Cell-Text">{{report.reportDefinition.name || " "}}</td>
+        <td class="col-xs-2 Cell-Text">{{report.reportDefinition.category || " "}}</td>
+        <td class="col-xs-2 Cell-Text">{{report.uploadedOn | sgCustomDate}}</td>
+        <td class="col-xs-2 Cell-Text">{{report.format || " "}}</td>
+        <td class="col-xs-2 Cell-Text">{{report.uploadedByUser.firstName || " "}}
+          {{report.uploadedByUser.lastName || " "}}</td>
+      </ng-template>
+    </sg-grid>
+  </div>
+</div>
+<ng-template #privacypolicy let-c="close">
+  <div class="modal-body margin-bottom">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <p translate="yes">repportal-privacy-policy-content-msg</p>
+      <p translate="yes">repportal-privacy-policy-content-cookie-msg</p>
+      <p translate="yes">repportal-privacy-policy-content-link <span><a target="_blank"
+            href="https://www.knipper.com/privacy-policy/"
+            translate="yes">repportal-privacy-policy-content-here-link</a></span></p>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-default" (click)="c($event);" translate="yes">repportal-authentication-ok</button>
+    </div>
+  </div>
+</ng-template>

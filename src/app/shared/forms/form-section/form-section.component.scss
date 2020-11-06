@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+
+.mat-expansion-panel {
+  margin-top: 1.5em;
+
+  .mat-expansion-panel-body {
+    .well {
+      background: $background-well-embed !important;
+    }
+  }
+
+  &.is-warning {
+    background: $pastel-yellow;
+    .mat-expansion-panel-header-title {
+      color: $dark-orange;
+    }
+  }
+  
+  &.is-error {
+    background: $bright-red;
+    .mat-expansion-panel-header-title {
+      color: $white;
+    }
+  }
+}
+
+.checkbox-list-container {
+  background: $background-well-embed;
+}

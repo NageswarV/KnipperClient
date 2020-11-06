@@ -1,0 +1,36 @@
+<div class="search-container light-expansion">
+    <mat-expansion-panel hideToggle disabled expanded=true>
+        <div class="d-flex" (click)="back()">
+            <i class="material-icons">keyboard_arrow_left</i>
+            <a>Back</a>
+        </div>
+        <h2>Search Activities by Sales Rep</h2>
+        <p><i>Please enter the following details to narrow down the search results.</i></p>
+        <form action="">
+            <div class="form-group">
+                <label for="firstName">Sales Rep First Name</label>
+                <input type="text" id="firstName" class="form-control" name="firstName"
+                    placeholder="Enter Sales Rep First Name" />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Sales Rep Last Name</label>
+                <input type="text" id="lastName" class="form-control" name="lastName"
+                    placeholder="Enter Sales Rep Last Name" />
+            </div>
+            <div class="form-group">
+                <label for="territoryName">Territory Name</label>
+                <input type="text" id="territoryName" class="form-control" name="territoryName"
+                    placeholder="Enter Territory Name" />
+            </div>
+            <div class="form-group">
+                <label for="territoryId">Territory ID</label>
+                <input type="text" id="territoryId" class="form-control" name="territoryId" placeholder="Enter Territory ID" />
+            </div>
+
+            <div class="d-flex">
+                <button class="btn btn-primary" style="margin-right: 15px;" routerLink="/rep/orders">Search</button>
+                <button class="btn btn-default" routerLink="/rep/orders">Skip And Continue</button>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</div>

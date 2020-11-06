@@ -1,0 +1,51 @@
+@import '../../../../styles/variables';
+
+.checkbox-list-container {
+  background: $white;
+  border: 1px solid $input-border;
+  border-radius: 0.15rem;
+  overflow-y: auto;
+
+  &.no-well {
+    border: none;
+
+  }
+  .mat-checkbox {
+    .mat-checkbox-label {
+      color: $charcoal;
+      white-space: initial !important;
+    }
+  }
+}
+
+.checkbox-list-container-collapsible {
+  padding: 1rem 5rem;
+
+  &.readonly {
+    padding-left: 3rem;
+  }
+}
+
+.checkbox-list-container-not-collapsible {
+  padding: 1rem 1.5rem;
+  &.no-well {
+    padding-left: 0;
+    padding-top: 0;
+    overflow: visible;
+  }
+}
+
+.readonly-text {
+  line-height: 24px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  vertical-align: top;
+}
+
+.check-icon {
+  color: $green;
+}
+
+.uncheck-icon {
+  color: $light-grey-2;
+}

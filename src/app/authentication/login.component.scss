@@ -1,0 +1,101 @@
+﻿@import '../../style/main.scss';
+
+.panel-login {
+    position: relative;
+    .panel-heading-login {
+        text-align: center;
+    }
+    .panel-body {
+        padding-top: 10px;
+    }
+}
+.panel-subheading {
+    margin: 15px 15px 0 15px;
+}
+#btn-signin {
+    width: 100%;
+}
+
+.input-group-btn .btn {
+    padding: 12.5px 17px;
+    text-transform: none;
+    margin: 0;
+
+    i {
+        margin-right: 10px;
+        vertical-align: top;
+        font-size: 20px;
+    }
+}
+
+.glyphicon {
+    margin-right: 24px;
+}
+
+.password-groups {
+    margin-left: 30px;
+}
+
+.passed {
+    color: green;
+    .glyphicon {
+        margin-right: 10px;
+    }
+    .glyphicon:before {
+        content: "\e013";
+    }
+}
+
+.not-passed {
+    color: red;
+    .glyphicon {
+        margin-right: 10px;
+    }
+    .glyphicon:before {
+        content: "\e209";
+    }
+}
+
+.has-error {
+    .btn.btn-default {
+        border-bottom-color: $danger;
+    }
+}
+.leftRightPadding {
+	padding: 0 8.2%;
+}
+
+.password-note-icon {
+	font-size: 16px;
+	vertical-align: sub;
+	color: #01569c;
+}
+
+.password-note {
+	font-style: italic;
+	margin-left: 2px;
+}
+
+.password-rule {
+	font-size: 12px;
+}
+
+.passed {
+    color: green;
+    .glyphicon {
+        margin-right: 10px;
+    }
+    .glyphicon:before {
+        content: "\e013";
+    }
+}
+
+.not-passed {
+    color: red;
+    .glyphicon {
+        margin-right: 10px;
+    }
+    .glyphicon:before {
+        content: "\e209";
+    }
+}

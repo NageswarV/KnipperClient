@@ -1,0 +1,29 @@
+<mat-expansion-panel #expansionPanel expanded="{{expanded}}" [class.is-warning]="isWarning" [class.is-error]="isError">
+  <mat-expansion-panel-header *ngIf="header" [ngClass]="headerClass" expandedHeight="{{height}}" collapsedHeight="{{height}}">
+    <mat-panel-title>
+      <mat-icon class="mr-2 mt-1" *ngIf="headerIcon">{{headerIcon}}</mat-icon>
+      <div *ngIf="level === 1">
+        <span *ngIf="!headerParameters && !headerIsDto" l10nTranslate>{{header}}</span>
+        <span *ngIf="headerParameters && !headerIsDto">{{header | translate:lang:headerParameters}}</span>
+        <span *ngIf="headerIsDto">
+          <samplicity-display-translation [values]="header"></samplicity-display-translation>
+        </span>
+      </div>
+      <div *ngIf="level === 2">
+        <h4 *ngIf="!headerParameters && !headerIsDto" l10nTranslate>{{header}}</h4>
+        <h4 *ngIf="headerParameters && !headerIsDto">{{header | translate:lang:headerParameters}}</h4>
+        <h4 *ngIf="headerIsDto">
+          <samplicity-display-translation [values]="header"></samplicity-display-translation>
+        </h4>
+      </div>
+      <div *ngIf="level === 3">
+        <h5 *ngIf="!headerParameters && !headerIsDto" l10nTranslate>{{header}}</h5>
+        <h5 *ngIf="headerParameters && !headerIsDto">{{header | translate:lang:headerParameters}}</h5>
+        <h5 *ngIf="headerIsDto">
+          <samplicity-display-translation [values]="header"></samplicity-display-translation>
+        </h5>
+      </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-content></ng-content>
+</mat-expansion-panel>

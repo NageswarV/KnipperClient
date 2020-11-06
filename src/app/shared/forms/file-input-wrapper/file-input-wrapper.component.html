@@ -1,0 +1,14 @@
+  <div class="form-group" [formGroup]="parentFormGroup" [class.samp-no-label]="noLabel">
+    <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"></samplicity-field-label>
+    <samplicity-file-input *ngIf="!control.disabled" [formControlName]="name" [buttonLabel]="buttonLabel" [acceptsTypes]="acceptsTypes"
+      [allowOverwrites]="allowOverwrites" [color]="color"
+      (delete)="onDeleteFile()" (upload)="onUploadFile()" (duplicateFileName)="onDuplicateFileName()"></samplicity-file-input>
+    <samplicity-field-errors [control]="control"></samplicity-field-errors>
+    <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+    <div class="field-error" *ngIf="showDuplicateNameError">
+      <small class="invalid-feedback d-flex align-items-middle field-errors" role="alert">
+        <mat-icon color="danger">error</mat-icon>
+        <span l10nTranslate>FileUpload.DuplicateFileNameMessage</span>
+      </small>
+    </div>
+  </div>

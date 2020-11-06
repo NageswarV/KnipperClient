@@ -1,0 +1,17 @@
+<ng-container *ngIf="!fileUpload.base64FileContent && !fileUpload.duplicateFileName">
+  <button mat-raised-button color="color" type="button" (click)="fileInput.click()" [attr.disabled]="disabledState">
+    <mat-icon>cloud_upload</mat-icon> <span l10nTranslate>{{buttonLabel}}</span>
+  </button>
+  <input type="file" #fileInput id="fileInput" (change)="setFile(fileInput)" [accept]="acceptsTypes" />
+</ng-container>
+
+<ng-container *ngIf="fileUpload.base64FileContent || fileUpload.duplicateFileName">
+  <div class="d-flex align-items-middle">
+    <div class="form-control file-upload-link">
+      <a [download]="fileUpload.fileName" [href]="dataUrl" [target]="_blank" *ngIf="fileUpload.fileName">{{fileUpload.fileName}}</a>
+    </div>
+    <button mat-raised-button type="button" color="default" class="delete-icon" (click)="onDeleteFile()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</ng-container>

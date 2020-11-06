@@ -1,0 +1,29 @@
+
+.treeview {
+  list-style-type: none;
+  padding: 0;
+}
+
+.treeview li {
+  padding-top: 5px;
+}
+
+.treeview .parent {
+  cursor: pointer;
+}
+
+.treeview .child {
+  padding-left: 5%;
+}
+
+.treeview span {
+  display: inline-block;
+}
+
+.treeview .node-opened {
+  transform: rotate(90deg);
+}
+
+.treeview .parent-with-no-childs {
+  padding-left:10.22px;
+}

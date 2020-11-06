@@ -1,0 +1,5 @@
+<span class='star-rating'>
+  <ng-container>
+    <i *ngFor='let n of range; let $index = index;' class='material-icons input-group-addon fa to-rate' (click)='mark($index)' [ngClass]='isMarked($index)'>star_rate</i>
+  </ng-container>
+</span>

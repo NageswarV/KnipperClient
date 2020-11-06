@@ -1,0 +1,181 @@
+@import '../../../styles/variables';
+
+.sticky-top-navbar {
+  z-index: 999;
+  position: fixed; //Fix for IE11 not supporting position: sticky;
+  width: 100%;
+  top: 0;
+}
+
+.ie-nav-spacer {
+  height: $navbar-height-desktop;
+  @media screen and (max-width: 1199px) {
+    height: $navbar-height-tablet
+  }
+}
+
+.navbar {
+  background: $cool-charcoal;
+  padding: 0;
+  height: $navbar-height-desktop;
+
+  @media screen and (max-width: 1199px) {
+    height: $navbar-height-tablet;
+  }
+
+  .navbar-brand {
+    min-width: $sidebar-width;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem !important;
+    color: $white;
+    padding: 0;
+    background: $cool-charcoal;
+    img {
+      max-height: 2.5rem;
+    }
+
+    &.has-link {
+      cursor: pointer;
+      &:hover {
+        background: $knipper-blue;
+      }
+
+      &.active-route {
+        background: $knipper-blue;
+      }
+    }
+
+
+
+    @media screen and (max-width: 1199px) {
+      flex-direction: column;
+    }
+
+    .samplicity-title {
+      font-family: $heading-font;
+
+      font-size: 1.5rem;
+      line-height: 1.6rem;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: center;
+
+      @media screen and (max-width: 1199px) {
+        max-width: 100%;
+      }
+    }
+  }
+
+
+
+  .navbar-toggler {
+    border: none;
+  }
+
+  .navbar-collapse {
+    padding-right: 1.5rem;
+
+    @media screen and (max-width: 1199px) {
+      flex-direction: column;
+    }
+
+    .right-nav {
+      @media screen and (max-width: 1199px) {
+        margin-top: 1rem;
+      }
+
+      color: $white;
+    }
+
+    .nav-item {
+      font-size: 0.8rem;
+      margin-right: 0.2rem;
+      cursor: pointer;
+
+      .setup-menu.menu-caret.mat-icon {
+        position: relative;
+        top: -0.2rem;
+        margin-right: -8px;
+      }
+
+      &.nav-item-button {
+        margin-right: 1.2rem;
+      }
+
+      &.nav-item-translate {
+        margin-right: 1.2rem;
+      }
+
+      &:hover{
+        background-color: $knipper-blue;
+      }
+
+    }
+
+    .hovered{
+      background-color: $knipper-blue !important;
+    }
+
+    .no-padding {
+      padding-right: 0rem;
+      padding-left: 0rem;
+    }
+
+    .nav-link {
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 56px;
+      line-height: 56px;
+      text-decoration: none;
+      color: $white;
+      white-space: nowrap;
+
+      span {
+        white-space: nowrap;
+      }
+
+      &:hover {
+        color: $white;
+
+        .mat-icon {
+          color: $white;
+        }
+      }
+
+      &.active-route {
+        color: $white;
+        background: $knipper-blue;
+      }
+
+      &.profile-menu {
+        text-transform: none;
+      }
+
+      &.inactive-link {
+        pointer-events: none;
+      }
+
+      .mat-icon {
+        margin-right: 0.3rem;
+
+        &.menu-caret {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .badge {
+      margin: 0;
+    }
+  }
+
+  .mat-menu-item {
+    color: $knipper-blue;
+    text-decoration: underline;
+    font-size: 0.7rem;
+
+    .mat-icon {
+      color: $knipper-blue;
+      margin-right: 0.3rem;
+    }
+  }
+}

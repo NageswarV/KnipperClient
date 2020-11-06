@@ -1,0 +1,76 @@
+@import '../../../styles/variables.scss';
+
+@mixin sort-caret {
+  display: flex;
+  align-self: center;
+  font-family: 'Material Icons';
+  font-size: 1rem;
+  font-size: 1.5rem;
+  margin-right: -1.5rem;
+}
+
+.mat-icon {
+  color: $mid-grey;
+  cursor: pointer;
+  margin: 0 0.25rem;
+
+  &:hover {
+    color: $dark-grey;
+  }
+}
+.table {
+  table-layout: fixed;
+
+  th {
+    vertical-align: middle;
+  }
+}
+.form-inline {
+  margin-right: 0;
+}
+.tool-col {
+  width: 5.75rem !important;
+}
+
+.reducedPadding {
+    th {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding:1% !important;
+    }
+  }
+
+.samp-grid-sort-header {
+
+  padding-right: 1.5rem;
+  cursor: pointer;
+
+  .standard-header-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &.sort-asc {
+    div.standard-header-container:after, div.fixed-header-container:after {
+      @include sort-caret;
+      content: '\E5CE';
+    }
+  }
+
+  &.sort-desc {
+    div.standard-header-container:after, div.fixed-header-container:after {
+      @include sort-caret;
+      content: '\E5CF';
+    }
+  }
+
+}
+
+
+.header-helper {
+  width: 100%;
+  .description-text {
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+}

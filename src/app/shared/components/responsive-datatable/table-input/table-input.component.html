@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label *ngIf="label" class="col-form-label">
+    <span l10nTranslate>{{label}}</span>
+  </label>
+  <p *ngIf="readonly" class="readonly">{{model[modelProp]}}</p>
+  <div class="addon-wrapper" [ngClass]="{'input-group': addonTextLeft || addonTextRight || required }">
+    <span *ngIf="addonTextLeft" class="input-group-addon left">
+      <span l10nTranslate>{{addonTextLeft}}</span>
+    </span>
+    <input *ngIf="!readonly && !textMask" [(ngModel)]="model[modelProp]" class="form-control"
+      [attr.maxlength]="maxLength">
+    <input *ngIf="!readonly && !!textMask" [(ngModel)]="model[modelProp]" class="form-control"
+      [attr.maxlength]="maxLength" [textMask]="{mask: masks[textMask]}">
+    <span *ngIf="addonTextRight" class="input-group-addon right">
+      <span l10nTranslate>{{addonTextRight}}</span>
+    </span>
+    <span class="required ml-2" *ngIf="required" l10nTranslate>Required</span>
+  </div>
+</div>

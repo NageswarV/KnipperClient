@@ -1,0 +1,7 @@
+{
+  "buildId": "1",
+  "azureAADConfig": {
+    "tenant": "05643f5b-c894-4bb4-a82f-42feb09b1194", 
+    "clientId": "892e1ba3-c65d-40f4-b6c5-2350537676c8"
+  }
+} 

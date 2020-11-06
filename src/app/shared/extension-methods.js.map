@@ -1,0 +1,1 @@
+{"version":3,"file":"extension-methods.js","sourceRoot":"","sources":["extension-methods.ts"],"names":[],"mappings":"AAIA,MAAM,CAAC,SAAS,CAAC,SAAS,GAAG,UAAS,SAAiB;IACnD,IAAI,IAAI,KAAK,SAAS,CAAC,WAAW,EAAE,EAAE;QAClC,OAAO,IAAI,CAAC;KACf;SAAM;QACH,OAAO,KAAK,CAAC;KAChB;AACL,CAAC,CAAA"}

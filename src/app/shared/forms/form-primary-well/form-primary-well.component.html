@@ -1,0 +1,22 @@
+<mat-expansion-panel [expanded]="isOpenOnLoad">
+  <mat-expansion-panel-header *ngIf="header" [ngClass]="headerClass" [expandedHeight]="'auto'" [collapsedHeight]="'auto'">
+    <mat-panel-title>
+      <ng-container *ngIf="hasErrorPrefix">
+        <span class="header-title-error" l10nTranslate>Errors.HeaderPrefix</span><span>&nbsp;</span>
+      </ng-container>
+      <span *ngIf="headerTranslated">{{header}}</span>
+      <span *ngIf="!headerTranslated && !headerParameters && !headerIsDto" l10nTranslate>{{header}}</span>
+      <span *ngIf="!headerTranslated && headerParameters && !headerIsDto">{{header | translate:lang:headerParameters}}</span>
+      <span *ngIf="!headerTranslated && headerIsDto">
+        <samplicity-display-translation [values]="header"></samplicity-display-translation>
+      </span>
+    </mat-panel-title>
+    <mat-panel-description *ngIf="headerButton && !hideButton">
+      <button mat-raised-button class="ml-auto mr-2" (click)="$event.stopPropagation(); buttonClick.emit()" color="{{headerbuttonColor}}">
+        <mat-icon *ngIf="headerButtonIcon">{{headerButtonIcon}}</mat-icon>
+        <span l10nTranslate>{{headerButton}}</span>
+      </button>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <ng-content></ng-content>
+</mat-expansion-panel>

@@ -1,0 +1,168 @@
+@import './../../../style/main.scss';
+
+
+  .d-flex{
+    display: flex;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+.space-between{
+  justify-content: space-between;
+}
+.ml-1{
+  margin-left: 1rem;;
+}
+.mt-1{
+    margin-top: 1rem;
+}
+.mt-2{
+    margin-top: 2rem;
+}
+.mt-3{
+    margin-top: 3rem;
+}
+.mr-1{
+margin-right: 1rem;
+}
+.mr-2{
+margin-right: 2rem;
+}
+.mb-1{
+margin-bottom: 1rem;
+}
+.mb-2{
+margin-bottom: 2rem;
+}
+.p-1{
+padding: 1rem;
+}
+.p-2{
+    padding: 2rem;
+}
+.p-3{
+    padding: 3rem;
+}
+.pl-2{
+padding-left: 2rem;
+}
+.pt-2{
+  padding-top: 2rem;
+}
+.pt-3{
+  padding-top: 3rem;
+}
+
+.header {
+  font-size: 24px;
+  line-height: 1.08;
+  letter-spacing: normal;
+}
+.fw-600{
+  font-weight: 600;
+}
+
+button{
+  border: 0;
+  padding: 0;
+  background-color: white;
+}
+.task-label{
+    color: #565656;
+}
+.task-value{
+    color: #000000;
+    font-weight: 600;
+}
+.bg-secondary{
+    background-color: var(--btn-secondary-default);
+  }
+.bg-knipper-blue{
+    background-color: #01569c;
+    color: white;
+}
+.bg-knipper-red{
+  background-color: var(--knipper-red);
+  color: white;
+}
+.bg-knipper-green{
+  background-color: green;
+  color: white;
+}
+.text-align-center{
+    text-align: center;
+}
+hr {
+    border: 0;
+    clear:both;       
+    background-color: #cccccc;
+    height: 1px;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  hr.divider {
+    border-top: 2px dashed #000000;
+    margin-right: 0;
+    margin-left: 0;
+    height: 0;
+    background-color: white;
+    opacity: 0.5;
+  }
+  
+  #assignedInput{
+      height: 35px;
+  }
+  .mandatory{
+    color: var(--knipper-red);
+  }
+
+  // :host ::ng-deep .mydp .selection{
+  //   border: solid 1px #e6e6e6 !important;
+  // }
+  
+  .text-area-link{
+    left: 0;
+  }
+  textarea{
+    border: none;
+    width: 100%;
+  }
+.Rectangle {
+ border: solid 1px #eaeaea;
+ background-color: var(--data-table-row-style-1);
+ margin: 10px 10px;
+}
+.TextArea-Styles{
+  margin: 1rem;
+  border-style:ridge ;
+  border-width :1.8px;
+  margin-left: 3rem;
+  width: 95%;
+}
+.Mat-Titles {
+  height: 26px;
+  font-family: Open Sans;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.08;
+  letter-spacing: normal;
+  color: #000000;
+}
+.Task-Details-Etiam {
+  height: 39px;
+  font-family: Open Sans;
+  font-size: 36px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.08;
+  letter-spacing: normal;
+  color: #000000;
+}
+  .link-active{
+    color: #01569c;
+    text-decoration: underline;
+  }

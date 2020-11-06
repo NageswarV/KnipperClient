@@ -1,0 +1,318 @@
+<div class="panel panel-accordion filter-container">
+    <div class="panel-accordion-buttons">
+        <button class="btn btn-primary btn-sm" (click)="onSubmit()" translate="yes">APPLY FILTERS</button>
+        <button class="btn btn-default btn-sm reset" (click)="resetFilter()" translate="yes">Reset</button>
+    </div>
+    <br />
+    <ngb-accordion #accordian="ngbAccordion"
+        activeIds="ngb-panel-hcp, ngb-panel-sales-rep, ngb-panel-program, ngb-panel-colored-signal, ngb-panel-order-filter">
+
+        <ngb-panel id="ngb-panel-hcp">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">HCP Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="HCP First Name"
+                        [(ngModel)]="hcpOrderFilterCriteria.firstName" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="HCP Last Name"
+                        [(ngModel)]="hcpOrderFilterCriteria.lastName" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="totalPendingAocs" name="totalPendingAocs" class="form-control"
+                        placeholder="Pending AOC" [(ngModel)]="hcpOrderFilterCriteria.totalPendingAocs" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="clientId" name="clientId" class="form-control" placeholder="Client ID"
+                        [(ngModel)]="hcpOrderFilterCriteria.clientId" />
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="designation" name="designation">
+                        <option disabled>Select Designation</option>
+                        <option *ngFor="let designation of designationArray"
+                            value="{{designation.classificationValueName}}">{{designation.classificationValueName}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="speciality" name="speciality" class="form-control"
+                        placeholder="Speciality" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="slnNumber" name="slnNumber" class="form-control" placeholder="SLN Number" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="npiNumber" name="npiNumber" class="form-control" placeholder="NPI Number" />
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="country" name="country">
+                        <option disabled>Select Country</option>
+                        <option *ngFor="let country of countryDropdown">{{country.countryName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="addressLine1" name="addressLine1" class="form-control"
+                        placeholder="Address Line 1" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="addressLine2" name="addressLine2" class="form-control"
+                        placeholder="Address Line 2" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="addressLine3" name="addressLine3" class="form-control"
+                        placeholder="Address Line 3" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="city" name="city" class="form-control" placeholder="City" />
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="state" name="state" [(ngModel)]="hcpOrderFilterCriteria.stateCode">
+                        <option [value]="hcpOrderFilterCriteria.stateCode === undefined ? undefined : ''" disabled>
+                            Select State</option>
+                        <option *ngFor="let state of stateDropdown" value="{{state.id}}">{{state.stateName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="Zip code" />
+                </div>
+                <div class="form-group">
+                    <label for="status" style="margin-bottom: 0;color: #565656;">HCP
+                        Status</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Active
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Inactive
+                        </label>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel id="ngb-panel-sales-rep">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Sales Rep Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <input type="text" id="repFirstName" name="repFirstName" class="form-control"
+                        placeholder="Rep First Name" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="repLastName" name="repLastName" class="form-control"
+                        placeholder="Rep Last Name" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="repId" name="repId" class="form-control" placeholder="Rep ID" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="territoryCode" name="territoryCode" class="form-control"
+                        placeholder="Territory Code" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="territoryName" name="territoryName" class="form-control"
+                        placeholder="Territory Name" />
+                </div>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel id="ngb-panel-program">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Program Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <input type="text" id="programName" name="programName" class="form-control"
+                        placeholder="Program Name" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="jobNumber" name="jobNumber" class="form-control" placeholder="Job Number" />
+                </div>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel id="ngb-panel-colored-signal">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Colored Signal Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Display records with <span class="red-badge">Red</span> singals
+                        </label>
+                        <div class="info-div">
+                            <i class="material-icons" style="font-size:13px">info</i>
+                            Records with red singals are usually with negative status such as “Error” or “Canceled” etc.
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Display records with <span class="yellow-badge">Yellow</span> singals
+                        </label>
+                        <div class="info-div">
+                            <i class="material-icons" style="font-size:13px">info</i>
+                            Records with yellow singals are usually with attentive or transitional status such as
+                            “Warning” or “Pending” etc.
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel id="ngb-panel-order-filter">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Order Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <label for="orderReceivedFrom" style="color: #565656;margin-bottom: 8px;">Received From</label>
+                    <div class="datepicker-form">
+                        <my-date-picker name="receivedDate" id="receivedDate" type="date"
+                            [options]="myDatePickerOptions" sgValidateDatePicker>
+                        </my-date-picker>
+                        <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                            [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                        <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                            [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                        </sg-field-validation> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="until" style="color: #565656;margin-bottom: 8px;">Until</label>
+                    <div class="datepicker-form">
+                        <my-date-picker name="untilDate" id="untilDate" type="date" [options]="myDatePickerOptions"
+                            sgValidateDatePicker>
+                        </my-date-picker>
+                        <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                            [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                        <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                            [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                        </sg-field-validation> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status" style="color: #565656;margin-bottom: 8px;">Select Order
+                        Status(es)</label>
+                    <select class="form-control" id="country" name="country">
+                        <option>All Statuses</option>
+                        <!-- oderedStatusArray -->
+                        <option *ngFor="let status of oderedStatusArray" value="{{status.classificationValueName}}">
+                            {{status.classificationValueName}}
+                    </select>
+                </div>
+                <div>
+                    <label for="status" style="color: #565656;margin-bottom: 8px;">Requestor
+                        Address</label>
+                    <div class="form-group">
+                        <select class="form-control" id="country" name="country">
+                            <option disabled>Select Country</option>
+                            <option *ngFor="let country of countryDropdown">{{country.countryName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="requestorOrderAddressLine1" name="requestorOrderAddressLine1"
+                            class="form-control" placeholder="Address Line 1" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="requestorOrderAddressLine2" name="requestorOrderAddressLine2"
+                            class="form-control" placeholder="Address Line 2" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="requestorOrderAddressLine3" name="requestorOrderAddressLine3"
+                            class="form-control" placeholder="Address Line 3" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="requestorOrderCity" name="requestorOrderCity" class="form-control"
+                            placeholder="City" />
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="orderState" name="orderState" placeholder="Select State">
+                            <option disabled>Select State</option>
+                            <option *ngFor="let state of stateDropdown">{{state.stateName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="requestorOrderZipcode" name="requestorOrderZipcode" class="form-control"
+                            placeholder="Zip code" />
+                    </div>
+                </div>
+                <div>
+                    <label for="status" style="color: #565656;margin-bottom: 8px;">Recipient
+                        Address</label>
+                    <div class="form-group">
+                        <select class="form-control" id="country" name="country">
+                            <option disabled>Select Country</option>
+                            <option *ngFor="let country of countryDropdown">{{country.countryName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="recipientOrderAddressLine1" name="recipientOrderAddressLine1"
+                            class="form-control" placeholder="Address Line 1" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="recipientOrderAddressLine2" name="recipientOrderAddressLine2"
+                            class="form-control" placeholder="Address Line 2" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="recipientOrderAddressLine3" name="recipientOrderAddressLine3"
+                            class="form-control" placeholder="Address Line 3" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="recipientOrderCity" name="recipientOrderCity" class="form-control"
+                            placeholder="City" />
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="orderState" name="orderState" placeholder="Select State">
+                            <option disabled>Select State</option>
+                            <option *ngFor="let state of stateDropdown">{{state.stateName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="recipientOrderZipcode" name="recipientOrderZipcode" class="form-control"
+                            placeholder="Zip code" />
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

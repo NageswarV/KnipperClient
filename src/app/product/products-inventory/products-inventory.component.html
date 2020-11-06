@@ -1,0 +1,172 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-xl-2">
+    <h1 translate="yes">Products({{productsByInventory?.length}})</h1>
+  </div>
+  <div class="col-xs-12 col-md-6 col-xl-2">
+    <div class="pull-right form-inline">
+      <input type="button" class="btn btn-default" value="EXPORT VIEW TO EXCEL" />
+    </div>
+  </div>
+</div>
+
+<!-- Insert Filter Tags (to be implemented later) -->
+
+<div class="busy-container mt-1">
+  <div class="list-head" [ngBusy]="busyPromise">
+    <div class="left-head">
+      <div class="left-head-item" [ngClass]="{'active':byInventory}" (click)="viewByInventory()">
+        View by Inventory
+      </div>
+      <div class="left-head-item" [ngClass]="{'active':!byInventory}" (click)="viewByOrder()">
+        View by Order
+      </div>
+    </div>
+    <div class="right-head">
+      <div style="margin-top:auto; margin-bottom: auto;">Sort Results By</div>
+      <select class="form-control" style="width: 21em; margin-left: 1em; height: 2.5em;" (change)="sortProducts()"
+        [(ngModel)]="sortingType">
+        <option value="asc" selected>Product ID in Ascending Order</option>
+        <option value="desc">Product ID in Descending Order</option>
+      </select>
+    </div>
+  </div>
+  <!-- byInventory -->
+  <div *ngIf="byInventory" class="list-content">
+    <div
+      *ngFor="let product of productsPerPage | paginate: { id: componentId,currentPage: currentPageInventory, itemsPerPage: pageSize, totalItems: totalRecordCount }">
+      <mat-expansion-panel class="expansionPanel primary-expansion" expanded=true>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="d-flex">
+              <div style="flex: 0 30%;">
+                {{product?.name}} (ID : {{product?.code}})
+              </div>
+              <div class="mat-rectangle">
+                <div class="knipper-logo"></div>
+                <div class="exppanel-heading" style="opacity:1;margin:auto auto auto 0;padding-left: 10px;">
+                  <span class="exppanel-heading">Inventory Status: </span>
+                  <em style="font-size: 14px;" [class.textWarning]="product?.inventoryStatus === 'On Hold'"
+                    [class.textError]="product?.inventoryStatus === 'Expired'"
+                    [class.textActive]="product?.inventoryStatus === 'Active'"> {{product?.inventoryStatus}} </em>
+                </div>
+                <div class="exppanel-heading" style="opacity:1;margin: auto 0;">
+                  <span class="exppanel-heading">Total Available Quantity:</span>
+                  <em style="font-size: 14px;color:white;"> {{product?.availableInventory}} </em>
+                </div>
+              </div>
+              <a class="icon-focus">
+                <mat-icon>add_task</mat-icon>
+              </a>
+              <a class="icon-focus" style="margin:0 14px 0 8px;">
+                <mat-icon>save_alt</mat-icon>
+              </a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; margin-top: 10px;">
+              <div class="value-box">
+                <div class="exppanel-heading">Product Type : </div>
+                <div class="exppanel-value">{{product.productType}}</div>
+              </div>
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Drug Schedule :
+                </div>
+                <div class="exppanel-value">
+                  {{product?.drugSchedule}}
+                </div>
+              </div>
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Short Day :
+                </div>
+                <div class="exppanel-value">
+                  {{product?.shortDay}}<span *ngIf="product.shortDay"> Days</span>
+                </div>
+              </div>
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Storage conditions :
+                </div>
+                <div class="exppanel-value">
+                  {{product?.storageCondition}}
+                </div>
+              </div>
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Product Description :
+                </div>
+                <div class="exppanel-value"
+                  [innerHtml]="(product?.description?.length>40)? (product?.description | slice:0:40)+'...':(product?.description) | safeHtml">
+                </div>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          <div class="col-xs-12 tab-container box-0">
+            <!-- <span class="col-xs-6" [ngClass]="{'active':byInventory}" >Active</span>
+              <span class="col-xs-6" [ngClass]="{'active':!byInventory}" >Inactive</span>  -->
+            <mat-tab-group mat-stretch-tabs>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <span>Active ({{product?.activeLots?.length}})</span>
+                </ng-template>
+                <div class="margined">
+                  <sg-grid [columns]="columns" emptyText="No Lots" [items]="product.activeLots"
+                    [totalRecordCount]="product.activeLots.length" [pageSize]="lotPageSize" [loadMorePagination]="true">
+                    <ng-template let-lot>
+                      <td class="col-xs-2">{{lot?.lotNumber}}</td>
+                      <td class="col-xs-2">{{lot?.expirationDate | sgCustomDate}}</td>
+                      <td class="col-xs-2">{{lot?.lastUseDate | sgCustomDate}}</td>
+                      <td class="col-xs-2">{{lot?.availableQty}}</td>
+                      <td class="col-xs-2">{{lot?.markedQty}}</td>
+                      <td class="col-xs-2">{{lot?.unavailableQty}}</td>
+                    </ng-template>
+                  </sg-grid>
+                </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <span>Inactive ({{product?.inactiveLots?.length}})</span>
+                </ng-template>
+                <div class="col-xs-12 margined ">
+                  <sg-grid [columns]="columns" emptyText="No Lots" [items]="product.inactiveLots"
+                    [totalRecordCount]="product.inactiveLots.length" [pageSize]="lotPageSize"
+                    [loadMorePagination]="true">
+                    <ng-template let-lot>
+                      <td class="col-xs-2">{{lot.lotNumber}}</td>
+                      <td class="col-xs-2">{{lot.expirationDate | sgCustomDate}}</td>
+                      <td class="col-xs-2">{{lot.lastUseDate | sgCustomDate}}</td>
+                      <td class="col-xs-2">{{lot.availableQty}}</td>
+                      <td class="col-xs-2">{{lot.markedQty}}</td>
+                      <td class="col-xs-2">{{lot.unavailableQty}}</td>
+                    </ng-template>
+                  </sg-grid>
+                </div>
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+        </mat-panel-description>
+
+      </mat-expansion-panel>
+    </div>
+  </div>
+  <!-- byorder -->
+  <div *ngIf="!byInventory" class="list-content busy-container">
+    <div class="productsContainer" [ngBusy]="busyPromise">
+      <app-products-data-table
+        *ngFor="let product of productsPerPage |paginate: { id: componentId,currentPage: currentPagebyOrder, itemsPerPage: pageSize, totalItems: totalRecordCount }"
+        [productDataSet]="product"></app-products-data-table>
+    </div>
+  </div>
+</div>
+<div>
+  <div *ngIf="byInventory">
+    <sg-pagination [componentId]="componentId" [totalRecordCount]="totalRecordCount" [pageSize]="pageSize"
+      [currentPage]="currentPageInventory" (emitPageChange)="pageChange($event)"></sg-pagination>
+  </div>
+  <div *ngIf="!byInventory">
+    <sg-pagination [componentId]="componentId" [totalRecordCount]="totalRecordCount" [pageSize]="pageSize"
+      [currentPage]="currentPagebyOrder" (emitPageChange)="pageChange($event)"></sg-pagination>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div *ngIf="shouldShowErrors">
+  <ng-container *ngFor="let error of listOfErrors()">
+    <small *ngIf="error && error.length > 0" class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+      <mat-icon color="danger">error</mat-icon>
+      <span>{{error}}</span>
+    </small>
+  </ng-container>
+</div>

@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.field-errors {
+  span {
+    flex-shrink: 1;
+  }
+  .mat-icon {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  color: $knipper-red;
+}

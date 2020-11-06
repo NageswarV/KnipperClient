@@ -1,0 +1,16 @@
+<button class="btn btn-light" type="button" translate="yes" (click) = "openmodal()">livechat-button-text</button>
+
+<ng-template #livechatmodal let-c="close">
+    <div class="modal-header">
+        <h2 class="modal-title" [innerHtml] = "'livechat-modal-header' | translate"></h2>
+    </div>
+    <div class="modal-body">
+        <div [innerHtml] = "'livechat-modal-warning' | translate"></div>
+    </div>
+    <div class="modal-footer">
+        <div class="footer-buttons">
+            <button class="btn btn-info" (click)="c($event)" translate="yes">livechat-modal-cancel</button>
+            <button class="btn btn-info" (click)="redirectToLiveChat(); c($event)" translate="yes">livechat-modal-ok</button>
+        </div>
+    </div>
+</ng-template>

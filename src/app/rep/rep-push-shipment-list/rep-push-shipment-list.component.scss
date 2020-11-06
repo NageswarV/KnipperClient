@@ -1,0 +1,176 @@
+.Rectangle {
+    width: 100%;
+    height: 61px;
+    background-color: var(--knipper-blue);
+    padding: 10px 0px;
+    display:flex;
+    align-items:center;
+  }
+  .RepName {
+    height: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: var(--sunflower-yellow);
+    text-decoration: underline;
+  }
+ 
+.FilterRectangle{
+    width: 100%;
+    height: 60px;
+    display:flex;
+    align-items:center;
+    padding: 10px 0px;
+}
+  .Attentiontangerine-yellow {
+    width: 15px;
+    height: 13px;
+    background-color: var(--sunflower-yellow);
+  }
+.headingRep{
+    font-size: 40px;
+    padding:5px 0px;
+}
+.tabHeading{
+    background-color:white;
+  
+    // width:50%;
+}
+.tab{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    margin:17px 0px;
+}
+.RepFilterStatus{
+    width: 200px;
+  height: 32px;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px var(--btn-secondary-default);
+  background-color: var(--white);
+}
+.tab-header{
+    background-color: #01569c;
+    font-size: 20px;
+    height:45px;
+    padding :0px 9px;
+}
+.tab-filter {
+    margin :0px 10px;
+    height:30px;
+}
+.tab-container{
+    padding:10px;
+}
+.mat-header-row, .mat-row {
+    width:750px;
+    padding: 0px 50px;
+}
+.mat-header-row, .mat-row {
+    border-bottom-width: 0px;
+    border-bottom-style: none;
+}
+.RepCount{
+   color:white;
+    border-radius: 11.5px;
+    background-image: linear-gradient(to left,var(--knipper-blue) 30%, #003668);
+}
+.mat-row:nth-child(even){
+    background-color: #f4f4f4;
+    }
+    ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+        background-color: var(--knipper-blue);
+        
+        
+    }
+    
+
+
+@media screen and (min-width: 1240px) {
+    .mat-header-row, .mat-row {
+        width:750px;
+    }
+}
+i.closeIco {
+    font-style: normal;
+    font-size: 20px;
+    margin-left: 6px;
+}
+.mat-tab-label {
+    opacity: 1 !important;
+  }
+  .FilterRectangle {
+    background: #fff;
+}
+.margined {
+    background: #fff;
+}
+.panel-body {
+    padding: 20px;
+    background: #dedede;
+}
+td.col-xs-2.ng-star-inserted {
+    vertical-align: middle;
+}
+.mat-tab-label {
+    height: 72px;
+}
+.mat-tab-label-content {
+    color: #565656;
+}
+.status-filter {
+    margin-top: 16px;
+    display: flex;
+    padding-left: 16px;
+    margin-bottom: 16px;
+    .label {
+        font-size: 1em;
+        color: gray;
+        font-weight: 500;
+        padding: 0 !important;
+        margin-right: 1em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    select {
+        width: 200px;
+        height: 32px;
+        font-size: 0.8em;
+        color: gray;
+        opacity: 0.7;
+        font-weight: 600;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+.ml-1{
+    margin-left: 1rem;
+}
+
+.material-icons {
+    font-size: 18px;
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+.icon-focus:hover {
+    background-color: #01569c;
+}
+  
+.Rectangle-color {
+    background-color: #01569c;
+}
+
+.d-flex{
+    display: flex;
+    align-items: center;
+}
+
+.mat-expansion-panel-header{
+    align-items: baseline;
+}

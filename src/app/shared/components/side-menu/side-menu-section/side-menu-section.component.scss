@@ -1,0 +1,35 @@
+@import '../../../../../style/main.scss';
+@import '../../../../styles/variables';
+@import '../../../../styles/styles'; 
+  .side-menu-section {
+    .side-menu-section-header {
+      height: 36px;
+      color: $input-grey;
+      padding-left: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      span {
+        line-height: 17px;
+      }
+    }
+
+    .side-menu-header {
+      padding-left: 21px;
+      font-size: 0.8rem;
+      background-color: $dark-menu-grey;
+
+      &.error {
+        background-color: $dark-red;
+      }
+
+      &.valid {
+        background-color: $green;
+      }
+
+      &.warning {
+        background-color: $yellow;
+        color: $charcoal;
+      }
+    }
+  }

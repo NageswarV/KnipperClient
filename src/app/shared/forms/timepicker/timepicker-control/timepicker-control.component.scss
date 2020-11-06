@@ -1,0 +1,22 @@
+@import '../../../../styles/variables.scss';
+.time-colon {
+  padding-top: 0.875rem;
+}
+
+.timezone {
+  background-color: #DCDCDC;
+}
+
+.form-control {
+  max-width: 6rem;
+}
+
+select {
+  &.form-control {
+    min-width: 5rem;
+  }
+}
+
+.invalid-feedback {
+  color: $knipper-red
+}

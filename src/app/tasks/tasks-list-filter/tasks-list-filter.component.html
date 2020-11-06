@@ -1,0 +1,139 @@
+<div class="panel panel-accordion filter-container">
+    <div class="panel-accordion-buttons">
+        <button class="btn btn-primary btn-sm" (click)="onSubmit()" translate="yes">APPLY FILTERS</button>
+        <button class="btn btn-default btn-sm reset" (click)="resetFilter()" translate="yes">Reset</button>
+    </div>
+    <br />
+    <ngb-accordion #accordian="ngbAccordion" activeIds="ngb-panel-task">
+
+        <ngb-panel id="ngb-panel-task">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Tasks Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div>
+                    <label for="creationStartDate" style="color: #565656;margin-bottom: 8px;">Task Creation Date
+                        Range</label>
+                    <div class="form-group">
+                        <label for="creationStartDate" style="color: #565656;margin-bottom: 8px;">From</label>
+                        <div class="datepicker-form">
+                            <my-date-picker name="creationStartDate" id="creationStartDate" type="date"
+                                [options]="myDatePickerOptions" sgValidateDatePicker>
+                            </my-date-picker>
+                            <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                            [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                        <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                            [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                        </sg-field-validation> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="creationEndDate" style="color: #565656;margin-bottom: 8px;">Until</label>
+                        <div class="datepicker-form">
+                            <my-date-picker name="creationEndDate" id="creationEndDate" type="date"
+                                [options]="myDatePickerOptions" sgValidateDatePicker>
+                            </my-date-picker>
+                            <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                            [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                        <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                            [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                        </sg-field-validation> -->
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="completionStartDate" style="color: #565656;margin-bottom: 8px;">Task Completion Date
+                        Range</label>
+                    <div class="form-group">
+                        <label for="completionStartDate" style="color: #565656;margin-bottom: 8px;">Start Date</label>
+                        <div class="datepicker-form">
+                            <my-date-picker name="completionStartDate" id="completionStartDate" type="date"
+                                [options]="myDatePickerOptions" sgValidateDatePicker>
+                            </my-date-picker>
+                            <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                                [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                            <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                                [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                            </sg-field-validation> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="completionEndDate" style="color: #565656;margin-bottom: 8px;">End Date</label>
+                        <div class="datepicker-form">
+                            <my-date-picker name="completionEndDate" id="completionEndDate" type="date"
+                                [options]="myDatePickerOptions" sgValidateDatePicker>
+                            </my-date-picker>
+                            <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                                [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                            <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                                [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                            </sg-field-validation> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="status" style="margin-bottom: 0;color: #565656;">HCP
+                        Status</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">New
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Active
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Closed
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status" style="margin-bottom: 0;color: #565656;">Priority</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Low
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Medium
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">High
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status" style="margin-bottom: 0;color: #565656;">Line Of Business</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Direct to Practitioner
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Direct to Rep
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Hand Carry
+                        </label>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

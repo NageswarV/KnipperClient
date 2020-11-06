@@ -1,0 +1,294 @@
+.expansionPanel {
+    margin: 2em 0 2em 0;
+}
+
+.primary-expansion {
+    color: white;
+    font-family: "Open Sans";
+    font-size: 14px;
+    margin-top: 0;
+    background-color: white;
+    mat-expansion-panel-header {
+        background-color: #00488a;
+        height: fit-content !important;
+        padding: 15px;
+        align-items: baseline;
+    }
+
+    mat-panel-title {
+        display: block !important;
+    }
+}
+.check {
+    height: 15px;
+    background-color: red;
+}
+
+// ::ng-deep .mat-expansion-indicator {
+//     margin-bottom: auto !important;
+// }
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0px;
+}
+
+.exppanel-heading {
+    opacity: 0.7;
+    font-size: 12px;
+}
+
+.exppanel-value {
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.value-box {
+    margin: auto auto auto 0;
+}
+
+.mat-expansion-indicator {
+    margin-bottom: auto !important;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    color: black;
+}
+
+.tab-data {
+    font-size: 1em;
+    color: gray;
+    width: 25%;
+    font-weight: 500;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: solid 0.1px #cccccc;
+    transition: color 0.1s ease-in-out, border-bottom 0.1s ease-in-out, font-weight 0.1s ease-in-out;
+}
+
+.selected-tab {
+    border-bottom: solid 2px #00488a !important;
+    color: #00488a;
+    font-weight: bold;
+    transition: color 0.1s ease-in-out, border-bottom 0.1s ease-in-out, font-weight 0.1s ease-in-out;
+}
+
+.button-filter {
+    margin: 16px 0;
+    padding-left: 16px;
+    display: flex;
+    input {
+        margin: 0 !important;
+        width: 177px;
+        padding: 5px 15px 5px 15px !important;
+        cursor: pointer;
+    }
+}
+
+.status-filter {
+    margin-top: 16px;
+    display: flex;
+    padding-left: 16px;
+    margin-bottom: 16px;
+    .label {
+        font-size: 1em;
+        color: gray;
+        font-weight: 500;
+        padding: 0 !important;
+        margin-right: 1em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    select {
+        width: 200px;
+        height: 32px;
+        font-size: 0.8em;
+        color: gray;
+        opacity: 0.7;
+        font-weight: 600;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+::ng-deep samplicity-responsive-datatable > * {
+    color: black;
+    border: none !important;
+}
+.mat-rectangle {
+    display: flex;
+    margin: auto;
+    width: 450px;
+    height: 23px;
+    border-radius: 11.5px;
+    background-image: linear-gradient(to left, var(--knipper-blue), #003668);
+}
+
+.knipper-logo {
+    margin-right: 1em;
+    display: flex;
+    width: 66px;
+    height: 23px;
+    border-radius: 12px;
+    box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: var(--white);
+}
+
+.textError {
+    background-color: var(--knipper-red);
+    color: white;
+}
+.textActive {
+    background-color: var(--wintergreen);
+    color: black;
+}
+.vtext-align {
+    margin: auto;
+    font-size: 12px;
+}
+.id-color {
+    color: #23527c;
+}
+.file-icon {
+    color: white;
+    background-color: var(--knipper-blue);
+    padding: 5px;
+    margin-left: 5px;
+}
+.info {
+    border: solid 1px #cccccc;
+    background-color: #dedede;
+    // height:90px;
+    margin: 15px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.key,
+.value,
+.sideData {
+    font-family: Open Sans;
+    //   font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+}
+.key {
+    color: #565656;
+    font-size: 14px;
+}
+.value {
+    font-size: 14px;
+}
+.data {
+    margin: 5px 0px;
+}
+// .sideData{
+//     width: auto;
+//     height:34px;
+//     border-radius: 14px;
+//     border: solid 1px #a0c4e5;
+//     background-color: var(--powder-blue);
+//     float: right;
+//     padding:0px  6px;
+//     display:flex;
+//     align-items: center;
+// }
+.sideData {
+    border-radius: 30px;
+    border: solid 1px #a0c4e5;
+    background-color: var(--powder-blue);
+    float: right;
+    width: 100%;
+    text-align: center;
+}
+.addrFlags div {
+    overflow: hidden;
+    border: 1px solid #a0c4e5;
+    border-radius: 30px;
+    background: var(--powder-blue);
+    padding: 0px;
+    margin: 5px;
+    font-weight: 700;
+    width: max-content;
+    float: right;
+}
+
+.addrFlags div span {
+    margin: -1px 1px 1px -1px;
+    line-height: 2em;
+    border-top: 1px solid blue;
+    padding: 0.4em;
+    margin-left: 2px;
+}
+.addrFlags p span:nth-child(2) {
+    border-left: 1px solid #a0c4e5 !important;
+    margin-left: 11px !important;
+    padding-left: 12px !important;
+}
+.addrSp2 {
+    border-left : 1px solid;
+    margin-right: 2px;
+    padding-left: 6px;
+}
+
+.iconBox {
+    background-color: #01569c;
+    // padding:4px; 
+    margin-left:4px;
+    
+}
+.divider {
+    border-right: solid 1px #a0c4e5;
+}
+.continerAddress {
+    padding: 5px 0px;
+}
+.sideData label:nth-child(1):after {
+    content: "|";
+    margin-right: 5px;
+    font-size: 19px;
+}
+
+.link-color {
+    text-decoration: underline !important;
+    color: #23527c !important;
+}
+
+.ml-1 {
+    margin-left: 1rem;
+}
+
+.material-icons {
+    font-size: 18px;
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.image-icon {
+    color: #00488a;
+}
+
+.checkMark-icon {
+    color: #0d6c38;
+    margin-left: 2px;
+}
+
+.icon-focus:hover {
+    background-color: #01569c;
+}
+
+.Rectangle {
+    background-color: #01569c;
+}
+
+.d-flex{
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="127" height="60" viewBox="0 0 127 60">
+    <defs>
+        <linearGradient id="wq0gcz2dgc" x1="0%" x2="100%" y1="50%" y2="50%">
+            <stop offset="0%" stop-color="#E8EEF8" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#DEE9FE"/>
+        </linearGradient>
+        <linearGradient id="kqshr9aq6d" x1="0%" x2="100%" y1="50%" y2="50%">
+            <stop offset="0%" stop-color="#E8EEF8" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#DEE9FE"/>
+        </linearGradient>
+        <rect id="g9wgjkgiza" width="127" height="60" x="0" y="0" rx="2"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <mask id="q6ftn5z6wb" fill="#fff">
+                <use xlink:href="#g9wgjkgiza"/>
+            </mask>
+            <use fill="#00488A" fill-opacity=".1" xlink:href="#g9wgjkgiza"/>
+            <g fill-rule="nonzero" mask="url(#q6ftn5z6wb)">
+                <g>
+                    <path fill="url(#wq0gcz2dgc)" d="M-3.5 21L2 28.5-3.5 36H-9l5.5-7.5L-9 21h5.5zm11 0l5.5 7.5L7.5 36H2l5.5-7.5L2 21h5.5zm11 0l5.5 7.5-5.5 7.5H13l5.5-7.5L13 21h5.5z" transform="translate(25 6) rotate(-90 7.5 28.5)"/>
+                    <path fill="url(#kqshr9aq6d)" d="M63.437 16l5.514 7.5-5.513 7.5h-5.512l5.512-7.5-5.512-7.5h5.511zm11.026 0l5.512 7.5-5.512 7.5h-5.512l5.512-7.5-5.512-7.5h5.512zm11.024 0L91 23.5 85.488 31h-5.513l5.513-7.5-5.513-7.5h5.512zM52.51 16l5.514 7.5-5.513 7.5H47l5.512-7.5L47 16h5.511z" transform="translate(25 6) rotate(-90 69 23.5)"/>
+                    <path fill="#E0E0E0" d="M59 14.984L38 10 38 49 59 43.584z" transform="translate(25 6)"/>
+                    <path fill="#2D59D4" d="M59 14.984L38 10 38 49 59 43.584z" transform="translate(25 6)"/>
+                    <path fill="#3364ED" d="M38 10L38 49 18 43.715 18 14.961z" transform="translate(25 6)"/>
+                    <path fill="#EE6646" d="M33 3.795v31.333c0 1.657 1.343 3 3 3 .253 0 .505-.032.75-.095l15-3.869c1.324-.342 2.25-1.537 2.25-2.905V7.355c0-1.39-.955-2.598-2.307-2.919l-15-3.56c-1.612-.382-3.23.614-3.612 2.227-.054.227-.081.459-.081.692z" transform="translate(25 6)"/>
+                    <path fill="#FFCD00" d="M25 5.2v33.582c0 1.104.895 2 2 2 .167 0 .334-.021.496-.063l17-4.349C45.38 36.144 46 35.346 46 34.433V9.2c0-.928-.638-1.734-1.542-1.947l-17-4.001c-1.075-.253-2.152.413-2.405 1.488-.035.15-.053.304-.053.458z" transform="translate(25 6)"/>
+                    <path fill="#01569C" d="M18 15L18 43.695 38.72 49 39 20.522z" transform="translate(25 6)"/>
+                    <path fill="#E0E0E0" d="M59 43.586L38 49 38 20.522 59 15z" transform="translate(25 6)"/>
+                    <path fill="#00488A" d="M59 43.586L38 49 38 20.522 59 15z" transform="translate(25 6)"/>
+                    <path fill="#009FDA" d="M45 44L54 41.835 54 37 45 39.164z" transform="translate(25 6)"/>
+                    <path fill="#000" d="M18 28.996L29.23 32 38 24.568 38 20.544 18.21 15 18 25.124zM47.147 32L38 24.421 38 20.581 59 16 59 28.863z" opacity=".1" transform="translate(25 6)"/>
+                    <path fill="#008CFF" d="M18.512 15L8 23.791 28.487 29 39 20.535z" transform="translate(25 6)"/>
+                    <path fill="#E0E0E0" d="M58.418 15L69 23.791 48.689 29 38 20.535z" transform="translate(25 6)"/>
+                    <path fill="#008CFF" d="M58.418 15L69 23.791 48.689 29 38 20.535z" transform="translate(25 6)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

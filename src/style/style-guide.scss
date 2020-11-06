@@ -1,0 +1,73 @@
+@import "colors.scss";
+
+.main-content-wrapper #main-content .sideNav{
+	background: #065262;
+	height:100%;
+}
+.nav-pills>li>a{
+	color:#fff;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus, .nav-pills>li>a:hover, .nav-pills>li>a:focus {
+	background-color: #009cb4;
+	border-radius:0 ;
+}
+#columnNav1 li.active > a:after {
+	content: ' ';
+	height: 0;
+	position: absolute;
+	width: 0;
+
+}
+hr{
+	margin:20px 0;
+}
+h1{
+	margin:30px 0;
+}
+h3{
+	margin:10px 0;
+}
+.grid {
+padding-top: 15px;
+padding-bottom: 15px;
+background-color: #eee;
+background-color: rgba(86,61,124,.15);
+border: 1px solid #ddd;
+border: 1px solid rgba(86,61,124,.2);
+}
+.row{
+	overflow:visible;
+}
+.box{
+	width:200px;
+	height:160px;
+	text-align:center;
+	line-height:160px;
+	color:#fff;
+}
+.primary-color{
+	background:$primary-color;
+	
+}
+.secondary-color{
+	background: $secondary-color;
+
+}
+.panel-color{
+	background:$white;
+	color:#000;
+}
+.helper-success{
+	background: $success;
+}
+.helper-warning{
+	background: $notify;
+}
+.helper-error{
+	background: $app-red;
+}
+.page-color{
+	background:$main-background;
+	color:#000;
+	border:1px solid $app-light-grey;
+}

@@ -1,0 +1,19 @@
+<samplicity-side-menu sidebarTitle="ORDER MENU" style="margin-top: 16px;">
+    <div filter-content>
+        <samplicity-side-menu-header [selected]="selected('Header&Actions')" [name]="'Header&Actions'"
+            header="Order Header & Actions"></samplicity-side-menu-header>
+        <samplicity-side-menu-header [selected]="selected('Hcp&Reps')" [name]="'Hcp&Reps'" header="HCP & Sales Rep"
+            (goto)="onGotoPage($event, 'hcpandsalesrep')"></samplicity-side-menu-header>
+        <samplicity-side-menu-header [selected]="selected('OrderDetail')" [name]="'OrderDetail'" header="Order Details"
+            (goto)="onGotoPage($event, 'orderdetail')"></samplicity-side-menu-header>
+        <samplicity-side-menu-header [selected]="selected('Delivery')" [name]="'Delivery'" header="Delivery Details">
+        </samplicity-side-menu-header>
+        <samplicity-side-menu-header [selected]="selected('Communication')" [name]="'Communication'"
+            header="Communication History"></samplicity-side-menu-header>
+    </div>
+    <div page-content>
+        <ng-container>
+            <router-outlet></router-outlet>
+        </ng-container>
+    </div>
+</samplicity-side-menu>

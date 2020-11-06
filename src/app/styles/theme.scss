@@ -1,0 +1,11 @@
+@import 'variables';
+
+$md-primary: ( 50 : #e0eef5, 100 : #b3d4e5, 200 : #80b7d4, 300 : #4d9ac2, 400 : #2684b5, 500 : $knipper-blue, 600 : #0066a0, 700 : #005b97, 800 : #00518d, 900 : #003f7d, A100 : #aaceff, A200 : #77b1ff, A400 : #4494ff, A700 : #2a85ff, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #000000, 400 : #ffffff, 500 : #ffffff, 600 : #ffffff, 700 : #ffffff, 800 : #ffffff, 900 : #ffffff, A100 : #000000, A200 : #000000, A400 : #000000, A700 : #ffffff, ) );
+$md-accent: ( 50 : #e5efe4, 100 : #bfd8bc, 200 : #95be90, 300 : #6aa464, 400 : #4a9142, 500 : #2a7d21, 600 : #25751d, 700 : #1f6a18, 800 : #196014, 900 : #0f4d0b, A100 : #88ff84, A200 : #57ff51, A400 : #26ff1e, A700 : #0dff04, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #000000, 400 : #ffffff, 500 : #ffffff, 600 : #ffffff, 700 : #ffffff, 800 : #ffffff, 900 : #ffffff, A100 : #000000, A200 : #000000, A400 : #000000, A700 : #000000, ) );
+$md-warn: ( 50 : #f5e2e4, 100 : #e6b6bc, 200 : #d6868f, 300 : #c55662, 400 : #b83141, 500 : #ac0d1f, 600 : #a50b1b, 700 : #9b0917, 800 : #920712, 900 : #82030a, A100 : #ffafb1, A200 : #ff7c7f, A400 : #ff494e, A700 : #ff3035, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #ffffff, 400 : #ffffff, 500 : #ffffff, 600 : #ffffff, 700 : #ffffff, 800 : #ffffff, 900 : #ffffff, A100 : #000000, A200 : #000000, A400 : #ffffff, A700 : #ffffff, ) );
+
+$knipper-theme-primary: mat-palette($md-primary);
+$knipper-theme-accent: mat-palette($md-accent);
+$knipper-theme-warn: mat-palette($md-warn);
+
+$knipper-theme: mat-light-theme( $knipper-theme-primary, $knipper-theme-accent, $knipper-theme-warn );

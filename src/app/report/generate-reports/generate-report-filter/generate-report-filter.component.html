@@ -1,0 +1,73 @@
+<div class="panel panel-accordion filter-container">
+    <div class="panel-accordion-buttons">
+        <button class="btn btn-primary btn-sm" (click)="onSubmit()" translate="yes">APPLY FILTERS</button>
+        <button class="btn btn-default btn-sm reset" (click)="resetFilter()" translate="yes">Reset</button>
+    </div>
+    <br />
+    <ngb-accordion #accordian="ngbAccordion" activeIds="ngb-panel-report-generate">
+
+        <ngb-panel id="ngb-panel-report-generate">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Report Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <input type="text" id="reportName" name="reportName" class="form-control"
+                        placeholder="Report Name" />
+                </div>
+                <div class="form-group">
+                    <label for="reportCategory" style="margin-bottom: 0;color: #565656;">Report Category</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">--All--
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Allocation
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Inventory
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Order
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Program Configuration
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reportCategory" style="margin-bottom: 0;color: #565656;">Line Of Business</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Direct to Practitioner
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Direct to Rep
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Hand Carry
+                        </label>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="127" height="60" viewBox="0 0 127 60">
+    <defs>
+        <rect id="rnzw15kvia" width="127" height="60" x="0" y="0" rx="2"/>
+        <rect id="vqsdn0m1kd" width="100" height="66.364" x="0" y="0" rx="1"/>
+        <ellipse id="3u3c3z795e" cx="6.004" cy="6.003" rx="6.004" ry="6.003"/>
+        <filter id="p4lbtzcuqc" width="119%" height="145.2%" x="-9.5%" y="-11.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" radius="6" result="shadowSpreadOuter1"/>
+            <feOffset dy="13" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="7"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.158653846 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <mask id="n3th7aj04b" fill="#fff">
+                <use xlink:href="#rnzw15kvia"/>
+            </mask>
+            <use fill="#00488A" fill-opacity=".1" xlink:href="#rnzw15kvia"/>
+            <g mask="url(#n3th7aj04b)">
+                <g>
+                    <g transform="translate(14 9)">
+                        <use fill="#000" filter="url(#p4lbtzcuqc)" xlink:href="#vqsdn0m1kd"/>
+                        <rect width="99.5" height="65.864" x=".25" y=".25" fill="#F8FAFC" stroke="#01569C" stroke-linejoin="square" stroke-opacity=".181" stroke-width=".5" rx="1"/>
+                    </g>
+                    <g transform="translate(14 9) translate(0 1.31)">
+                        <path fill="#D5E0EB" d="M0 5.239H100V6.239H0z"/>
+                        <circle cx="4.803" cy="1.965" r="1.965" fill="#00488A"/>
+                        <path fill="#D5E0EB" d="M10.262 1.528H16.157V2.62H10.262zM18.341 1.528H24.236V2.62H18.341zM26.419 1.528H32.314V2.62H26.419zM34.498 1.528H40.393V2.62H34.498z"/>
+                        <rect width="16.594" height="1.965" x="75.546" y="1.092" fill="#D5E0EB" rx=".982"/>
+                        <circle cx="95.852" cy="1.965" r="1.528" fill="#D3E9F7"/>
+                    </g>
+                    <g>
+                        <path fill="#FCFCFF" stroke="#01569C" stroke-opacity=".217" stroke-width=".5" d="M0.25 0.25H26.169V20.925H0.25z" transform="translate(14 9) translate(70.96 9.824)"/>
+                        <path fill="#D5E0EB" d="M1.747 1.746H12.446V2.838H1.747z" transform="translate(14 9) translate(70.96 9.824)"/>
+                        <g>
+                            <path fill="#D5E0EB" d="M0 0H3.493V1H0z" transform="translate(14 9) translate(70.96 9.824) translate(16.157 7.204)"/>
+                            <path fill="#D3E9F7" d="M0 1.31H8.079V2.31H0z" transform="translate(14 9) translate(70.96 9.824) translate(16.157 7.204)"/>
+                            <path fill="#D5E0EB" d="M0 3.056H3.493V4.056H0z" transform="translate(14 9) translate(70.96 9.824) translate(16.157 7.204)"/>
+                            <path fill="#D3E9F7" d="M0 4.366H8.079V5.366H0z" transform="translate(14 9) translate(70.96 9.824) translate(16.157 7.204)"/>
+                            <path fill="#D5E0EB" d="M0 6.112H3.493V7.112H0z" transform="translate(14 9) translate(70.96 9.824) translate(16.157 7.204)"/>
+                            <path fill="#D3E9F7" d="M0 7.422H8.079V8.422H0z" transform="translate(14 9) translate(70.96 9.824) translate(16.157 7.204)"/>
+                        </g>
+                        <g transform="translate(14 9) translate(70.96 9.824) translate(2.183 5.02)">
+                            <mask id="1v0jcn5wpf" fill="#fff">
+                                <use xlink:href="#3u3c3z795e"/>
+                            </mask>
+                            <use fill="#D3E9F7" xlink:href="#3u3c3z795e"/>
+                            <path fill="#F2FAFD" d="M5.895 -1.092L6.004 6.003 10.917 1.528 9.17 -0.327z" mask="url(#1v0jcn5wpf)"/>
+                            <path fill="#E1ECF4" d="M7.336 2.805L7.444 9.9 14.531 9.501 10.611 3.569z" mask="url(#1v0jcn5wpf)" transform="rotate(49 10.933 6.352)"/>
+                        </g>
+                        <g fill="#E1E5F4">
+                            <path d="M0 0H2.402V1H0zM3.275 0H5.677V1H3.275zM6.55 0H8.952V1H6.55z" transform="translate(14 9) translate(70.96 9.824) translate(8.734 18.992)"/>
+                        </g>
+                    </g>
+                    <g>
+                        <g transform="translate(14 9) translate(2.838 42.569) translate(33.624)">
+                            <path fill="#A6C7EC" d="M0 0H14.847V1.092H0z"/>
+                            <path fill="#D5E0EB" d="M0 2.401H27.074V3.401H0zM0 3.711H27.074V4.711H0z"/>
+                            <circle cx="2.729" cy="10.369" r="2.729" fill="#D3E9F7"/>
+                            <path fill="#A6C7EC" d="M6.114 7.859H13.538V9.169H6.114z"/>
+                            <path fill="#D5E0EB" d="M0 5.021H18.341V6.021H0z"/>
+                        </g>
+                        <g transform="translate(14 9) translate(2.838 42.569) translate(67.249)">
+                            <path fill="#A6C7EC" d="M0 0H14.847V1.092H0z"/>
+                            <path fill="#D5E0EB" d="M0 2.401H27.074V3.401H0zM0 3.711H27.074V4.711H0z"/>
+                            <circle cx="2.729" cy="10.369" r="2.729" fill="#D3E9F7"/>
+                            <path fill="#A6C7EC" d="M6.114 7.859H13.538V9.169H6.114z"/>
+                            <path fill="#D5E0EB" d="M0 5.021H18.341V6.021H0z"/>
+                        </g>
+                        <g transform="translate(14 9) translate(2.838 42.569)">
+                            <path fill="#A6C7EC" d="M0 0H14.847V1.092H0z"/>
+                            <path fill="#D5E0EB" d="M0 2.401H27.074V3.401H0zM0 3.711H27.074V4.711H0z"/>
+                            <circle cx="2.729" cy="10.369" r="2.729" fill="#D3E9F7"/>
+                            <path fill="#A6C7EC" d="M6.114 7.859H13.538V9.169H6.114z"/>
+                            <path fill="#D5E0EB" d="M0 5.021H18.341V6.021H0z"/>
+                        </g>
+                    </g>
+                    <g>
+                        <path fill="#FCFCFF" stroke="#01569C" stroke-opacity=".217" stroke-width=".5" d="M0.25 0.25H94.291V5.208H0.25z" transform="translate(14 9) translate(2.838 34.055)"/>
+                        <path fill="#D5E0EB" d="M2.183 2.183H7.6419999999999995V3.275H2.183zM9.825 2.183H15.283999999999999V3.275H9.825zM17.467 2.183H22.926V3.275H17.467zM25.109 2.183H30.568V3.275H25.109zM79.258 2.183H84.717V3.275H79.258zM86.9 2.183H92.35900000000001V3.275H86.9z" transform="translate(14 9) translate(2.838 34.055)"/>
+                    </g>
+                    <g>
+                        <path fill="#FCFCFF" stroke="#01569C" stroke-opacity=".217" stroke-width=".5" d="M0.25 0.25H65.689V20.925H0.25z" transform="translate(14 9) translate(2.838 9.824)"/>
+                        <path fill="#D5D8EB" fill-opacity=".28" d="M1.747 7.204H64.19200000000001V8.204H1.747zM1.747 9.605H64.19200000000001V10.605H1.747zM1.747 12.007H64.19200000000001V13.007H1.747z" transform="translate(14 9) translate(2.838 9.824)"/>
+                        <path fill="#D5D8EB" fill-opacity=".61" d="M1.747 14.408H64.19200000000001V15.408H1.747z" transform="translate(14 9) translate(2.838 9.824)"/>
+                        <path fill="#D5E0EB" d="M1.747 1.746H30.35V2.838H1.747z" transform="translate(14 9) translate(2.838 9.824)"/>
+                        <g>
+                            <path fill="#A6C7EC" d="M0 0H4.148V1H0zM10.917 0H15.065V1H10.917zM21.834 0H25.982V1H21.834zM58.297.655H62.44499999999999V1.655H58.297z" transform="translate(14 9) translate(2.838 9.824) translate(1.747 17.246)"/>
+                            <path fill="#D5E0EB" d="M0 1.528H8.734V2.528H0zM10.917 1.528H19.651V2.528H10.917zM21.834 1.528H30.567999999999998V2.528H21.834z" transform="translate(14 9) translate(2.838 9.824) translate(1.747 17.246)"/>
+                        </g>
+                        <g fill="#00488A">
+                            <path d="M0 4.366H1.31V8.077H0zM23.581 4.366H24.891V8.077H23.581zM47.162 3.711H48.472V8.077H47.162zM1.965 2.62H3.2750000000000004V8.078H1.965zM25.546 2.62H26.855999999999998V8.078H25.546zM49.127 2.62H50.437000000000005V8.078H49.127zM3.93 3.275H5.24V8.078H3.93zM27.511 3.275H28.820999999999998V8.078H27.511zM51.092 3.275H52.402V8.078H51.092zM5.895 3.929H7.205V8.077H5.895zM29.476 3.275H30.785999999999998V8.078H29.476zM53.057 3.929H54.367000000000004V8.077H53.057zM7.86 2.62H9.17V8.078H7.86zM31.441 2.62H32.751V8.078H31.441zM55.022 2.62H56.332V8.078H55.022zM9.825 1.528H11.135V8.077H9.825zM33.406 1.528H34.716V8.077H33.406zM56.987 1.528H58.297000000000004V8.077H56.987zM11.79 1.092H13.1V8.078H11.79zM35.371 1.092H36.681000000000004V8.078H35.371zM13.755 1.965H15.065000000000001V8.077H13.755zM37.336 1.965H38.646V8.077H37.336zM15.721 1.092H17.031V8.078H15.721zM39.301 0H40.611000000000004V8.077H39.301zM17.686.873H18.996V8.077H17.686zM41.266.873H42.576V8.077H41.266zM19.651 2.838H20.961V8.077H19.651zM43.231 2.838H44.541000000000004V8.077H43.231zM21.616 3.929H22.926V8.077H21.616zM45.197 3.929H46.507000000000005V8.077H45.197z" transform="translate(14 9) translate(2.838 9.824) translate(3.93 6.549)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

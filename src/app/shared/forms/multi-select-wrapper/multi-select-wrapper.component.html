@@ -1,0 +1,9 @@
+<div class="multi-select-container" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <samplicity-multi-select *ngIf="parentFormGroup" [parentFormGroup]="parentFormGroup" [name]="name" [listItems]="listItems" [selectAll]="selectAll" [collapsible]="collapsible" [readonly]="control && control.disabled"
+    [idProperty]="idProperty" [namesProperty]="namesProperty" [disabledItem]="disabled" [noWell]="noWell" [height]="height" [maxHeight]="maxHeight" [selectAllText]="selectAllText"
+    [sort]="sort" [multiSort]="multiSort" (change)="onChange($event)" [namesTranslated]="namesTranslated"></samplicity-multi-select>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

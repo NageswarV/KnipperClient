@@ -1,0 +1,126 @@
+@import '../../../../style/main.scss';
+@import '../../../styles/variables';
+@import '../../../styles/styles'; 
+.mat-drawer {
+  overflow-y: auto !important;
+}
+
+.white-bg-circle{
+  background: #fff;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+}
+
+.white-bg-triangle{
+  margin-top: -47px;
+  margin-left: 3px;
+  border-style: solid;
+  border-width: 0 15px 26px 15px;
+  border-color: transparent transparent #ffffff transparent;
+  z-index: -1;
+  position: absolute;
+}
+
+
+.side-menu {
+  width: 250px;
+  background-color: $menu-grey;
+  font-size: 16px;
+  margin-top: 12rem;
+  font-weight: 400;
+  padding: 0px;
+  height: fit-content !important;
+  overflow-x: hidden;
+  color: $input-grey;
+}
+
+
+.filter-strip {
+  font-size: 2rem;
+  transform: translateX(-1px);
+  text-align: center;
+  padding-top: 2.5rem;
+  margin-top: 8.5rem;
+  height: 18rem !important;
+  width: calc(2.5rem + 1px);
+  position: fixed;
+  background: $active-blue;
+  z-index: 10;
+  text-orientation: upright;
+  color: $white;
+  cursor: pointer;
+  top: $navbar-height-desktop;
+
+  @media screen and (max-width: 1199px) {
+    top: $navbar-height-tablet;
+  }
+
+  &:hover {
+    color: $white;
+  }
+
+  p {
+    margin-top: -1rem !important;
+    font-size: 16px;
+    writing-mode: vertical-lr;
+    -ms-writing-mode: tb-rl;
+    margin-left: 2px;
+    white-space: nowrap;
+    display: block;
+    width: 24px;
+    text-align: left;
+  }
+
+  .mat-icon {
+    height: 24px;
+    width: 24px;
+    transition: transform 0.3s ease-in-out;
+    color: $white;
+    margin-bottom: 20px;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  .mat-icon-error {
+    border-radius: 1rem;
+    background-color: $knipper-red;
+    height: 20px;
+    width: 20px;
+    margin-top: 4rem;
+    margin-left: 0.6rem;
+
+    .mat-icon {
+      margin-top: -2px;
+      margin-left: -2px;
+    }
+  }
+
+  .mat-icon-warning {
+    margin-top: 4rem;
+    margin-left: 0.2rem;
+
+    .mat-icon {
+      color: $yellow;
+      margin-top: -2px;
+      margin-left: -2px;
+    }
+  }
+
+  .mat-icon-valid {
+    margin-top: 4rem;
+    margin-left: 0.2rem;
+
+    .mat-icon {
+      color: $green;
+      margin-top: -2px;
+      margin-left: -2px;
+    }
+  }
+}

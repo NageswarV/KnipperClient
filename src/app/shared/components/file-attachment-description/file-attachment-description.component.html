@@ -1,0 +1,24 @@
+<samplicity-file-input-wrapper #inputWrapper *ngIf="canEdit" [acceptsTypes]="acceptsTypes"
+  [allowOverwrites]="allowOverwrites"
+  [name]="fileControlName" [buttonLabel]="uploadButton" [parentFormGroup]="parentFormGroup"
+  (delete)="clearAttachment()" (upload)="onUpload()" (duplicateFileName)="onDuplicateFileName()" [existingAttachments]="existingAttachments">
+</samplicity-file-input-wrapper>
+<div class="d-flex">
+  <!-- <ng-container *ngIf="isDuplicateFileName">
+    <small class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+      <mat-icon color="danger">error</mat-icon>
+      <span l10nTranslate>{{duplicateFileNameMessage}}</span>
+    </small>
+  </ng-container> -->
+  <samplicity-text-inline-input *ngIf="isImageUploaded && !isDuplicateFileName && !showDuplicateNameError" [label]="descLabel"
+    [name]="descControlName" [maxLength]="descMaxLength" [parentFormGroup]="parentFormGroup">
+  </samplicity-text-inline-input>
+
+  <div *ngIf="isImageUploaded && isImageDescriptionFilled && !isDuplicateFileName && !showDuplicateNameError">
+    <button class="attach-file-button" type="button" mat-raised-button color="primary"
+      (click)="createAttachment()">
+      <mat-icon>attach_file</mat-icon>
+      <span l10nTranslate>{{attachButton}}</span>
+    </button>
+  </div>
+</div>

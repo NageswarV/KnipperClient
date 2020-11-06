@@ -1,0 +1,55 @@
+@import '../../../../styles/variables';
+
+.nav-item {
+  color: $white;
+
+  .mat-icon {
+    color: $white;
+  }
+
+  a {
+    text-decoration: none;
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.border-top{
+  border-top: 1px solid $light-grey-2;
+}
+
+.cut-text { 
+  width : 150px;
+  overflow:hidden;
+  display:inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-info{
+  color: $mid-grey;
+  margin-left: 0px;
+  margin-right: 20px;
+  margin-bottom:5px;
+}
+
+.text-styling{
+  color: $mid-grey;
+  font-size: 0.72rem;
+}
+
+.name-styling{
+  color: $mid-grey;
+  font-size: 0.9rem;
+}
+
+.user-wrapper {
+
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 65px;
+}
+

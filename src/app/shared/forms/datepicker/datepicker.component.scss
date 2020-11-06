@@ -1,0 +1,16 @@
+.date-before-hyphen {
+    vertical-align: middle; 
+    padding-left: 10px;
+}
+
+.center-input-group-layout {
+    align-items: center;
+}
+
+.datepicker-btn {
+    height: 49px;
+    border: 0;
+    .mat-icon {
+        margin-left: -4px;
+    }
+}

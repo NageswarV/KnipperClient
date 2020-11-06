@@ -1,0 +1,13 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [labelTranslated]="labelTranslated" [required]="required || isRequired"></samplicity-field-label>
+  <div>
+    <mat-button-toggle-group class="mat-button-toggle-group" role="radiogroup" [formControlName]="name" #group="matButtonToggleGroup">
+      <mat-button-toggle *ngFor="let item of items" [value]="item.value" (click)="control?.setValue(item.value)" l10nTranslate>
+        <mat-icon *ngIf="item.value === control?.value">check_circle</mat-icon>
+        {{item.label}}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

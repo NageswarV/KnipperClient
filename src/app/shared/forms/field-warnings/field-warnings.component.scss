@@ -1,0 +1,9 @@
+.field-errors {
+  span {
+    flex-shrink: 1;
+  }
+  .mat-icon {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+}

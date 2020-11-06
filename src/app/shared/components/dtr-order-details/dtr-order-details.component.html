@@ -1,0 +1,152 @@
+<div class="container mt-2" [ngBusy]="busyPromise">
+    <div class="row">  
+        <div class="col-xs-12" >
+            <div class="fs-12"><a class="nav-breadcrumb" [routerLink]="breadCrumbNavigationUrl">{{breadCrumbs}}</a> / Order Details: {{orderID}}</div>
+        </div>
+    </div>
+    <div class="row mt-2">  
+        <div class="col-xs-12">
+            <div class="head-left">Order Details: {{orderID}} <mat-icon>launch</mat-icon></div>
+        </div>
+    </div>
+    <div class="col-xs-12 mt-2">  
+        <div class="row panel" >
+            <div class="row p-2">
+                <div class="d-flex flex-row col-xs-3">
+                    <div class="label-light">
+                        Order #: 
+                    </div>
+                    <div class="value ml-1">
+                        {{orderDetails?.orderNumber}}
+                    </div>
+                </div>
+                <div class="d-flex flex-row  col-xs-3">
+                    <div class="label-light">
+                        Order Date: 
+                    </div>
+                    <div class="value ml-1">
+                        {{orderDetails?.orderDate}}
+                    </div>
+                </div>
+                <div class="d-flex flex-row  col-xs-3">
+                    <div class="label-light">
+                        Order Type:  
+                    </div>
+                    <div class="value ml-1">
+                        {{orderDetails?.orderType}}
+                    </div>
+                </div>
+                <div class="d-flex flex-row  col-xs-3">
+                    <div class="label-light">
+                        Status:  
+                    </div>
+                    <div class="value ml-1">
+                        {{orderDetails?.status}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 mt-2">  
+        <div class="row panel">
+            <div class="row p-2">
+                <div class="d-flex flex-column col-xs-12 col-md-3">
+                    <div class="label-dark">
+                        Ordered By
+                    </div>
+                    <div class="value Rectangle p-2 mt-2">
+                        <div class="label-light">
+                            Address:
+                        </div>
+                        <div class="value mt-1">
+                            <div>{{orderDetails?.orderedByFirstName}} {{orderDetails?.orderedByLastName}}</div>
+                            <div>{{orderDetails?.orderedByAddressLine1}} {{orderDetails?.orderedByAddressLine2}}</div>
+                            <div>{{orderDetails?.orderedByCity}} {{orderDetails?.orderedByState}} {{orderDetails?.orderedByZipCode}}</div>
+                            <div>{{orderDetails?.orderedByCountry}}</div>
+                        </div>
+                        <div class="label-light mt-2">Phone:</div>
+                        <div class="value mt-1">
+                            <div>{{orderDetails?.orderedByPhoneNumber}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex   col-xs-12 col-md-3">
+                    
+                </div>
+                <div class="d-flex flex-column  col-xs-12 col-md-3">
+                    <div class="label-dark">
+                        Ship To  
+                    </div>
+                    <div class="value Rectangle p-2 mt-2">
+                        <div class="label-light">
+                            Address:
+                        </div>
+                        <div class="value mt-1">
+                            <div>{{orderDetails?.shipToFirstName}} {{orderDetails?.shipToLastName}}</div>
+                            <div>{{orderDetails?.shipToAddressLine1}} {{orderDetails?.shipToAddressLine2}}</div>
+                            <div>{{orderDetails?.shipToCity}} {{orderDetails?.shipToState}} {{orderDetails?.shipToZipCode}}</div>
+                            <div>{{orderDetails?.shipToCountry}}</div>
+                        </div>
+                        <div class="label-light mt-2">Phone:</div>
+                        <div class="value mt-1">
+                            <div>{{orderDetails?.shipToPhoneNumber}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex  col-xs-12 col-md-3">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 mt-2">  
+        <div class="row panel">
+            <div class="row p-2">
+                <div class="d-flex flex-column col-xs-12">
+                    <div class="label-dark">
+                        Delivery Details
+                    </div>
+                    <div class="value d-flex flex-row mt-2">
+                        <div class="label-light">
+                            Delivery Method: 
+                        </div>
+                        <div class="value ml-1">
+                            <div> {{orderDetails?.shipmentCarrier}} {{orderDetails?.shipmentCarrierService }}</div>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 mt-2">  
+        <div class="row panel">
+            <div class="row p-2">
+                <div class="d-flex flex-column col-xs-12">
+                    <div id="head-large" class="label-dark">
+                        Material Ordered
+                    </div>
+                    <div class="value mt-2">
+                        <sg-grid [columns]="columns" emptyText="No Orders" [items]="orderDetails?.orderLineItems" [totalRecordCount]="orderDetails?.orderLineItems.length" [pageSize]="orderDetails?.orderLineItems.length" 
+                       >
+                      <ng-template let-item>
+                        <td class="col-xs-6 decoration-none grid-padding" style="height: 20px;"> 
+                            <!-- <img [src]="item?.productImagePath" class="img-thumbnail"  width="44" height="40">  -->
+                            {{item?.productName}}</td>
+                        <td class="col-xs-2 grid-padding">{{item?.productCode}}</td>
+                        <td class="col-xs-2 grid-padding">{{item?.productUom }}</td>
+                        <td class="col-xs-2 grid-padding">{{item?.orderQty}}</td>
+                      </ng-template>
+                    </sg-grid>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </div>
+    
+  </div>
+  
+
+
+
+
+

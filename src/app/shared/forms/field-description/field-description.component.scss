@@ -1,0 +1,15 @@
+.description-text {
+  margin-top: 0.2rem;
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  white-space: pre-line;
+}
+
+.description-array {
+  margin-bottom: 0.25rem;
+   
+  .description-text {
+    margin-left: 2rem;
+  }
+}

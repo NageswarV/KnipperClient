@@ -1,0 +1,59 @@
+@import '../../../styles/variables';
+
+.multi-select-list-container {
+
+  .header {
+    border-top: 1px solid $input-border;
+    border-left: 1px solid $input-border;
+    border-right: 1px solid $input-border;
+    padding: 10px;
+    background-color: $table-header-background;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .checkbox-list-container {
+    border-radius: 0 !important;
+    overflow-y: hidden !important;
+    border-top: 0 !important;
+  }
+
+  .select-all-container {
+    border: 1px solid $input-border;
+    background: $table-subheader-background;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+
+  .search-row {
+    background-color: $table-header-background;
+    border: 1px solid $input-border;
+    border-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1rem;
+
+    .form-group {
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .collapse-btn {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    cursor: pointer;
+    color: $mid-grey;
+    vertical-align: sub;
+
+    .mat-icon {
+      transform: rotate(-90deg);
+      color: $table-icon;
+
+      &.expanded {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}

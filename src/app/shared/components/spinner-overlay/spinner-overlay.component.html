@@ -1,0 +1,7 @@
+<div class="spinner-overlay">
+  <div class="card spinner-container m-auto">
+    <mat-spinner class="m-auto"></mat-spinner>
+    <h3 class="mt-4" *ngIf="!messageTextTranslated" l10nTranslate>{{messageText}}</h3>
+    <h3 class="mt-4" *ngIf="messageTextTranslated">{{messageTextTranslated}}</h3>
+  </div>
+</div>

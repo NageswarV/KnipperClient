@@ -1,0 +1,26 @@
+<div *ngIf="parentFormGroup" class="multi-select-list-container form-group" [style.height]="height" [formGroup]="parentFormGroup" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+  <div class="row search-row">
+    <samplicity-search-input class="col-6 mx-auto" placeholder="SearchPlaceholder" [parentFormGroup]="searchForm" name="search" (search)="onSearch($event)"></samplicity-search-input>
+  </div>
+  <div class="multi-select-list-container-selects" [class.is-invalid]="isInvalid">
+    <samplicity-multi-select *ngFor="let group of filteredItems; let i = index;" [outputIds]="outputIds" [listItems]="group[groupProperty]" [title]="group['names']" [formControlName]="name + '__' + groupProperty + i"
+                      [disabledItem]="disabled" [idProperty]="idProperty" [collapsible]="true"></samplicity-multi-select>
+  </div>
+</div>
+
+<div *ngIf="!parentFormGroup" class="multi-select-list-container form-group" [style.height]="height">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+  <ng-container *ngIf="filteredItems.length">
+    <div *ngIf="title" class="header">
+      <span l10nTranslate>{{ title }}</span>
+    </div>
+    <samplicity-multi-select *ngFor="let group of filteredItems; let i = index;" [outputIds]="outputIds" [listItems]="group[groupProperty]" [title]="group['names']" [readonly]="readonly"
+                      [disabledItem]="disabled" [idProperty]="idProperty" [collapsible]="true"></samplicity-multi-select>
+  </ng-container>
+</div>

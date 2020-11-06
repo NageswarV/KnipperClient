@@ -1,0 +1,17 @@
+@import '../../style/main.scss';
+
+.material-icons.like-button {
+  font-size: 27px;
+  color: $like-icon-grey;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding-bottom: 10px;
+
+  &.is-like {
+    color: $like-icon-green;
+  }
+
+  &.is-dislike {
+    color: $like-icon-red;
+  }
+}

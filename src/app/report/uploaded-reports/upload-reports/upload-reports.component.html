@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-11 col-xs-11"></div>
+        <div mat-dialog-actions class="col-md-1 col-xs-1">
+            <i class="material-icons " role="button" (click)="disableDilog()">close</i>
+        </div> 
+    </div>
+    <div class="row">
+     <div mat-dialog-title class="Upload-Reports">Upload Reports</div> 
+    </div>
+    <div class="row Supported-formats">
+        <p><i class="glyphicon glyphicon-info-sign infoIco"></i>Supported Formats : .PDF, .XLSX, .CSV</p>
+    </div>
+     <div mat-dialog-content>
+
+        <div class="tableHeading">
+            <div class="Upload-Report-Detail">
+             Upload Report Details
+            </div>
+            <div  class="Click-the-add-button">
+             click the add button in the table and add reports and set the report name and report type
+            </div>
+        </div>
+       
+        <div class="row table">
+            
+                 <sg-grid [columns]="columnsOut" emptyText="No Reports" [items]="reportsToDisplay" [totalRecordCount]="reportsToDisplay?.length"
+                     [pageSize]="pageSize" [currentPage]="currentPage" 
+                     (emitPageChange)="paginate($event)" [fromReport]="fromReport">
+                     <ng-template let-report>
+                     <td class="columnHeader col-xs-4 col-md-4 form-group"><div class="text-primary">{{report.file}}</div></td>
+                     <td class="columnHeader col-xs-4 col-md-4 form-group"><select class="form-control selectIco" name="reportType" value="opt1" id="reportType">
+                            <option value="opt1">Option 1</option>
+                            <option value="opt2">Option 2</option>
+                            <option value="opt3">Option 3</option>
+                            </select>
+                    </td>
+                     <td class="columnHeader col-xs-4 col-md-4 form-group"> <input class="form-control" style="padding: 1px;" type="text" placeholder="Report Name">
+                     </td>
+                     </ng-template>
+                 </sg-grid>
+                 <div class="row ">
+                     <div class="col-xs-9">
+                         <a style="margin-left: 13px;" (click)="clearUploads()" class="clrAll">Clear All</a>
+                     </div>
+                     <div class="col-xs-3 text-right">
+                     <button name="addReport" class="btn btn-default addReports" style="margin-bottom: 10px; padding: 8px;margin-right: 10px;" (click)="addReportsToPage()"> + Add Report</button>
+                     </div>
+                 </div>
+            
+        </div>
+         
+     </div>
+     <div class="row">
+         <div class="col-xs-10">
+             <button class="btn btn-default" name="cancel" (click)="disableDilog()">CANCEL</button>
+         </div>
+         <div class="col-xs-2">
+             <button class="btn btn-primary" name="upload">UPLOAD</button>
+         </div>
+     </div>
+   
+ </div>
+ 

@@ -1,0 +1,33 @@
+﻿<div *ngIf="commentList?.length == 0">
+    <p>
+        <span translate="yes">hcpportal-shared-nocomments</span>
+    </p>
+</div>
+<div *ngIf="!contentFlag">
+    <div *ngIf="commentList?.length > 0" class="comment">
+        <p>
+            <i>{{commentList[0].commentedByName}}</i> |
+            <i>{{commentList[0].commentDate | sgCustomDate: false}}</i>
+        </p>
+        <pre>{{commentList[0].commentsText}}</pre>
+    </div>
+    <div *ngIf="commentList?.length > 1">
+        <p>
+            <a (click)="showContent(true)" translate="yes">hcpportal-shared-showmore</a>
+        </p>
+    </div>
+</div>
+<div *ngIf="contentFlag">
+    <div *ngFor="let comment of commentList" class="comment">
+        <p>
+            <i>{{comment.commentedByName}}</i> |
+            <i>{{comment.commentDate | sgCustomDate: false}}</i>
+        </p>
+        <pre>{{comment.commentsText}}</pre>
+    </div>
+    <div>
+        <p>
+            <a (click)="showContent(false)" translate="yes">hcpportal-shared-showless</a>
+        </p>
+    </div>
+</div>

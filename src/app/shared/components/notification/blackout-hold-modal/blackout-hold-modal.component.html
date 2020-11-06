@@ -1,0 +1,15 @@
+<div class="dialog-header dialog-info d-flex">
+  <span class="dialog-header-text align-middle" l10nTranslate>Notifications.BlackoutHold.BlackoutHoldDetails</span>
+  <mat-icon class="dialog-close align-middle ml-auto" (click)="closeModal()">close</mat-icon>
+</div>
+<div class="dialog-body">
+  <div class="col-12"><label class="with-colon">{{blackoutHoldTitle}}</label>
+    <samplicity-responsive-datatable [columns]="blackoutHoldColumns" [loadMore]="loadData.bind(this)">
+    </samplicity-responsive-datatable>
+  </div>
+</div>
+<div class="dialog-footer d-flex">
+  <button mat-raised-button (click)="closeModal()" color="default" l10nTranslate>
+    <span l10nTranslate>Notifications.BlackoutHold.Ok</span>
+  </button>
+</div>

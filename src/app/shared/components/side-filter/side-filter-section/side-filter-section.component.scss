@@ -1,0 +1,15 @@
+@import '../../../../styles/variables';
+
+.mat-expansion-panel {
+  margin-top: 0.5em;
+  
+  .mat-expansion-panel-body {
+    .well {
+      background: $background-well-embed !important;
+    }
+  }
+}
+
+.checkbox-list-container {
+  background: $background-well-embed;
+}

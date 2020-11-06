@@ -1,0 +1,173 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/styles';
+
+@mixin sort-caret {
+  display: inline;
+  font-family: 'Material Icons';
+  font-size: 1rem;
+  font-size: 1.5rem;
+  margin-left: 0.25rem;
+}
+
+b {
+  margin-left: 1em;
+}
+.custom-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.row {
+  padding-left: 0;
+
+  dt {
+    color: $mid-grey;
+    cursor: pointer;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+
+    span {
+      &.sort-asc {
+        &:after {
+          @include sort-caret;
+          content: '\E5CE';
+        }
+      }
+
+      &.sort-desc {
+        &:after {
+          @include sort-caret;
+          content: '\E5CF';
+        }
+      }
+    }
+  }
+  
+  dt, dd {
+
+    &.li-visibility-xs {
+      display: none;
+    }
+
+    &.li-visibility-xs1 {
+      @media screen and (min-width: $table-breakpoint-xs1) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-sm {
+      @media screen and (min-width: $table-breakpoint-sm) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-sm1 {
+      @media screen and (min-width: $table-breakpoint-sm1) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-md {
+      @media screen and (min-width: $table-breakpoint-md) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-md1 {
+      @media screen and (min-width: $table-breakpoint-md1) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-md2 {
+      @media screen and (min-width: $table-breakpoint-md2) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-md3 {
+      @media screen and (min-width: $table-breakpoint-md3) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-lg {
+      @media screen and (min-width: $table-breakpoint-lg) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-lg1 {
+      @media screen and (min-width: $table-breakpoint-lg1) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-lg2 {
+      @media screen and (min-width: $table-breakpoint-lg2) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-lg3 {
+      @media screen and (min-width: $table-breakpoint-lg3) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xl {
+      @media screen and (min-width: $table-breakpoint-xl) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xl1 {
+      @media screen and (min-width: $table-breakpoint-xl1) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xl2 {
+      @media screen and (min-width: $table-breakpoint-xl2) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xl3 {
+      @media screen and (min-width: $table-breakpoint-xl3) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xxl {
+      @media screen and (min-width: $table-breakpoint-xxl) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xxl1 {
+      @media screen and (min-width: $table-breakpoint-xxl1) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xxl2 {
+      @media screen and (min-width: $table-breakpoint-xxl2) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xxl3 {
+      @media screen and (min-width: $table-breakpoint-xxl3) {
+        display: none;
+      }
+    }
+
+    &.li-visibility-xxl4 {
+      @media  (min-width: $table-breakpoint-xxl4) {
+        display: none;
+      }
+    }
+  }
+}

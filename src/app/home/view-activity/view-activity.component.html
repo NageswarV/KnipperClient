@@ -1,0 +1,87 @@
+<mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <h2>What would you like to do today?</h2>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <div class="view-activity-container">
+        <div class="search-box">
+            <label for="orderId" style="color: #565656;margin-bottom: 8px;">Search Order by Order ID</label>
+            <div class="flex-space" style="padding: 0;">
+                <div class="input-group" style="flex: 1;">
+                    <input type="text" maxlength="255" id="orderId" name="orderId" class="form-control no-border"
+                        placeholder="Enter Order ID">
+                    <span class="input-group-addon form-control-span btn-search"><i
+                            class="glyphicon glyphicon-search"></i></span>
+                </div>
+                <div class="search-button">
+                    <button class="btn btn-default btn-sm">SEARCH</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-space" (click)="goToSearchPage('HCP')">
+            <div class="flex-center">
+                <img src="../../../resources/images/activity-by-hcp.svg">
+                <div>
+                    <p class="header-name">Activity by HCP</p>
+                    <p class="placeholder">View order information by HCP</p>
+                </div>
+            </div>
+            <i class="material-icons forward-icon">arrow_forward</i>
+        </div>
+
+        <div class="flex-space" (click)="goToSearchPage('Rep')">
+            <div class="flex-center">
+                <img src="../../../resources/images/activity-by-sales-rep.svg">
+                <div>
+                    <p class="header-name">Activity by Sales Rep</p>
+                    <p class="placeholder">View order/transaction information by sales rep </p>
+                </div>
+            </div>
+            <i class="material-icons forward-icon">arrow_forward</i>
+        </div>
+
+        <!-- <div class="flex-space">
+            <div class="flex-center">
+                <img src="../../../resources/images/activity-by-customer.svg">
+                <div>
+                    <p class="header-name">Activity by Customer</p>
+                    <p class="placeholder">View commercial order information by customer</p>
+                </div>
+            </div>
+            <i class="material-icons forward-icon">arrow_forward</i>
+        </div> -->
+
+        <div class="flex-space" (click)="goToSearchPage('product')">
+            <div class="flex-center">
+                <img src="../../../resources/images/orders-by-product.svg">
+                <div>
+                    <p class="header-name">Find Orders by Product </p>
+                </div>
+            </div>
+            <i class="material-icons forward-icon">arrow_forward</i>
+        </div>
+
+        <!-- <div class="flex-space">
+            <div class="flex-center">
+                <img src="../../../resources/images/msc-promotions.svg">
+                <div>
+                    <p class="header-name">View All MySampleCloset® Promotions </p>
+                </div>
+            </div>
+            <i class="material-icons forward-icon">arrow_forward</i>
+        </div> -->
+
+        <div class="flex-space" routerLink="/tasks">
+            <div class="flex-center">
+                <img src="../../../resources/images/tasks.svg">
+                <div>
+                    <p class="header-name">View All Tasks </p>
+                </div>
+            </div>
+            <i class="material-icons forward-icon">arrow_forward</i>
+        </div>
+    </div>
+</mat-expansion-panel>

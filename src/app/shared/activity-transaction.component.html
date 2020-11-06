@@ -1,0 +1,33 @@
+<div class="main-capsule" [class.warning]="warningCapsule" [class.error]="errorCapsule">
+    <div class="capsule-head">
+        {{transaction.orderStatus}}
+    </div>
+    <div class="capsule-body">
+        <!-- <div class="arrow" [style.top]="getTop()" [style.left]="getLeft()">
+            <i class="material-icons">arrow_downward</i>
+        </div> -->
+        <div class="curr">
+            <div class="inner-capsule">
+                <a style="font-size: 1.5em; text-decoration: underline;" [class.warningText]="warningCapsule"
+                    [class.errorText]="errorCapsule" (click)="gotoCurrentPeriodRoute()">{{transaction.currentPeriod.quantity}}</a>
+                <div style="font-size: 0.7em; opacity: 0.8;">
+                    {{transaction.currentPeriod | sgCustomDateRange : 2 : timeFrameSelected}}</div>
+            </div>
+        </div>
+        <!-- <div style="border-left: solid 1px lightgray;height: 33px;"></div> -->
+        <div class="arrow" *ngIf="transaction.currentPeriod.quantity < transaction.previousPeriod.quantity">
+            <i class="material-icons">arrow_downward</i>
+        </div>
+        <div class="arrow" *ngIf="transaction.currentPeriod.quantity > transaction.previousPeriod.quantity">
+            <i class="material-icons">arrow_upward</i>
+        </div>
+        <div class="prev">
+            <div class="inner-capsule">
+                <a style="font-size: 1.5em; text-decoration: underline;" [class.warningText]="warningCapsule"
+                    [class.errorText]="errorCapsule" (click)="gotoPreviousPeriodRoute()">{{transaction.previousPeriod.quantity}}</a>
+                <div style="font-size: 0.7em; opacity: 0.8;">
+                    {{transaction.previousPeriod | sgCustomDateRange : 2 : timeFrameSelected}}</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"></samplicity-field-label>
+  <div class="input-group">
+    <input #inputField [type]="type" class="form-control" [id]="id" (keyup.enter)="onSearch()" [placeholder]="translatedPlaceholder" [formControlName]="name" [attr.maxLength]="maxLength">
+    <span *ngIf="control!.value" class="input-group-addon addon-clear" (click)="control!.setValue(''); inputField.focus(); onSearch();"><mat-icon>close</mat-icon></span>
+    <span class="input-group-btn">
+      <button mat-raised-button color="primary" class="btn btn-secondary" type="button" (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </span>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

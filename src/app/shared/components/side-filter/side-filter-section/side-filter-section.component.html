@@ -1,0 +1,12 @@
+<mat-expansion-panel expanded="{{expanded}}">
+  <mat-expansion-panel-header *ngIf="header" [ngClass]="headerClass" expandedHeight="{{height}}" collapsedHeight="{{height}}">
+    <mat-panel-title>
+      <span *ngIf="!headerParameters && !headerIsDto" l10nTranslate>{{header}}</span>
+      <span *ngIf="headerParameters && !headerIsDto">{{header | translate:lang:headerParameters}}</span>
+      <span *ngIf="headerIsDto">
+        <samplicity-display-translation [values]="header"></samplicity-display-translation>
+      </span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-content></ng-content>
+</mat-expansion-panel>

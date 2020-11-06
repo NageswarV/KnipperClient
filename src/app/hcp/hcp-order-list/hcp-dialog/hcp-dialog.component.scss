@@ -1,0 +1,153 @@
+
+::ng-deep .custom-dialog > mat-dialog-container {
+    background-color: white;
+   
+  }
+.container{
+  width:800px;
+}
+.Heading{
+  font-size: 24px;
+  font-weight: 600;
+}
+// .material-icons {
+//   font-size: 18px;
+//   margin:2px;
+//   color: rgba(0, 0, 0, 0.21);
+//   background-color: var(--data-table-row-style-1); 
+//   color:green;
+//   cursor: pointer;
+// }
+// .order{
+//   padding:20px 0px;
+// }
+.tableHeading,.text1,.text2,.OrderInfoHeading,.OderInfoText{
+  font-size: 14px;
+  color: #565656;
+}
+.OderInfoText,.tableHeading{
+  color: black;
+}
+.OrderInfoHeading,.OderInfoText{
+  margin:3px 0px;
+}
+
+.table{
+  border: solid 1px #eaeaea;
+  margin-left:0.9px;
+  
+}
+.btwLine{
+  border-right: solid 1px #eaeaea;
+  padding:0px;
+}
+.tableHeading{
+background-color:var(--data-table-row-style-1) ;
+// height:70px;
+padding:5px 10px;
+}
+
+.text1{
+font-size: 16px;
+font-weight: 600;
+color: black;
+}
+.text2{
+  font-size: 14px;
+  font-style: italic;
+  color: #565656;
+}
+.columnHeader{
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding:4px 10px;
+}
+.attachName{
+  color: #01569c;
+  // height:90px;
+  font-weight: normal;
+  // text-decoration: underline;
+  }
+  .infoText{
+    color:#565656;
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  table a:not(.btn), .table a:not(.btn) {
+    text-decoration: underline !important;
+}
+
+table.dataTable thead th{
+  vertical-align: top;
+  // height: 80px;
+}
+.th{
+}
+   
+table tr td:nth-child(1) {
+  color: #01569c;
+  // height: 80px;
+}
+.cancel.material-icons{
+  background-color: white;
+  font-size: 24px;
+  color:black;
+}
+.titleBar{
+  display:flex;
+  justify-content: space-between;
+}
+.mat-dialog-actions{
+  padding: 0px;
+}
+@media only screen and (max-width: 1000px) {
+  .txtMiddle table tr td{
+    vertical-align: middle;
+    height:100px;
+  }
+}
+.label-color{
+  color: #565656;
+}
+.fw-600{
+  font-weight: 600;
+}
+.p-1{
+  padding: 1rem;
+}
+.p-2{
+  padding: 2rem;
+}
+.mt-05{
+  margin-top: 0.5rem;
+}
+.mt-2{
+  margin-top: 2rem;
+}
+.pl-2{
+  padding-left: 2rem;
+}
+.material-icons{
+  font-size: 18px;
+  padding:3px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Rectangle{
+  background-color: #e6e6e6;
+}
+
+.print-icon{
+  color: #01569c;
+}
+
+.send-icon{
+  color:var(--spruce);
+  margin-left: 8px;
+}
+.ff-open-sans{
+  font-family: Open Sans;
+}

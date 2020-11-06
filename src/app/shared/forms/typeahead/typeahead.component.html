@@ -1,0 +1,32 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <input *ngIf="!control.disabled" type="text" [attr.disabled]="disabled ? '' : null" [matAutocomplete]="typeAhead" class="form-control"
+    (blur)="onInputBlur()" (input)="onInputChange()" (focus)="onInputFocus()"
+    [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''" [formControlName]="name" [attr.maxLength]="maxLength">
+  <div class="form-group" *ngIf="typeaheadErrors && typeaheadErrors.length > 0">
+    <ng-container *ngFor="let typeaheadError of typeaheadErrors">
+      <small class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+        <mat-icon color="danger">error</mat-icon>
+        <span>{{typeaheadError}}</span>
+      </small>
+    </ng-container>
+  </div>
+  <div *ngIf="control.disabled && control.value" >
+    <p class="readonly">{{displayFn(control.value)}}</p>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description && !control.disabled" [description]="description"></samplicity-field-description>
+</div>
+<mat-autocomplete #typeAhead="matAutocomplete" [displayWith]="displayFn.bind(this)" (optionSelected)="searchOptionSelected($event)" class="ht-typeahead-panel">
+  <mat-option *ngFor="let item of items" [value]="item">
+    <ng-container *ngIf="item.names">
+      <samplicity-display-translation class="static-text" [values]="item.names"></samplicity-display-translation>
+    </ng-container>
+    <ng-container *ngIf="!item.names">
+      <span *ngIf="codeProperty">
+        {{item[codeProperty]}}
+      </span>
+    </ng-container>
+  </mat-option>
+</mat-autocomplete>

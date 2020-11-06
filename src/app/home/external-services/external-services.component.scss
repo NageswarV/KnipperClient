@@ -1,0 +1,40 @@
+.external-container {
+    padding-bottom: 10px;
+    
+    .row {
+        margin: 0;
+        padding: 10px 0;
+
+        .col-md-9,
+        .col-sm-9 {
+            padding-left: 0;
+        }
+
+        .flex-box-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .header-name {
+                font-weight: 600;
+                color: black;
+                margin-bottom: 4px;
+                cursor: pointer;
+            }
+
+            .placeholder {
+                color: #565656;
+                font-style: italic;
+                font-size: 12px;
+                margin-bottom: 0;
+            }
+
+            i {
+                color: #01569c;
+                font-size: 24px;
+                cursor: pointer;
+                margin-right: 4px;
+            }
+        }
+    }
+}

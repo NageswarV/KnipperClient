@@ -1,0 +1,125 @@
+
+::ng-deep .custom-dialog > mat-dialog-container {
+    background-color: white;
+  }
+.container{
+  width:800px;
+  height:400px;
+}
+.report{
+  padding:20px 0px;
+}
+.OrderInfoHeading,.OderInfoText,.tableHeading,.text1,.text2{
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #565656;
+}
+.OderInfoText,.tableHeading{
+  color: black;
+}
+
+.table{
+  border: solid 1px #eaeaea;
+  margin-left:0.9px;
+  
+}
+.btwLine{
+  border-right: solid 1px #eaeaea;
+  padding:0px;
+}
+.tableHeading{
+background-color:var(--data-table-row-style-1) ;
+height:70px;
+padding:5px 10px;
+}
+
+.columnHeader{
+  height: 40px;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #000000;
+}
+.columnData{
+    height: 40px;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: #000000;
+}
+.Supported-formats {
+  height: 25px;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #565656;
+  margin-left: 6px;
+  margin-bottom: 6px;
+}
+.Upload-Reports {
+  height: 26px;
+  font-family: Open Sans;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.08;
+  letter-spacing: normal;
+  color: #000000;
+  margin-left: 20px;
+}
+.Upload-Report-Detail{
+  height: 17px;
+  font-size: 16px;
+  font-weight: 560;
+  font-family: Open Sans;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.06;
+  letter-spacing: normal;
+  color: #000000;
+  margin: 5px;
+}
+.Click-the-add-button {
+  height: 20px;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: italic;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #565656;
+  margin-left: 5px;
+}
+.infoIco {
+  padding  : 3px 5px 0 0px;
+  margin   : 0px 0 0 0;
+  font-size: 12px;
+  color    : #01569c;
+}
+.clrAll{
+  color: #01569c;
+  text-decoration: underline !important;
+}
+.addReports{
+  background: #7f7f7f;
+  color: #fff;
+}

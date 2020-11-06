@@ -1,0 +1,176 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "repportalweb": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "assets": [
+              "src/resources",
+              "src/favicon.ico",
+              "src/web.config",
+              "src/build.json",
+              "src/environment.js"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/material-design-icons/iconfont/material-icons.css",
+              "node_modules/open-sans-fontface/open-sans.css",
+              "node_modules/pnotify/dist/pnotify.css",
+              "node_modules/pnotify/dist/pnotify.brighttheme.css",
+              "node_modules/pnotify/dist/pnotify.buttons.css",
+              "node_modules/ng-busy/src/style/busy.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "src/style/colors.scss",
+              "src/style/main.scss",
+              "src/style/theme.scss",
+              "src/style/style-guide.scss"
+            ],
+            "scripts": [
+              "node_modules/tslib/tslib.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/pnotify/dist/pnotify.js",
+              "node_modules/pnotify/dist/pnotify.buttons.js",
+              "node_modules/pnotify/dist/pnotify.animate.js",
+              "node_modules/quill/dist/quill.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "repportalweb:build"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "sourceMap": false,
+              "aot": true,
+              "vendorChunk": false
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "repportalweb:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [
+              "node_modules/tslib/tslib.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/pnotify/dist/pnotify.js",
+              "node_modules/pnotify/dist/pnotify.buttons.js",
+              "node_modules/pnotify/dist/pnotify.animate.js",
+              "node_modules/quill/dist/quill.js"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/material-design-icons/iconfont/material-icons.css",
+              "node_modules/open-sans-fontface/open-sans.css",
+              "node_modules/pnotify/dist/pnotify.css",
+              "node_modules/pnotify/dist/pnotify.brighttheme.css",
+              "node_modules/pnotify/dist/pnotify.buttons.css",
+              "node_modules/ng-busy/src/style/busy.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "src/style/colors.scss",
+              "src/style/main.scss",
+              "src/style/theme.scss",
+              "src/style/style-guide.scss"
+            ],
+            "assets": [
+              "src/resources",
+              "src/favicon.ico",
+              "src/web.config",
+              "src/build.json",
+              "src/environment.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": []
+          }
+        }
+      }
+    },
+    "hcp-portal.web-e2e": {
+      "root": "e2e",
+      "sourceRoot": "e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "hcp-portal.web:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "repportalweb",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  },
+  "cli": {
+    "analytics": "c1c5fbe7-5fa1-44e3-8db0-34b9b69c5b22"
+  }
+}

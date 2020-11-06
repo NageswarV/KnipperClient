@@ -1,0 +1,26 @@
+@import '../../../../styles/variables';
+
+.delete-icon {
+  min-width: 3rem;
+  width: 3rem;
+  max-height: 3rem;
+
+  .mat-icon {
+    margin-left: -5px;
+  }
+}
+
+.file-upload-link {
+  border: none;
+  box-shadow: none;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: transparent;
+  padding-left: 0;
+}
+
+button.default {
+  background-color: red !important;
+}

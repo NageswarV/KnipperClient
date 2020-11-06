@@ -1,0 +1,91 @@
+@import '../../../../../style/main.scss';
+@import '../../../../styles/variables';
+@import '../../../../styles/styles'; 
+  .side-menu-header {
+    min-height: 36px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    color: $input-grey;
+    cursor: pointer;
+
+    span {
+      line-height: 17px;
+      vertical-align: middle;
+
+      .mat-icon {
+        float: right;
+        margin-right: 0.5rem;
+        margin-top: -2px;
+      }
+    }
+
+    &:hover {
+      background-color: $cool-charcoal;
+      color: $white;
+    }
+
+    &.select {
+      background-color: $active-cool-charcoal !important;
+      font-weight: 700;
+      color: $white;
+      border-left: 0.5rem solid $knipper-blue;
+      padding-left: 0.5rem;
+      cursor: auto;
+
+      &.error {
+        border-left-color: $knipper-red;
+
+        .mat-icon {
+          color: $knipper-red;
+        }
+      }
+
+      &.valid {
+        border-left-color: $active-blue;
+
+        .mat-icon {
+          color: $chart-mid-green;
+        }
+      }
+
+      &.warning {
+        border-left-color: $yellow;
+        color: $white;
+
+        .mat-icon {
+          color: $yellow;
+        }
+      }
+    }
+
+    .side-menu-header-footnote {
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    &.error {
+      background-color: $knipper-red;
+
+      &:hover {
+        background-color: $deep-red;
+      }
+    }
+
+    &.valid {
+      background-color: $chart-mid-green;
+
+      &:hover {
+        background-color: $active-green;
+      }
+    }
+
+    &.warning {
+      background-color: $yellow;
+      color: $charcoal;
+
+      &:hover {
+        background-color: $dark-yellow;
+      }
+    }
+  }

@@ -1,0 +1,339 @@
+<div class="container mt-3">
+    <div class="row">  
+        <div class="col-xs-12" >
+            <div class="fs-12"><a class="nav-breadcrumb" [routerLink]="breadCrumbNavigationUrl">{{breadCrumbs}}</a> / Transaction Details : {{transactionID}} (Disbursement)</div>
+        </div>
+    </div>
+    <div class="hand-carry-contanier" >
+        <div class="hand-carry-label">Hand Carry</div>
+    </div>
+    <div class="col-xs-12 mt-2">  
+        <div class="row">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="head-left">{{transactionID}} (Disbursement) <mat-icon>launch</mat-icon></div>
+                <div>
+                    <input type="button" class="btn btn-default" value="Print Transaction"/>
+                    <input type="button" class="btn btn-default ml-1" value="View Image"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container ">
+    <div class="busy-container">
+        <div [ngBusy]="busyPromise">
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Transaction Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="panel-body">
+                    <div class="d-flex flex-row row">
+                        <div class="col-md-3">
+                            <div class="panel-label">Transaction Type</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.transactionType}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Transaction ID</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.transactionId}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Document #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.docNumber}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Paper Reference #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.paperRefNumber}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Call Date </div>
+                            <div class="panel-value mt-1 fw-500">{{order?.callDate | date : 'M/d/yyyy'}}</div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row row mt-2">
+                        <div class="col-md-3">
+                            <div class="panel-label">Valid for Reconciliation?</div>
+                            <div class="panel-value mt-1 fw-500">
+                                <span *ngIf="order?.validForReconcilation">Yes</span>
+                                <span *ngIf="!(order?.validForReconcilation)">No</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Practitioner signed?</div>
+                            <div class="panel-value mt-1 fw-500">
+                                <span *ngIf="order?.practitionerSigned">Yes</span>
+                                <span *ngIf="!(order?.practitionerSigned)">No</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Practitioner Signature Error Type</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerSignatureErrType}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Crossout on Form?</div>
+                            <div class="panel-value mt-1 fw-500">
+                                <span *ngIf="order?.crossoutOnForm">Yes</span>
+                                <span *ngIf="!(order?.crossoutOnForm)">No</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Lost Call?</div>
+                            <div class="panel-value mt-1 fw-500">
+                                <span *ngIf="order?.lostCall">Yes</span>
+                                <span *ngIf="!(order?.lostCall)">No</span>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-expansion-panel class="expansionPanel dark-expansion" expanded=true>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="panel-head">
+                                Transaction Information
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="panel-body">
+                            <div class="d-flex flex-row row">
+                                <div class="col-md-3">
+                                    <div class="panel-label">Form Status</div>
+                                    <div class="panel-value mt-1 fw-500 pending-text">{{order?.transactionInformation?.formStatus}}</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Generated Form</div>
+                                    <a class="panel-value mt-1 fw-500 link-active">{{order?.transactionInformation?.generatedForm}}</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Form Type</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.formType}}</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Date Called/Date of Change Awareness</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.dateCalledOrChangeAwareness | date : 'M/d/yyyy'}}</div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row row mt-2">
+                                <div class="col-md-3">
+                                    <div class="panel-label">Correction Type(s)</div>
+                                    <div class="panel-value mt-1 fw-500">- {{order?.transactionInformation?.correctionTypes}}</div>                               </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Date Form Generated</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.dateFormGenerated }}</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Date Form Emailed To Employee</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.dateFormEmailedToEmployee }}</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Days Between Transaction & Awareness</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.daysBetweenTransactionsAndAwareness}}</div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row row mt-2">
+                                <div class="col-md-3">
+                                    <div class="panel-label">Escalation Needed?</div>
+                                    <div class="panel-value mt-1 fw-500">
+                                        <span *ngIf="order?.transactionInformation?.escalationNeeded">Yes</span>
+                                <span *ngIf="!(order?.transactionInformation?.escalationNeeded)">No</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Response Due Date</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.responseDueDate | date : 'M/d/yyyy'}}</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="panel-label">Extended Response Due Date</div>
+                                    <div class="panel-value mt-1 fw-500">{{order?.transactionInformation?.extendedResponseDueDate | date : 'M/d/yyyy'}}</div>
+                                </div>
+                            </div>
+                            <div class="light-expansion mt-2">
+                                <div class="panel-value fw-500 p-2 ">Response Form(s) [{{order?.responseForms?.length}}]</div>
+                                <sg-grid [columns]="responseColumns" emptyText="Response not available" [items]="order?.responseForms" [totalRecordCount]="order?.responseForms?.length" >
+                                    <ng-template let-res >
+                                        <!-- <td class="col-xs-3 fw-600 decoration-none p-1 pl-2" [ngClass]="{'bg-blue fw-700': !(rep?.endDate)}"> <span [ngClass]="{'glyphicon glyphicon-map-marker mr-1': !(rep?.endDate)}"></span>{{rep?.territory?.code}}</td>
+                                        <td class="col-xs-3 fw-600 p-1" [ngClass]="{'bg-blue fw-700': !(rep?.endDate)}" >{{rep?.territory?.name}}</td>
+                                        <td class="col-xs-3 fw-600 p-1" [ngClass]="{'bg-blue fw-700': !(rep?.endDate)}">{{rep?.startDate | date}}</td>
+                                        <td class="col-xs-3 fw-600 p-1" [ngClass]="{'bg-blue fw-700': !(rep?.endDate)}"><span *ngIf="!(rep?.endDate)">--</span>{{rep?.endDate | date}}</td> -->
+                                        <td></td>
+                                        <td class="link-active">{{res.responseform}}</td>
+                                        <td>{{res.formReceivedDate | date : 'M/d/yyyy'}}</td>
+                                        <td>{{res.formStatus}}</td>
+                                        <td>{{res.extendedResponseDueDate | date : 'M/d/yyyy'}}</td>
+                                    </ng-template>
+                                </sg-grid>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Employee Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="panel-label">Name</div>
+                            <a class="panel-value mt-1 fw-500 link-active">{{order?.employeeInformation?.name}} <mat-icon class="fs-18">launch</mat-icon></a>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Rep ID</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.employeeInformation?.repId}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Territoy Code</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.employeeInformation?.territoryCode}}</div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Practitioner Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="panel-label">Name</div>
+                            <a class="panel-value mt-1 fw-500 link-active">{{order?.practitionerInformation?.name}} <mat-icon class="fs-18">launch</mat-icon></a>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Sample-able?</div>
+                            <div class="panel-value mt-1 fw-500">
+                                <span *ngIf="order?.practitionerInformation?.sampleable">Yes</span>
+                                <span *ngIf="!(order?.practitionerInformation?.sampleable)">No</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Address ID</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.addressId}}</div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="panel-label">Address</div>
+                            <div class="panel-value mt-1 fw-500"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-2">
+                            <div class="panel-label">Account ID</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.accountId}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">ME #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.meNumber}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">NPI #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.npiNumber}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">IMS #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.imsNumber}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">State License #</div>
+                            <div class="panel-value mt-1 fw-bold license-invalid d-flex flex-row align-items-center"><span class="material-icons fs-20px mr-1">info</span><span>{{order?.practitionerInformation?.stateLicenseNumber}}</span></div>
+                            <div class="panel-value mt-1 fw-500 fs-12 license-invalid">Invalid State License Number</div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-2">
+                            <div class="panel-label">State License # Expiry Date</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.stateLicenseExpiryDate }}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">DEA #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.deaNumber}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">DEA # Expiry Date</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.deaExpiryDate }}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Primary Designation</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.primaryDesignation}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Secondary Designation</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.secondaryDesignation}}</div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-2">
+                            <div class="panel-label">Florida Registration?</div>
+                            <div class="panel-value mt-1 fw-500">
+                                <div class="panel-value mt-1 fw-500">
+                                    <span *ngIf="order?.practitionerInformation?.floridaRegistration">Yes</span>
+                                    <span *ngIf="!(order?.practitionerInformation?.floridaRegistration)">No</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Alternative Practitioner ID</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.alternativePractitionerId}}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel-label">Primary Specialty</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.primarySpeciality}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Secondary Specialty</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.practitionerInformation?.secondarySpeciality}}</div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Products ({{order?.product?.length}})
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div >
+                    <sg-grid [columns]="productsColumns" emptyText="Products not available" [items]="order?.product" [totalRecordCount]="order?.product?.length" >
+                        <ng-template let-product >
+                            <td class="pl-25px color-black">{{product?.productName}}</td>
+                            <td>{{product?.lotNumber}}</td>
+                            <td>{{product?.disbursedQty}}</td>
+                            <td>{{product?.correctionType}}</td>
+                        </ng-template>
+                    </sg-grid>
+                    
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Comments ({{order?.comments?.length}})
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div >
+                    <sg-grid [columns]="commentsColumns" emptyText="Comments not available" [items]="order?.comments" [totalRecordCount]="order?.comments?.length" >
+                        <ng-template let-comment >
+                            <td class="pl-25px color-black">{{comment?.comment}}</td>
+                            <td>{{comment?.commentType}}</td>
+                            <td>{{comment?.commentSource}}</td>
+                            <td>{{comment?.commentVisibility}}</td>
+                            <td>{{comment?.commentIncludedOnReconReport}}</td>
+                            <td>{{comment?.commentDate | date : 'M/d/yyyy'}}</td>
+                            <td>{{comment?.commentFile}}</td>
+                        </ng-template>
+                    </sg-grid>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </div>
+</div>
+
+
+
+  
+
+
+
+
+

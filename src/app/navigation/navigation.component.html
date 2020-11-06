@@ -1,0 +1,95 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid navigation-container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main"
+        *ngIf="isLoggedIn">
+        <span class="sr-only" translate="yes">hcpportal-navigation-toggle</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" routerLink="/home">
+        <div class="logo"></div>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav" id="ul-main-links">
+        <li *ngIf="isLoggedIn" routerLinkActive="active" data-toggle="collapse" data-target="#navbar-main"
+          class="hidden-md hidden-lg">
+          <a routerLink="/hcp/orders" translate="yes">HCPs</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" class="hidden-xs">
+          <a routerLink="/hcp/orders" translate="yes">HCPs</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" data-toggle="collapse" data-target="#navbar-main"
+          class="hidden-md hidden-lg">
+          <a routerLink="/reps" translate="yes">Sales Reps</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" class="hidden-xs">
+          <a routerLink="/reps" translate="yes">Sales Reps</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" data-toggle="collapse" data-target="#navbar-main"
+          class="hidden-md hidden-lg">
+          <a routerLink="/products" translate="yes">Products</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" class="hidden-xs">
+          <a routerLink="/products" translate="yes">Products</a>
+        </li>
+        <!-- <li *ngIf="isLoggedIn" routerLinkActive="active" data-toggle="collapse" data-target="#navbar-main"
+          class="hidden-md hidden-lg">
+          <a routerLink="/product/list" translate="yes">Reports</a>
+        </li> -->
+        <li class="dropdown" *ngIf="isLoggedIn" routerLinkActive="active" class="hidden-xs">
+          <a class="dropdown-toggle" data-toggle="dropdown" translate="yes">Reports
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li *ngIf="isLoggedIn" routerLinkActive="active"><a class="subMenu" routerLink="reports/generated">Generate Reports</a></li>
+            <li *ngIf="isLoggedIn" routerLinkActive="active"><a class="subMenu" routerLink="reports/uploaded">Uploaded Reports</a></li>
+          </ul>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" data-toggle="collapse" data-target="#navbar-main"
+          class="hidden-md hidden-lg">
+          <a routerLink="/dashboard" translate="yes">Dashboard</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" class="hidden-xs">
+          <a routerLink="/dashboard" translate="yes">Dashboard</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" data-toggle="collapse" data-target="#navbar-main"
+          class="hidden-md hidden-lg">
+          <a routerLink="tasks" translate="yes">Tasks</a>
+        </li>
+        <li *ngIf="isLoggedIn" routerLinkActive="active" class="hidden-xs">
+          <a routerLink="tasks" translate="yes">Tasks</a>
+        </li>
+      </ul>
+      <div class="navbar-form navbar-right" *ngIf="isLoggedIn">
+        <input type="text" class="form-control nav-search" placeholder="Search Orders by Order ID">
+        <ul class="hidden-xs hidden-sm nav navbar-nav navbar-right" id="hidden-xs-navbar-icons">
+          <li *ngIf="isLoggedIn">
+            <a id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              class="account-icon">
+              <i class="material-icons">person<span class="glyphicon glyphicon-menu-down userArrowDown" aria-hidden="true"></span></i>
+            </a>
+            <ul class="dropdown-menu hidden-xs dropdown-width" aria-labelledby="account-dropdown">
+              <li>
+                <a routerLink="/profile/detail" translate="yes" class="subMenu">
+                  User Profile
+                </a>
+              </li>
+              <li>
+                <!-- <div style="color: black;"> -->
+                  <a (click)="signOut()" translate="yes" class="subMenu">
+                    Log Out
+                  </a>
+                  <!-- <span>
+                    <i class="material-icons">exit_to_app</i>
+                  </span> -->
+                <!-- </div> -->
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

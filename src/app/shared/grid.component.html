@@ -1,0 +1,35 @@
+<div class="table-overflow-container">
+        <table class="table table-striped table-bordered dataTable no-footer" data-table-sort="true">
+            <thead>
+                <tr role="row">
+                    <th *ngFor="let column of columns" [ngClass]="{'sorting_disabled': !column?.sortby}" class="{{column?.classes}}">
+                        <sg-sorter *ngIf="column?.sortby" [isActive]="sortedColumn" [columnName]="column.sortby" (emitSort)="sort($event)">{{column?.title | translate}}</sg-sorter>
+                        <ng-container *ngIf="!column.sortby">{{column.title | translate}}</ng-container>
+                        <input *ngIf="(column?.isChecked != null && column?.isChecked != undefined)" type="checkbox" (click)="onChange(column,$event)" [checked]="isChecked" >
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!(items?.length > 0)">
+                    <td [attr.colspan]="columns?.length">{{emptyText}}</td>
+                </tr>
+                <ng-container *ngIf="pageSize">
+                    <tr *ngFor="let item of items | paginate: { id: componentId, currentPage: currentPage, itemsPerPage: pageSize, totalItems: totalRecordCount ,totalPages: totalPages}">
+                        <ng-template [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: item }">
+                        </ng-template>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="!pageSize">
+                    <tr *ngFor="let item of items">
+                        <ng-template [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: item }">
+                        </ng-template>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <sg-pagination *ngIf="pageSize" [componentId]="componentId" [totalRecordCount]="totalRecordCount" [pageSize]="pageSize"
+    [totalPages]="totalPages" [pageSizeOptions]="pageSizeOptions" [currentPage]="currentPage" [fromReport]="fromReport"
+                   (emitPageChange)="paginate($event)" [pages]="pages"
+                   (emitpageSizeChange)="pageSizeChange($event)"
+                   [disableFloating]="disablePaginationFloating" [disableScroll]="disableScrollOnPage" [loadMorePagination]="loadMorePagination" ></sg-pagination>

@@ -1,0 +1,9 @@
+<div class="side-menu-header" (click)="onClick()"
+  [ngClass]="{'select' : selected}">
+  <span>
+    <span>{{header}}</span>
+  </span>
+  <div class="side-menu-header-footnote">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.samp-no-label]="noLabel"
+  [class.is-invalid]="(inputControl!.invalid && inputControl!.dirty && inputControl!.touched) || ( selectControl && (selectControl!.invalid && selectControl!.dirty && selectControl!.touched))">
+  <samplicity-field-label *ngIf="label || isInlineRequired" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <div class="input-group" [ngClass]="{'inline-required': isInlineRequired}">
+    <input *ngIf="!textMask" [type]="type" class="form-control" [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''"
+           [formControlName]="name">
+    <input *ngIf="textMask" [type]="type" class="form-control" [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''"
+           [formControlName]="name" [textMask]="{mask: masks[textMask]}">
+    <span class="input-group-btn" [style.width]="selectWidth + '%'">
+      <select *ngIf="selectName" size class="form-control" id="input-select-group-{{id}}" [formControlName]="selectName">
+        <option value="null" l10nTranslate *ngIf="showDefaultOption">Select</option>
+        <option *ngFor="let option of items" [value]="option.id">
+          <samplicity-display-translation [values]="option[namesProp]"></samplicity-display-translation>
+        </option>
+      </select>
+      <select *ngIf="!selectName" size class="form-control" id="input-select-group-{{id}}">
+        <option value="null" l10nTranslate *ngIf="showDefaultOption">Select</option>
+        <option *ngFor="let option of items" [value]="option.id">
+          <samplicity-display-translation [values]="option[namesProp]"></samplicity-display-translation>
+        </option>
+      </select>
+    </span>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-errors [control]="selectControl"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

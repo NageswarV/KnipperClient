@@ -1,0 +1,9 @@
+{{#each classificationValues}}
+export class {{this.classificationTypeCode}} {
+    static readonly id: string = "{{this.id}}";
+    static readonly classificationValueCode: string = "{{this.classificationValueCode}}";
+    static readonly classificationValueName: string = "{{this.classificationValueName}}";
+    static readonly readOnlyFlag: boolean = {{this.readOnlyFlag}};
+    static readonly classificationTypeCode: string = "{{this.classificationTypeCode}}";
+}
+{{/each}}

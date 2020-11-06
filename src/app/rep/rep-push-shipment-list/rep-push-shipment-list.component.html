@@ -1,0 +1,70 @@
+<div class="list-content busy-container">
+    <div [ngBusy]="busyPromise">
+        <div class="panel"
+            *ngFor="let rep of repsPerPage | paginate: { currentPage: currentPage, itemsPerPage: pageSize, totalItems: totalRecordCount }; let i=index"
+            #page>
+            <div class="panel-body">
+                <div class="brand-history-table">
+                    <!-- <div class="col-xs-12 Rectangle">
+                                              <div class="col-xs-6 RepName">{{rep.firstName}}, {{rep.lastName}}</div>
+                                          </div> -->
+                    <div class="col-xs-12 Rectangle">
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <a class="RepName">{{ rep.firstName }}, {{ rep.lastName }}</a>
+                                <mat-icon style="color: #ffcd00;margin-left: 4px;">tv</mat-icon>
+                            </div>
+                        </div>
+                        <div class="col-md-4 RepCount">
+                            Total Orders Recieved:{{rep.totalOrdersReceived}}
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <a class="icon-focus">
+                                <mat-icon>add_task</mat-icon>
+                            </a>
+                            <a class="icon-focus" style="margin-left: 8px;">
+                                <mat-icon>save_alt</mat-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="status-filter" *ngIf="selectedTab === 'dtp' || selectedTab === 'rep'">
+                        <div class="label">
+                            Filter Results by Order Status
+                        </div>
+                        <select class="form-control">
+                            <option value="all" selected>All Statuses</option>
+                        </select>
+                    </div>
+                    <div [ngBusy]="busyPromises.rep" class="col-xs-12 margined">
+                        <sg-grid [columns]="columns" emptyText="No Orders" [items]="rep.repPushShipments"
+                            [totalRecordCount]="rep.repPushShipments.length" [pageSize]="10"
+                            [loadMorePagination]="true">
+                            <ng-template let-order>
+                                <td class="col-xs-2">
+                                    <a [routerLink]="['dtrorders',order.orderNumber]">{{order.orderNumber}}</a>
+                                    <!-- <a (click)="openCreateTaskDialog()" class="ml-1">
+                                        <mat-icon class="Rectangle-color">add_task</mat-icon>
+                                    </a> -->
+                                </td>
+                                <td class="col-xs-2">{{order.status}}</td>
+                                <td class="col-xs-1">{{order.orderDate}}</td>
+                                <td class="col-xs-1">{{order.orderType}}</td>
+                                <td class="col-xs-1">{{order.rushOrder}}</td>
+                                <td class="col-xs-3">{{order.shipToAddressLine1}},
+                                    {{order.shipToAddressLine2}},
+                                    <br /> {{order.shipToCity}},
+                                    {{order.shipToState}}, {{order.shipToZipCode}}</td>
+                                <td class="col-xs-3">{{order.shipToAddressLine1}},
+                                    {{order.shipToAddressLine2}},
+                                    <br />{{order.shipToCity}},
+                                    {{order.shipToState}}, {{order.shipToZipCode}}</td>
+                            </ng-template>
+                        </sg-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<sg-pagination [totalRecordCount]="totalRecordCount" [pageSize]="pageSize" [currentPage]="currentPage"
+    (emitPageChange)="pageChange($event)"></sg-pagination>

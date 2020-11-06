@@ -1,0 +1,20 @@
+<div class="samplicity-stepper" *ngIf="stepHeaders">
+  <div class="samplicity-stepper-header-container d-flex justify-content-between align-items-center">
+    <ng-container *ngFor="let step of steps; let last = last; let i=index;">
+      <div class="samplicity-stepper-header d-flex flex-column justify-content-left align-items-center"
+           [class.complete]="step.status === 1" [class.error]="step.status === 2" [class.warning]="step.status === 4">
+        <div class="samplicity-stepper-header-icon">
+          <mat-icon *ngIf="step.status === 1 || step.status === 4">check</mat-icon>
+          <span class="error" *ngIf="step.status === 2" style="font-size: 24px;margin:auto;margin-bottom: 0.9rem;">!</span>
+          <span *ngIf="step.status === 3" style="font-size: 24px;margin:auto;margin-bottom: 0.9rem;">{{i+1}}</span>
+        </div>
+        <p [class.currentStatus]="i==currentStatus">{{step.name}}</p>
+      </div>
+      <div class="samplicity-stepper-horizontal-line" *ngIf="!last" 
+        [class.complete]="steps[i+1].status !== 3 && steps[i+1].status === 1" 
+        [class.error]="steps[i+1].status !== 3 && steps[i+1].status === 2"
+        [class.warning]="steps[i+1].status !== 3 && steps[i+1].status === 4">
+      </div>
+    </ng-container>
+  </div>
+</div>

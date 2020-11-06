@@ -1,0 +1,31 @@
+<ng-container
+    *ngFor="let announcement of announcements | paginate: { currentPage: currentPage, itemsPerPage: pageSize, totalItems: totalRecordCount };let index = index">
+    <div class="announcements-container">
+        <div class="d-flex-container">
+            <div style="font-weight: 600;font-size: 0.9em;">{{announcement.title}}</div>
+            <div class="date-header">
+                <i class="material-icons" style="font-size: 1.2em;margin-right: 4px;">query_builder</i>
+                {{announcement.publishedOn | date: mediumDate}}</div>
+        </div>
+        <div style="font-size: 0.9em;" [innerHTML]="announcement.description | safeHtml"></div>
+        <div class="d-flex-container">
+            <div>
+                <div class="attachments" *ngIf="announcement.attachmentLink">
+                    <i class="glyphicon glyphicon-save-file" style="margin-right: 4px;"></i>
+                    <a target="_blank" href="{{announcement?.attachmentLink}}">{{announcement.attachmentLink}}</a>
+                </div>
+            </div>
+            <div style="display: flex;align-items:center">
+                <div class="button-header">Mark as read</div>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="divider" *ngIf="index !== announcements.length - 1"></div>
+    </div>
+
+</ng-container>
+<!-- <sg-pagination [totalRecordCount]="totalRecordCount" [pageSize]="pageSize" [fromAnnouncement]="true"
+    [currentPage]="currentPage" [disableScroll]="true" [disableFloating]="true" (emitPageChange)="pageChange($event)"></sg-pagination> -->

@@ -1,0 +1,76 @@
+<div *ngIf="successMessage" class="alert alert-success d-flex" role="alert">
+  <mat-icon class="alert-icon">check_circle</mat-icon>
+  <p>
+    <strong>
+      <span *ngIf="successTitle" l10nTranslate>{{successTitle}}</span>
+    </strong>
+    {{successMessage}}
+  </p>
+  <mat-icon *ngIf="displayCloseButton" class="ml-auto close-icon" (click)="removeMessage('success')">close</mat-icon>
+</div>
+
+<div *ngIf="infoMessage" class="alert alert-info d-flex" role="alert">
+  <mat-icon class="alert-icon">info</mat-icon>
+  <p>
+    <strong>
+      <span *ngIf="infoTitle" l10nTranslate>{{infoTitle}}</span>
+    </strong>
+    {{infoMessage}}
+  </p>
+  <mat-icon *ngIf="displayCloseButton" class="ml-auto close-icon" (click)="removeMessage('info')">close</mat-icon>
+</div>
+
+<div *ngIf="warningMessage" class="alert alert-warning d-flex" role="alert">
+  <mat-icon class="alert-icon">report_problem</mat-icon>
+  <p>
+    <strong>
+      <span *ngIf="warningTitle" l10nTranslate>{{warningTitle}}</span>
+    </strong>
+    {{warningMessage}}
+  </p>
+  <mat-icon *ngIf="displayCloseButton" class="ml-auto close-icon" (click)="removeMessage('warning')">close</mat-icon>
+</div>
+
+<div *ngIf="errorMessage || serverError" class="alert alert-danger d-flex" role="alert">
+  <mat-icon class="alert-icon">error</mat-icon>
+  <div>
+    <p>
+      <strong>
+        <span *ngIf="!errorTitle" l10nTranslate>Notifications.ErrorTitleDefault</span>
+        <span *ngIf="errorTitle" l10nTranslate>{{errorTitle}}</span>
+      </strong>
+      <span *ngIf="errorMessage" [innerHtml]="errorMessage"></span>
+      <span *ngIf="serverError" l10nTranslate>Notifications.ServerError</span>
+    </p>
+  </div>
+  <mat-icon *ngIf="displayCloseButton" class="ml-auto close-icon" (click)="removeMessage('error')">close</mat-icon>
+</div>
+
+<div *ngIf="infoMessageList?.length > 0" class="alert alert-info d-flex" role="alert">
+  <mat-icon class="alert-icon">info</mat-icon>
+  <p>
+    <strong>
+      <span *ngIf="infoTitle" l10nTranslate>{{infoTitle}}</span>
+    </strong></p>
+  <div *ngFor="let infoMessage of infoMessageList;let last = last;">
+
+      <div *ngIf="infoMessage.value && isArray(infoMessage.value)">
+        <p>&nbsp;<a target="_blank" [routerLink]="[infoMessage.value[0], infoMessage.value[1]]" color="white">{{infoMessage.label}}</a> </p>
+      </div>
+    <div *ngIf="infoMessage.value && !isArray(infoMessage.value) && infoMessage.value.startsWith('/')">
+      <p>&nbsp;<a target="_blank" [routerLink]="[infoMessage.value]" color="white">{{infoMessage.label}}</a> </p>
+    </div>
+    <div *ngIf="infoMessage.value && !isArray(infoMessage.value) && !infoMessage.value.startsWith('/')">
+      <p>&nbsp;<a [routerLink]="" (click)="openModal(infoMessage.value)" color="white">{{infoMessage.label}}</a> </p>
+    </div>
+    <div *ngIf="!infoMessage.value">
+      <p><span>&nbsp;{{infoMessage.label}}</span></p>
+    </div>
+
+  </div>
+</div>
+
+
+<ng-template #blackoutHoldDialog>
+    <samplicity-blackout-hold-modal (close)="closeModal()"></samplicity-blackout-hold-modal>
+  </ng-template>

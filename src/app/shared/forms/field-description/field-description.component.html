@@ -1,0 +1,20 @@
+<ng-container *ngIf="!isArray && !isDto">
+  <div class="form-text text-muted d-flex">
+    <mat-icon *ngIf="icon" color="primary" class="float-left">info</mat-icon>
+    <ng-container *ngIf="!isArray">
+      <p class="description-text" [class.mb-0]="zeroMarginBottom" l10nTranslate>{{description}}</p>
+    </ng-container>
+  </div>
+</ng-container>
+<ng-container *ngIf="isArray && isDto">
+  <span class="form-text text-muted">
+    <mat-icon *ngIf="icon" color="primary" class="float-left">info</mat-icon>
+    <div class="description-text" [class.mb-0]="zeroMarginBottom"><samplicity-display-translation [values]="description"></samplicity-display-translation></div>
+  </span>
+</ng-container>
+<ng-container *ngIf="isArray && !isDto">
+  <div *ngFor="let desc of description" class="form-text text-muted description-array">
+    <mat-icon *ngIf="icon" color="primary" class="float-left">info</mat-icon>
+    <p class="description-text" [class.mb-0]="zeroMarginBottom" [innerHTML]="desc" l10nTranslate></p>
+  </div>
+</ng-container>

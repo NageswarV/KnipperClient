@@ -1,0 +1,565 @@
+<div class="container-fluid">
+<h1>DashBoard</h1>
+<ng-container>
+  <div class="panel">
+    <div class="panel-body" style="position: relative;">
+      <mat-tab-group mat-align-tabs="start" class="dashboardComp" (selectedTabChange) ="mainTabChanged($event)">
+        <mat-tab label="Practitioner Metrics">
+          <ng-template mat-tab-label>
+            <span>Practitioner Metrics</span>
+          </ng-template>
+          <div style="padding:25px;padding-left: 40px;">
+            <span>Filter By Program</span>
+            <select style="margin-left:5px;min-width:150px;width:auto;border:2px solid thick">
+              <option value="Allergan DTP Veeva">Allergan DTP Veeva</option>
+              <option value="Allergan DTP EyeCare">Allergan DTP EyeCare</option>
+            </select>
+          </div>
+          <div style="padding-top:15px">
+            <mat-tab-group mat-align-tabs="start" class="dashboardCompInner" (selectedTabChange) ="tabChanged($event)">
+              <mat-tab label="Weekly Order Volume Trends">
+                <!-- <ng-template mat-tab-label>
+                  <span>Weekly Order Volume Trends</span>
+                </ng-template> -->
+                <div class="col-8">
+                  <samplicity-chart #weeklyOrderVolumeChart
+                                    (chartClick)="onChartClick($event,'orders',null,null)"
+                                    [isCollapsible]="true"
+                                    [config]="weeklyOrderVolumeChartOptions"></samplicity-chart>
+                                    <h2>Weekly Order Volume Trends</h2>
+                </div>
+              </mat-tab>
+              <mat-tab label="14-Day Order Events Trends">
+                <!-- <ng-template mat-tab-label>
+                  <span>14-Day Order Events Trends</span>
+                </ng-template> -->
+                <samplicity-form-section  [isCard]="true" class="orderEventTrends">
+                  <h2>14-Day Order Events Trends</h2>
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #ordersReceivedChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="ordersReceivedChartOptions"
+                                        [noRecordsMessage]="'Dashboard.Charts.Orders.NoOrdersMessage'" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #ordersShippedChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="ordersShippedChartOptions"
+                                        [noRecordsMessage]="'Dashboard.Charts.Orders.NoOrdersShippedMessage'" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <samplicity-chart #ordersRejectedChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="ordersRejectedChartOptions"
+                                        [noRecordsMessage]="'Dashboard.Charts.Orders.NoOrdersRejectedMessage'" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <samplicity-chart #ordersRejectionReasonsChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [noRecordsMessage]="'Dashboard.Charts.Orders.NoOrdersRejectedMessage'"
+                                        [config]="ordersRejectionReasonsChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+
+                </samplicity-form-section>
+              </mat-tab>
+              <mat-tab label="Weekly Communications Volume Trends">
+                <!-- <ng-template mat-tab-label>
+                  <span>Weekly Communications Volume Trends</span>
+                </ng-template> -->
+                <samplicity-form-section [isCard]="true" class="orderEventTrends">
+                  <h2>Weekly Communications Volume Trends</h2>
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #outgoingSRFsChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="outGoingSRFsChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #outgoingExceptionChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="outGoingExceptionChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-12">
+                      <samplicity-chart #outgoingRejectionChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="outGoingRejectionChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #outgoingAOCsChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="outgoingAOCsChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #incomingAOCsChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="incomingAOCsChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+                </samplicity-form-section>
+              </mat-tab>
+              <mat-tab label="Monthly SVL Volume Trends">
+                <!-- <ng-template mat-tab-label>
+                  <span>Monthly SVL Volume Trends</span>
+                </ng-template> -->
+                <samplicity-form-section [headerParameters]="{count: monthlySvlCount}" [isCard]="true"  class="orderEventTrends">
+                  <h2>Monthly SVL Volume Trends</h2>
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #outgoingSVLsChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        
+                                        [config]="outgoingSVLsChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #incomingSVLsChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        
+                                        [config]="incomingSVLsChartOptions" class="orderEventTrendsInner">
+                      </samplicity-chart>
+                    </div>
+                  </div>
+                </samplicity-form-section>
+                <!-- <ng-template mat-tab-label>
+                  <span>Monthly SVL Responses</span>
+                </ng-template> -->
+                <samplicity-form-section [headerParameters]="{count: monthlysvlResponsesCount}" [isCard]="true" class="orderEventTrends">
+                  <h2>Monthly SVL Responses</h2>
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #incomingOrderRequestSvlChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="incomingOrderRequestSvlChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <samplicity-chart #incomingAocSvlChart
+                                        (chartClick)="onChartClick($event,'orders',null,null)"
+                                        [config]="incomingAocSvlChartOptions" class="orderEventTrendsInner"></samplicity-chart>
+                    </div>
+                  </div>
+                </samplicity-form-section>
+              </mat-tab>
+              <mat-tab label="Weekly AOD Tracking">
+                <ng-template mat-tab-label>
+                  <span>Weekly AOD Tracking</span>
+                </ng-template>
+                <div class="col-8">
+                  <samplicity-chart #weeklyAODTrackingChart
+                                    [isCollapsible]="true"
+                                    (chartClick)="onChartClick($event,'orders',null,null)"
+                                    [config]="weeklyAODTrackingChartOptions">
+                  </samplicity-chart>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </mat-tab>
+        <mat-tab label="Hand Carry Metrics">
+          <ng-template mat-tab-label>
+            <span>Hand Carry Metrics</span>
+          </ng-template>
+          <div class="row">
+            <div class="col-sm-6">
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h2>Employee Status</h2>
+                <table>
+                  <tr>
+                    <td style="text-decoration:none" width="92%">Active (sample-able)</td>
+                    <td><a [routerLink]="navigationUrl" class="hCarryMetricstbla">56</a></td>
+                  </tr>
+                  <tr>
+                    <td style="text-decoration:none">Leave Of Absence</td>
+                    <td><a [routerLink]="navigationUrl" class="hCarryMetricstbla">2</a></td>
+                  </tr>
+                  <tr>
+                    <td style="text-decoration:none">
+                      Terminated <br /> within calendar year
+                    </td>
+                    <td><a [routerLink]="navigationUrl" class="hCarryMetricstbla">5</a></td>
+                  </tr>
+                </table>
+              </samplicity-form-section>
+      
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h2>Non-Compliant Incidents</h2>
+                <div style="opacity: 0.9; font-size: 0.9em;">Select Timeframe <span style="color:red">*</span></div>
+                <div style="display: flex; width: 100%;margin-top:0.5em;">
+                  <input type="button" class="btn"
+                         [ngClass]="primarystatus ? 'btn-primary' : 'btn-default'" [style.width]="50 + '%'"
+                         value="QUARTERLY" (click)="changeTimeFrame('QUARTERLY')"/>
+                  <input type="button" class="btn" [ngClass]="defaultstatus ? 'btn-default' : 'btn-primary'"
+                         [style.width]="50+'%'" value="MONTHLY" (click)="changeTimeFrame('MONTHLY')" />
+                </div>
+                <div style="display: flex; margin: 1.2em 0 1.2em 0;">
+                  <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="false"
+                     (click)="getPrevSet()">arrow_back</i>
+                  <div style="margin: auto; font-weight: 600;">{{timeFrameSelected}}</div>
+                  <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+                     [class.disable]="disableRightArrow" (click)="getNextSet()">arrow_forward</i>
+                </div>
+                <h3> Reportable Incidents </h3>
+                <samplicity-chart #reportIncidentChart
+                                  [isCollapsible]="true"
+                                  (chartClick)="onChartClick($event,'handCarry',null,null)"
+                                  [config]="reportIncidentChartOptions">
+                </samplicity-chart>
+              </samplicity-form-section>
+      
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h3>Transaction Escalation Email Sent <br /></h3>
+                <table style="border-style: solid;border-width: 1px; border-color: #cb2d4c;background-color: #fbeae5; border: 1px solid #cb2d4c;
+      border-collapse: collapse;">
+                  <tr>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Exceptions</span></td>
+                          <td><span class="textRed">42</span></td>
+                        </tr>
+                      </table>
+                  </td>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Expired lot #s</span></td>
+                          <td><span class="textRed">107</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Missing Inventory</span></td>
+                          <td><span class="textRed">26</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Return Missing return acknowledgement</span></td>
+                          <td><span class="textRed">2</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #cb2d4c;">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Late AOD <br /> Shipment missing shipment acknowledgement</span></td>
+                          <td><span class="textRed">2</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Transfer out missing transfer in</span></td>
+                          <td><span class="textRed">29</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </samplicity-form-section>
+      
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h3>Discrepant Transactions <br /></h3>
+                <table style="border-style: solid;border-width: 1px; border-color: #cb2d4c;background-color: #fbeae5; border: 1px solid #cb2d4c;
+                border-collapse: collapse;">
+                  <tr colspan="2">
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Disbursement discrepancies</span></td>
+                          <td><span class="textRed">42</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Return discrepancies</span></td>
+                          <td><span class="textRed">107</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr colspan="2">
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Shipment discrepancies</span></td>
+                          <td><span class="textRed">26</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td style="border: 1px solid #cb2d4c">
+                      <table class="tblNoborder">
+                        <tr>
+                          <td width="90%"><span class="color56">Transfer discrepancies</span></td>
+                          <td><span class="textRed">2</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </samplicity-form-section>
+      
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h2> Reconcilation Status </h2>
+                <div style="display: flex; margin: 1.2em 0 1.2em 0;">
+                  <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="false">arrow_back</i>
+                  <div style="margin: auto; font-weight: 600;">2019</div>
+                  <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+                     [class.disable]="true">arrow_forward</i>
+                </div>
+                <table style="border-style: solid;border-width: 1px;border-collapse: collapse;">
+                  <tr >
+                    <td  colspan="2" class="bgwhite">
+                      <table class="bdr0">
+                        <tr>
+                          <td width="90%" class="bdr0"><span class="color56">Total Employees in reconcilation</span></td>
+                          <td class="bdr0"><span class="textBlue">102</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <!-- <td style="border: 1px solid #cb2d4c"></td> -->
+                  </tr>
+                  <tr colspan="2">
+                    <td class="bgwhite">
+                      <table class="bdr0">
+                        <tr>
+                          <td width="90%" class="bdr0"><span class="color56">Disbursement discrepancies</span></td>
+                          <td class="bdr0"><span class="textBlue">42</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class="bgYellow">
+                      <table class="bdr0">
+                        <tr>
+                          <td width="90%" class="bdr0 bgYellow"><span class="color56">Return discrepancies</span></td>
+                          <td class="bdr0 bgYellow"><span class="textBrown">107</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr colspan="2">
+                    <td class="bgOrange">
+                      <table class="bdr0">
+                        <tr>
+                          <td width="90%" class="bdr0 bgOrange"><span class="color56">Shipment discrepancies</span></td>
+                          <td class="bdr0 bgOrange"><span class="textRed">26</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class="bgPink">
+                      <table class="bdr0">
+                        <tr>
+                          <td width="90%" class="bdr0 bgPink"><span class="color56">Transfer discrepancies</span></td>
+                          <td class="bdr0 bgPink"><span class="textRed">2</span></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </samplicity-form-section>
+      
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h2>Practitioner Signature Audit</h2>
+                <div style="opacity: 0.9; font-size: 0.9em;">Select Timeframe <span style="color:red">*</span></div>
+                <div style="display: flex; width: 100%;margin-top:0.5em;">
+                  <input type="button" class="btn"
+                         [ngClass]="signatureaudprimary ? 'btn-primary' : 'btn-default'" [style.width]="33.3 + '%'"
+                         value="QUARTERLY" (click)="changeTimeFrameSignature('QUARTERLY')"/>
+                  <input type="button" class="btn" [ngClass]="signatureaudprimary ? 'btn-default' : 'btn-primary'"
+                         [style.width]="33.3+'%'" value="MONTHLY" (click)="changeTimeFrameSignature('MONTHLY')" />
+                  <input type="button" class="btn" [ngClass]="signatureauddefault ? 'btn-default' : 'btn-primary'"
+                         [style.width]="33.3+'%'" value="YEAR TO DATE" (click)="changeTimeFrameSignature('YEARTODATE')" />
+                </div>
+                <div style="display: flex; margin: 1.2em 0 1.2em 0;">
+                  <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="false"
+                     (click)="getPrevSet()">arrow_back</i>
+                  <div style="margin: auto; font-weight: 600;">{{timeFrameSelected}}</div>
+                  <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+                     [class.disable]="disableRightArrow" (click)="getNextSet()">arrow_forward</i>
+                </div>
+                <div>
+                  <h3>Letter Count</h3>
+                  <table style="border-style: solid;border-width: 1px; border-collapse: collapse;">
+                    <tr colspan="2">
+                      <td class="bgwhite">
+                        <table class="tblNoborder bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0 bgwhite"><span class="color56">Generated SLVs</span></td>
+                            <td class="bdr0 bgwhite"><span class="textBlue">26</span></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="bgYellow">
+                        <table class="tblNoborder bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0 bgYellow"><span class="color56">Pending SLVs</span></td>
+                            <td class="bdr0 bgYellow"><span class="textBrown">2</span></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bgwhite" colspan="2">
+                        <table class="bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0"><span class="color56">Employees in Audit</span></td>
+                            <td class="bdr0"><span class="textBlue">102</span></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="mt-2">
+                  <h3>Responses</h3>
+                  <table style="border-style: solid;border-width: 1px; border-collapse: collapse;">
+                    <tr colspan="2">
+                      <td class="bgwhite">
+                        <table class="tblNoborder bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0 bgwhite"><span class="color56">Positive</span></td>
+                            <td class="bdr0 bgwhite"><span class="textBlue">26</span></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="bgPink">
+                        <table class="tblNoborder bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0 bgPink"><span class="color56">Negative</span></td>
+                            <td class="bdr0 bgPink"><span class="textBlue">2</span></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr colspan="2">
+                      <td class="bgwhite">
+                        <table class="tblNoborder bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0 bgwhite"><span class="color56">Other</span></td>
+                            <td class="bdr0 bgwhite"><span class="textBlue">26</span></td>
+                          </tr>
+                        </table>
+                              </td>
+                      <td class="bgYellow">
+                        <table class="tblNoborder bdr0">
+                          <tr>
+                            <td width="90%" class="bdr0 bgYellow"><span class="color56">UnDeliverable</span></td>
+                            <td class="bdr0 bgYellow"><span class="textBlue">2</span></td>
+                          </tr>
+                        </table>
+                          </td>
+                    </tr>
+                  </table>
+                </div>
+              </samplicity-form-section>
+            </div>
+            <div class="col-sm-6">
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h2>Rep Sampling Activities</h2>
+                <div style="opacity: 0.9; font-size: 0.9em;">Select Timeframe <span style="color:red">*</span></div>
+                <div style="display: flex; width: 100%;margin-top:0.5em;">
+                  <input type="button" class="btn"
+                         [ngClass]="repprimary ? 'btn-primary' : 'btn-default'" [style.width]="50 + '%'"
+                         value="QUARTERLY" (click)="changeTimeFrameRep('QUARTERLY')"/>
+                  <input type="button" class="btn" [ngClass]="repdefault ? 'btn-default' : 'btn-primary'"
+                         [style.width]="50+'%'" value="MONTHLY" (click)="changeTimeFrameRep('MONTHLY')" />
+                </div>
+                <div style="display: flex; margin: 1.2em 0 1.2em 0;">
+                  <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="false"
+                     (click)="getPrevSet()">arrow_back</i>
+                  <div style="margin: auto; font-weight: 600;">{{timeFrameSelected}}</div>
+                  <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+                     [class.disable]="disableRightArrow" (click)="getNextSet()">arrow_forward</i>
+                </div>
+                
+                <samplicity-chart #repSamplingChart
+                                  [isCollapsible]="true"
+                                  (chartClick)="onChartClick($event,'handCarry',null,null)"
+                                  [config]="repSamplingChartOptions" class="handCarryMetrics">
+                                  <h2> Rep Sampling Activities </h2>
+                </samplicity-chart>
+              </samplicity-form-section>
+        
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h3> % Reconciled </h3>
+                <div style="display: flex; margin: 1.2em 0 1.2em 0;">
+                  <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="false">arrow_back</i>
+                  <div style="margin: auto; font-weight: 600;">2019</div>
+                  <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+                     [class.disable]="true">arrow_forward</i>
+                </div>
+                <samplicity-chart #reconciledChart
+                                  [isCollapsible]="true"
+                                  (chartClick)="onChartClick($event,'handCarry',null,null)"
+                                  [config]="reconciledChartOptions">
+                </samplicity-chart>
+              </samplicity-form-section>
+        
+              <samplicity-form-section [isCard]="true" class="handCarryMetrics">
+                <h3>Audit Inventory Management</h3>
+                <div style="opacity: 0.9; font-size: 0.9em;">Select Program <span style="color:red">*</span></div>
+                <select style="width: 40em; height: 2em;">
+                  <option value="annualInventory">Annual Inventory Audit</option>
+                  <option value=""></option>
+                </select>
+                <div style="display: flex; width: 100%;margin-top:0.5em;">
+                  <input type="button" class="btn"
+                         [ngClass]="auditprimary ? 'btn-primary' : 'btn-default'" [style.width]="50 + '%'"
+                         value="QUARTERLY" (click)="changeTimeFrameAudit('QUARTERLY')" />
+                  <input type="button" class="btn" [ngClass]="auditdefault ? 'btn-default' : 'btn-primary'"
+                         [style.width]="50+'%'" value="MONTHLY" (click)="changeTimeFrameAudit('MONTHLY')" />
+                </div>
+                <div style="display: flex; margin: 1.2em 0 1.2em 0;">
+                  <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="false"
+                     (click)="getPrevSet()">arrow_back</i>
+                  <div style="margin: auto; font-weight: 600;">{{timeFrameSelected}}</div>
+                  <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+                     [class.disable]="disableRightArrow" (click)="getNextSet()">arrow_forward</i>
+                </div>
+                
+                <samplicity-chart #auditInventoryManagementChart
+                                  [isCollapsible]="true"
+                                  (chartClick)="onChartClick($event,'handCarry',null,null)"
+                                  [config]="auditInventoryManagementChartOptions" class="handCarryMetrics">
+                                  <h3> Rep Sampling Activities </h3>
+                </samplicity-chart>
+              </samplicity-form-section>
+            </div>
+            </div>
+        </mat-tab>
+
+        </mat-tab-group>
+        <!--<div style="position: absolute;right: 4%;top: 35px;">
+          <div style="display: flex;justify-content: flex-end;">
+            <button class="btn btn-default" mat-raised-button color="default" style="font-size: 0.9em;margin-bottom: 8px;">
+              <mat-icon [class.samp-loading-spin]="isLoading" style="font-size: 22px;">sync</mat-icon>Refresh Dashboard
+              Data Now
+            </button>
+          </div>
+          <p class="samp-subdued" style="color: #565656;font-size: 0.9em;
+      font-style: italic;">Dashboard Last Updated {{lastUpdated | momentDateTime}}</p>
+        </div>-->
+      </div>
+    </div>
+</ng-container>
+</div>

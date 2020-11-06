@@ -1,0 +1,87 @@
+<ng-container *ngIf="isLoggedIn">
+  <nav class="navbar navbar-expand sticky-top-navbar navbar-light bg-faded shadow-1" *ngIf="navbarSchema" id="samplicity-navbar">
+    <div class="navbar-brand align-self-stretch d-flex align-items-center justify-content-center"
+      [class.active-route]="router.url.includes('dashboard')" [class.has-link]="navbarSchema.logoLink"  id="linkSamplicity">
+      <!--<img src="assets/images/knipper_logo.png" alt="Knipper" />
+      <div class="logo-divider"></div>-->
+      <span class="samplicity-title" *ngIf="!showDashboard" l10nTranslate>{{navbarSchema.logoTitle}}</span>
+      <span class="samplicity-title" *ngIf="showDashboard" (click)="navigateToLogoLink(navbarSchema.logoLink)" l10nTranslate>{{navbarSchema.logoTitle}}</span>
+    </div>
+    <div class="navbar-collapse d-flex align-items-center" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <ng-container *ngFor="let link of navbarSchema?.links">
+          <li *ngIf="!link.menu && !link.hide" class="nav-item">
+            <a class="nav-link" [routerLink]="[link.link]" [class.active-route]="router.isActive(link.link, true)" id="{{link.id}}" l10nTranslate>{{link.display}}</a>
+          </li>
+          <ng-container *ngIf="link.menu && !link.hide">
+            <li class="nav-item" #navMenuTrigger (click)="openNavMenu(0, navMenuTrigger, setupMenuTrigger)">
+              <a class="nav-link no-padding inactive-link" [class.active-route]="isDropdownLinkActive(link)" id="{{link.id}}">
+                  <div class="nav-link inactive-link">
+                      <span l10nTranslate>{{link.display}}</span>
+                      <mat-icon class="align-middle setup-menu menu-caret">arrow_drop_down</mat-icon>
+                  </div>
+                <div #setupMenuTrigger="matMenuTrigger" [matMenuTriggerFor]="dropdownMenu" (menuClosed)="menuClosed(navMenuTrigger)" (menuOpened)="menuOpened(navMenuTrigger)"></div>
+              </a>
+            </li>
+            <mat-menu #dropdownMenu="matMenu" [overlapTrigger]="false" xPosition="after">
+              <div #dropdownPane>
+                <ng-container *ngFor="let section of link.menu">
+                  <ng-container *ngIf="!section.hide">
+                    <p *ngIf="section.title" class="menu-subheading">
+                      <em l10nTranslate>{{section.title}}</em>
+                    </p>
+                    <ng-container *ngFor="let link of section.links">
+                      <ng-container *ngIf="!link.hide">
+                        <ng-container *ngIf="link.menu">
+                          <button mat-menu-item l10nTranslate id="{{link.id}}" [matMenuTriggerFor]="nestedDropdownMenu" (menuOpened)="setNestedDropdownMenu(link.menu)">
+                            <mat-icon *ngIf="link.icon" class="align-middle">{{link.icon}}</mat-icon>{{link.display}}
+                          </button>
+                        </ng-container>
+                        <ng-container *ngIf="!link.menu">
+                          <ng-container *ngIf="!link.url">
+                            <button mat-menu-item routerLink="{{link.link}}" id="{{link.id}}" l10nTranslate><mat-icon *ngIf="link.icon" class1="align-middle">{{link.icon}}</mat-icon>{{link.display}}</button>
+                          </ng-container>
+                          <ng-container *ngIf="link.url">
+                            <button mat-menu-item (click)="navigateToUrl(link.url)" id="{{link.id}}" l10nTranslate><mat-icon *ngIf="link.icon" class1="align-middle">{{link.icon}}</mat-icon>{{link.display}}</button>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </mat-menu>
+            <mat-menu #nestedDropdownMenu="matMenu">
+              <div #nestedDropdownPane>
+                <ng-container *ngFor="let section of nestedDropdownMenuSections">
+                  <p *ngIf="section.title && !section.hide" class="menu-subheading">
+                    <em l10nTranslate>{{section.title}}</em>
+                  </p>
+                  <div *ngFor="let link of section.links">
+                    <ng-container *ngIf="!link.hide">
+                      <ng-container *ngIf="!link.url">
+                        <button mat-menu-item id="link.id" routerLink="{{link.link}}" l10nTranslate>
+                          <mat-icon *ngIf="link.icon" class="align-middle">{{link.icon}}</mat-icon>{{link.display}}
+                        </button>
+                      </ng-container>
+                      <ng-container *ngIf="link.url">
+                        <button mat-menu-item id="link.id" (click)="navigateToUrl(link.url)" l10nTranslate>
+                          <mat-icon *ngIf="link.icon" class="align-middle">{{link.icon}}</mat-icon>{{link.display}}
+                        </button>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </mat-menu>
+          </ng-container>
+        </ng-container>
+      </ul>
+      <ul class="navbar-nav right-nav ml-auto align-items-center">
+        <ng-content select="[navbar-content]"></ng-content>
+      </ul>
+    </div>
+  </nav>
+  <div class="ie-nav-spacer"></div>
+</ng-container>
+

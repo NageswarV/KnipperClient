@@ -1,0 +1,75 @@
+@import '../../../style/main.scss';
+
+::ng-deep .custom-dialog > mat-dialog-container {
+    background-color: white;
+  }
+
+  .d-flex{
+      display: flex;
+  }
+
+  .flex-row{
+      flex-direction: row;
+  }
+  .space-between{
+    justify-content: space-between;
+}
+.ml-10px{
+    margin: 10px;
+    font-size: 24px;
+}
+.mr-1{
+  margin-right: 1rem;
+}
+.mr-2{
+  margin-right: 2rem;
+}
+.mb-1{
+  margin-bottom: 1rem;
+}
+.mb-2{
+  margin-bottom: 2rem;
+}
+.p-1{
+  padding: 1rem;
+}
+.pl-2{
+  padding-left: 2rem;
+}
+
+.header {
+    font-size: 24px;
+    line-height: 1.08;
+    letter-spacing: normal;
+  }
+
+  button{
+    border: 0;
+    padding: 0;
+    background-color: white;
+  }
+
+  .table-border {
+    border: 3px solid var(--data-table-row-style-1);
+  }
+
+  .fw-600 {
+    font-weight: 600;
+  }
+
+  .fw-700{
+    font-weight: 700;
+  }
+
+  .decoration-none{
+    text-decoration: none;
+    color: #000000;
+  }
+.bg-blue{
+  background-color: var(--sky-blue);
+  border-bottom: 2px solid var(--cerulean);
+}
+
+.material-icons {
+  font-size: 22px;
+}

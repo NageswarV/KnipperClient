@@ -1,0 +1,20 @@
+<ng-container *ngIf="!isDto">
+  <label *ngIf="labelTranslated" for="{{inputId}}" l10nTranslate>
+    <span [class.with-colon]="colon">{{label}}</span>
+    <span class="required" *ngIf="required" l10nTranslate>Required</span>
+  </label>
+  <label *ngIf="!labelParameters && !labelTranslated" for="{{inputId}}">
+    <span [class.with-colon]="colon">{{label}}</span>
+    <span class="required" *ngIf="required" l10nTranslate>Required</span>
+  </label>
+  <label *ngIf="labelParameters && !labelTranslated" for="{{inputId}}">
+    <span [class.with-colon]="colon">{{label | translate:lang:labelParameters}}</span>
+    <span class="required" *ngIf="required" l10nTranslate>Required</span>
+  </label>
+</ng-container>
+<ng-container *ngIf="isDto">
+  <label for="{{inputId}}">
+    <samplicity-display-translation [values]="label"></samplicity-display-translation>
+    <span class="required" *ngIf="required" l10nTranslate>Required</span>
+  </label>
+</ng-container>

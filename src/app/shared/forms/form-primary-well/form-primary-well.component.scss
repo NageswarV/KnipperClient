@@ -1,0 +1,22 @@
+@import '../../../styles/variables';
+
+.mat-expansion-panel {
+  margin-bottom: 1.5em;
+  background-color: #F4F4F4;
+  box-shadow: none !important;
+
+  .mat-expansion-panel {
+    background-color: $white;
+  }
+
+  .card-section-header{
+    font-size: 19px;
+    line-height: 25px;
+  }
+
+  .mat-expansion-panel-body {
+    .well {
+      background: $background-well-embed !important;
+    }
+  }
+}

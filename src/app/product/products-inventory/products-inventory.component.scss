@@ -1,0 +1,209 @@
+h1 {
+  margin: 0;
+}
+.container {
+  border: solid 0.1px #cccccc;
+}
+
+.list-head {
+  display: flex;
+  background-color: white;
+  height: 72px;
+  // font-size: 0.85em;
+}
+
+.right-head {
+  margin: auto;
+  vertical-align: middle;
+  margin-right: 2em;
+  flex-wrap: nowrap;
+  display: flex;
+  opacity: 1;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #565656;
+}
+
+.left-head {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-head-item {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.list-content {
+  background-color: #cccccc;
+  padding: 15px;
+}
+
+.form-control {
+  font-size: 0.9em !important;
+  color: black;
+  padding-top: 2px;
+  opacity: 1;
+  padding-bottom: 2px;
+}
+
+.expansionPanel {
+  margin: 2em 0 2em 0;
+}
+
+.primary-expansion {
+  margin-top: 0;
+  background-color: white;
+  mat-expansion-panel-header {
+    background-color: #00488a;
+    height: fit-content !important;
+    padding: 15px;
+    color: white;
+    align-items: baseline;
+  }
+
+  mat-panel-title {
+    display: block !important;
+  }
+}
+
+.exppanel-heading {
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.knipper-logo {
+  display: none;
+  margin-right: 1em;
+  width: 66px;
+  height: 23px;
+  border-radius: 12px;
+  box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px #349bfe;
+  background-color: var(--white);
+  background-image: url("/resources/images/assets-logo-knipper-white-labeled-copy.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.value-box {
+  // margin: auto auto auto 0;
+  flex: auto;
+}
+
+.textWarning {
+  color: var(--sunflower-yellow);
+}
+.textError {
+  color: #ff7373;
+}
+.textActive {
+  color: var(--wintergreen);
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-6px {
+  margin-top: 6px;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+.p-1 {
+  padding: 1rem;
+}
+.pr-1 {
+  padding-right: 1rem;
+}
+
+.pl-1 {
+  padding-left: 1rem;
+}
+.pl-2 {
+  padding-left: 2rem;
+}
+.pl-3 {
+  padding-left: 3rem;
+}
+
+.ml-2 {
+  margin-left: 2rem;
+}
+.ml-4 {
+  margin-left: 4rem;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.active {
+  font-weight: bold;
+  color: #01569c;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: 3px solid #01569c;
+}
+
+.box-0 {
+  padding: 0rem;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: var(--knipper-blue);
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  margin-right: 0px !important;
+}
+
+.material-icons {
+  font-size: 18px;
+  color: white;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.icon-focus:hover {
+  background-color: #01569c;
+}
+
+.exppanel-value {
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.mat-rectangle {
+  display: flex;
+  margin-right: auto;
+  margin-left: 2rem;
+  width: 450px;
+  height: 23px;
+  border-radius: 11.5px;
+  background-image: linear-gradient(to left, var(--knipper-blue), #003668);
+}

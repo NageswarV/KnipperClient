@@ -1,0 +1,202 @@
+.expansionPanel{
+    margin: 2em 0 2em 0;
+}
+  
+.light-expansion {
+    background-color: white;
+    .mat-expanded {
+        margin-bottom: 0 !important;
+    }
+}
+.container {
+    margin-top: 36px;
+}
+.inner-expansion {
+    background-color:#f4f4f4;
+    box-shadow: none !important;
+}
+.Direct-to-Practition {
+    width: 143px;
+    height: 20px;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: var(--white);
+    margin: auto;
+}
+.expansionPanel{
+    margin: 2em 0 2em 0;
+}
+
+.primary-expansion {
+    color: white;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    margin-top: 0;
+    background-color: white;
+    mat-expansion-panel-header {
+        background-color: #00488a;
+        height: fit-content !important;
+        padding: 15px;
+    }
+
+    mat-panel-title {
+        display: block !important;
+    }
+
+      
+}
+.check{
+    height:15px;
+    background-color: red;
+}
+
+// ::ng-deep .mat-expansion-indicator {
+//     margin-bottom: auto !important;
+// }
+
+::ng-deep .mat-expansion-panel-body {
+    padding:0px;
+} 
+
+
+.exppanel-heading {
+    opacity: 0.7;
+    font-size: 12px;
+}
+
+.exppanel-value {
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.value-box {
+    margin: auto auto auto 0;
+}
+
+.mat-expansion-indicator {
+    margin-bottom: auto !important;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    color: black;
+}
+
+.tab-data {
+    font-size: 1em;
+    color: gray;
+    width: 25%;
+    font-weight: 500;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: solid 0.1px #cccccc;
+    transition: color 0.1s  ease-in-out, border-bottom 0.1s  ease-in-out, font-weight 0.1s  ease-in-out;
+}
+
+.selected-tab {
+    border-bottom: solid 2px #00488a !important;
+    color: #00488a;
+    font-weight: bold;
+    transition: color 0.1s  ease-in-out, border-bottom 0.1s  ease-in-out, font-weight 0.1s  ease-in-out;
+}
+
+.button-filter {
+    margin-top: 16px;
+    padding-left: 16px;
+    display: flex;
+    input {
+        margin: 0 !important;
+        width: 177px;
+        padding: 5px 15px 5px 15px !important;
+        cursor: pointer;
+    }
+}
+
+.status-filter {
+    margin-top: 16px;
+    display: flex;
+    padding-left: 16px;
+    margin-bottom: 16px;
+    .label {
+        font-size: 1em;
+        color: gray;
+        font-weight: 500;
+        padding: 0 !important;
+        margin-right: 1em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    select {
+        width: 200px;
+        height: 32px;
+        font-size: 0.8em;
+        color: gray;
+        opacity: 0.7;
+        font-weight: 600;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+::ng-deep samplicity-responsive-datatable > * {
+    color: black;
+    border: none !important;
+}
+.mat-rectangle {
+    display: flex;
+    margin: auto;
+    width: 450px;
+    height: 23px;
+    border-radius: 11.5px;  
+    background-image: linear-gradient(to left, var(--knipper-blue), #003668);
+}
+
+.knipper-logo {
+    margin-right: 1em;
+    display: flex;
+    width: 66px;
+    height: 23px;
+    border-radius: 12px;      
+    box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.5);      
+    background-color: var(--white);    
+}
+
+.textError {
+    background-color: var(--knipper-red);
+    color: white;
+}
+.textActive {
+    background-color: var(--wintergreen);
+    color: black;
+}
+.vtext-align {
+    margin: auto;
+    font-size: 12px;
+}
+.id-color{
+    color: #23527c;
+}
+.file-icon{
+    color: white;
+    background-color:  var(--knipper-blue);
+    padding: 5px;
+    margin-left: 5px;
+}
+.nav-breadcrumb {
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #01569c;
+    text-decoration: underline;
+    font-size: 13px;
+  }

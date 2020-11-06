@@ -1,0 +1,115 @@
+<div class="container-fluid">
+    <div class="row reportsParams">
+        <p class="Inventory-Return-R">Reports / <a [routerLink]="navigationBreadCrumb"><u>GenerateReport</u></a> / {{reportDetails}}</p>
+    </div>
+    <div class="row m-1">
+        <div class="col-xs-12 col-md-6 col-xl-2 Inventory-Return-Rec">
+            {{reportDetails}}
+        </div>
+        <div class="col-xs-12 col-md-6 col-xl-2 text-right">
+            <button class="btn btn-default" >APPLY SAVED PARAMETERS TEMPLATE</button>
+            <button class="btn btn-default">SAVE PARAMETERS AS TEMPLATE</button>
+        </div>
+    </div>
+    <div class="row reportsParams" >
+        <mat-accordion>
+            <mat-expansion-panel style="background-color: white;" expanded=true>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="Report-Parameters">
+                  Report Parameters
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-accordion style="margin: 10px 20px;">
+              <mat-expansion-panel class="Rectangle" expanded=true>
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="DisplayHeaders">
+                    Filters
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                    <div class="row">
+                         <div class="form-group col-md-2" style="margin: 5px;" >
+                            <label for="status" style="color: #565656;margin-bottom: 8px;padding: 5px;">Program Name (Job ID)</label>
+                            <select class="form-control bgWhite" id="country" name="country">
+                              <option>--All--</option>
+                              <option>Allergan DTP Veeva</option>
+                              <option>Allergan DTP EyeCare</option>
+                            </select>
+                          </div>
+                        <div class="form-group col-md-2" style="margin-top: 10px;">
+                            <label for="orderReceivedFrom" style="color: #565656;margin-bottom: 8px;">DateRange</label>
+                            <div class="datepicker-form">
+                              <my-date-picker name="receivedDate" id="receivedDate" type="date" [options]="myDatePickerOptions"
+                                sgValidateDatePicker>
+                              </my-date-picker>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2" style="margin-top: 17px;">
+                            <label for="until" style="color: #565656;margin-bottom: 10px;"></label>
+                            <div class="datepicker-form">
+                              <my-date-picker name="untilDate" id="untilDate" type="date" [options]="myDatePickerOptions"
+                                sgValidateDatePicker>
+                              </my-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label >Products</label>
+                            <p>All Products (24)</p>
+                            <u style="color: blue;">Select Products To Include/Exclude</u>
+                        </div>
+                        <div class="col-md-2">
+                            <div>Include Discontinued Items</div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" checked>Yes</label>
+                              </div>
+                              <div class="radio">
+                                <label><input type="radio" name="optradio">No</label>
+                              </div>
+                        </div>
+                    </div>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+            <mat-accordion style="margin:10px 20px">
+                <mat-expansion-panel class="Rectangle" expanded='true'>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="DisplayHeaders">
+                      Display Formatting
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div style="margin-left:10px;">
+                  <p>Columns To Display On Report</p>
+                  <div style="margin-bottom: 10px;">
+                      <span>All Columns (17) </span><span><u  style="color: blue;">Select Columns To Include/Exclude</u></span>
+                  </div>
+                </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div >
+                  <button style="margin: 20px 10px 10px 20px;" class="btn btn-primary" (click)="generateReport()">GENERATE REPORT</button>
+                  <a style="margin-bottom: 10px;" role="button" style="color: blue;"><u>Reset</u></a>
+              </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <div class="row mt-2" *ngIf="generateReportFlag">
+          <div class="col-md-12">
+            <button class="btn btn-default pad-5" (click)="download('resources\images\banner1.jpg','JPG')">EXPORT REPORT AS .CSV</button>
+            <a href="resources\images\banner1.jpg" download="JPG"><button class="btn btn-default pad-5">EXPORT REPORT AS .PDF</button></a>
+            <a href="resources\images\banner1.jpg" download="JPG"><button class="btn btn-default pad-5">EXPORT REPORT AS .XLSX</button></a>
+          </div>
+        </div>
+    </div>
+    
+    <div class="row m-1 mt-22" *ngIf="generateReportFlag">
+      <div class="col-sm-12">
+        <sg-grid [columns]="columns" emptyText="No Reports" [items]="collection" [totalRecordCount]="collection?.length"
+          [pageSize]="pageSize" [currentPage]="currentPage" [loadMorePagination]="true" [disablePaginationFloating]="true"
+          (emitPageChange)="paginate($event)" [fromReport]="fromReport">
+          <ng-template let-report>
+            <ng-container *ngFor="let column of columnkeys" >
+              <td>{{report[column]}}</td>
+             </ng-container>
+            </ng-template>
+        </sg-grid>
+    </div>
+    </div>
+</div>

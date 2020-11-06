@@ -1,0 +1,36 @@
+@import '../../style/main.scss';
+.btn-light{
+     color: $app-blue !important;
+     font-weight: 500;
+     font-size: 1.6em;
+     border-radius: 0em !important;
+     padding: 10px !important;
+}
+.footer-buttons{
+     display: flex;
+     width: 100%;     
+}
+.btn-info{
+     padding: 4px;
+     width: 150px;
+     margin-left: 20px;
+     margin-right:20px;
+}
+.modal-title{
+     font-weight: 400;
+}
+*{
+     font-family: Helvetica, sans-serif;
+}
+.btn{
+     text-transform: unset;
+}
+.modal-body{
+     white-space: pre-wrap;
+     color: gray;
+     text-align: left;
+}
+::ng-deep .livechatModalClass .modal-dialog{
+     max-width: 55%;
+     width: 55%;
+}

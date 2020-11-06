@@ -1,0 +1,63 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-xs-12 col-md-2 col-xl-2 product-filter-sidebar" [ngClass]="{'is-collapsed': isCollapsed}"
+      id="filter-sidebar" sgMyMatchHeight="sidebar-match-height">
+      <div class="filter sidebar-match-height" [ngClass]="{'is-collapsed': isCollapsed}">
+        <app-rep-order-list-filter (emitSearch)="onSubmit($event)"
+          [filterObjectFromOtherPage]="filterObjectFromOtherPage"></app-rep-order-list-filter>
+      </div>
+      <div class="filter-strip sidebar-match-height" (click)="onCollapse()">
+        <i class="material-icons sidebar-chevron">{{isCollapsed ? 'chevron_right' : 'chevron_left'}}</i>
+        <p><span translate="yes">FILTER</span></p>
+      </div>
+      <div class="filter-strip-mobile" (click)="onCollapse()">
+        <i class="material-icons sidebar-chevron pull-right">{{isCollapsed ? 'expand_more' : 'expand_less'}}</i>
+        <p translate="yes">FILTER</p>
+      </div>
+    </div>
+    <div class="col-xs-12" [ngClass]="{'col-sm-8 col-md-10 col-xl-10': !isCollapsed, 'is-collapsed': isCollapsed}"
+      id="page-content">
+      <div class="row">
+        <div class="col-xs-12 col-md-6 col-xl-2">
+          <h1 translate="yes">Sales Reps</h1>
+        </div>
+        <div class="col-xs-12 col-md-6 col-xl-2">
+          <div class="pull-right form-inline">
+            <input type="button" class="btn btn-default" value="EXPORT VIEW TO EXCEL" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <sg-validation *ngIf="componentId" [componentId]="componentId"></sg-validation>
+        </div>
+      </div>
+      <div class="busy-container1 mt-1">
+        <div class="list-head">
+          <div class="left-head">
+            <span class="left-head-item" [ngClass]="{'active':byRepOrders}" (click)="viewBySalesRep()">Sales Rep
+              Activities</span>
+            <span class="left-head-item" [ngClass]="{'active':!byRepOrders}" (click)="viewByHomeOffce()">Client Home
+              Office Push Activities</span>
+          </div>
+          <div class="right-head">
+            <div style="margin-top:auto; margin-bottom: auto;">Sort Results By</div>
+            <select class="form-control" style="width: 21em; margin-left: 1em; height: 2.5em;" [(ngModel)]="sortingType"
+              id="search-box-filter_32">
+              <option value="asc" selected>Name in Ascending Order</option>
+              <option value="desc">Name in Descending Order</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="byRepOrders">
+        <app-rep-order-list [filterObj]="filterObj" [sortingType]="sortingType" (emitFilter)="filterData($event)">
+        </app-rep-order-list>
+      </div>
+      <div *ngIf="!byRepOrders">
+        <app-rep-push-shipment-list [filterObj]="filterObj" [sortingType]="sortingType"
+          (emitFilter)="filterData($event)"></app-rep-push-shipment-list>
+      </div>
+    </div>
+  </div>
+</div>

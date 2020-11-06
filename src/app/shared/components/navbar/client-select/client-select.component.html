@@ -1,0 +1,6 @@
+<li class="nav-item client-select-wrapper" id="clientSelect" *ngIf="isShowing && clients">
+  <span class="client-label">Client:</span>
+  <select class="client-select" (change)="onChange($event)" [ngModel]="selectedClientId | async">
+    <option *ngFor="let client of clients" [value]="client.tenantId">{{client.name}}</option>
+  </select>
+</li>

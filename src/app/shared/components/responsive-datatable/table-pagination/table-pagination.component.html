@@ -1,0 +1,52 @@
+<div *ngIf="totalCount > perPage">
+  <nav class="pagination-wrapper" [class.floating]="fixedFooter" [class.wide]="!isFilterShown"
+    [class.scroll]="!bottomOfPage">
+    <div class="pageDisplay" [class.left]="dialog"> {{pageDisplay}} </div>
+    <button *ngIf="1 === pageNum" class="btn btn-default" disabled="disabled">
+      <mat-icon>chevron_left</mat-icon>
+      <span l10nTranslate>Prev</span>
+    </button>
+    <button *ngIf="1 != pageNum" class="btn btn-default" (click)="paginatePrevious()">
+      <mat-icon>chevron_left</mat-icon>
+      <span l10nTranslate>Prev</span>
+    </button>
+    <button *ngIf="1 === pageNum" class="btn btn-primary">
+      1
+    </button>
+    <button *ngIf="1 != pageNum" class="btn btn-default" (click)="paginate(1)">
+      1
+    </button>
+    <button class="btn btn-default" *ngIf="displayFirstPage" (click)="paginateFirstEllipses()">
+      ...
+    </button>
+    <div *ngFor="let page of pages;">
+      <button *ngIf="page === pageNum" class="btn btn-primary">
+        {{page}}
+      </button>
+      <button *ngIf="page != pageNum" class="btn btn-default" (click)="paginate(page)">
+        {{page}}
+      </button>
+    </div>
+    <button class="btn btn-default" *ngIf="displayLastPage" (click)="paginateLastEllipses()">
+      ...
+    </button>
+    <button *ngIf="lastPage === pageNum" class="btn btn-primary">
+      {{lastPage}}
+    </button>
+    <button *ngIf="lastPage != pageNum" class="btn btn-default" (click)="paginate(lastPage)">
+      {{lastPage}}
+    </button>
+    <button *ngIf="pageNum === lastPage" class="btn btn-default" disabled="disabled">
+      <span l10nTranslate>Next</span>
+      <mat-icon class="icon-right">chevron_right</mat-icon>
+    </button>
+    <button *ngIf="pageNum != lastPage" class="btn btn-default" (click)="paginateNext()">
+      <span l10nTranslate>Next</span>
+      <mat-icon class="icon-right">chevron_right</mat-icon>
+    </button>
+    <button *ngIf="displayScrollButton" class="btn btn-default" class="scroll-to-top" (click)="scrollToTop()">
+      <span l10nTranslate>SCROLL TO TOP</span>
+      <mat-icon>expand_less</mat-icon>
+    </button>
+  </nav>
+</div>

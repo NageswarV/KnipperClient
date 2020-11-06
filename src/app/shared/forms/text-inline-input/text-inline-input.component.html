@@ -1,0 +1,24 @@
+<div class="form-group text-inline-input" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <div *ngIf="!readonly" class="form-row">
+    <label class="col-form-label" for="id">
+      <span [class.with-colon]="colon" l10nTranslate>{{label}}</span>
+      <span class="required" *ngIf="required || forceRequiredLabel || isRequired" l10nTranslate>Required</span>
+    </label>
+    <div class="col-form-input">
+      <input *ngIf="!textMask" [type]="type" [attr.disabled]="disabled ? '' : null" class="form-control col-9"
+             [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''" [formControlName]="name"
+             [attr.maxlength]="maxLength" (blur)="onBlur()">
+      <input *ngIf="textMask" [type]="type" [attr.disabled]="disabled ? '' : null" class="form-control col-9"
+             [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''" [formControlName]="name"
+             [attr.maxlength]="maxLength" [textMask]="{mask: masks[textMask]}" (blur)="onBlur()">
+      <samplicity-field-errors [control]="control"></samplicity-field-errors>
+    </div>
+  </div>
+  <div *ngIf="readonly">
+    <label class="col-form-label">
+      <span [class.table-label]="tableLabel" [class.with-colon]="label && colon" l10nTranslate>{{label}}</span>
+      <span class="required" *ngIf="label && required || forceRequiredLabel" l10nTranslate>Required</span>
+    </label>
+    <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  </div>
+</div>

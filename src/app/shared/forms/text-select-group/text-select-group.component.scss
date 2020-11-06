@@ -1,0 +1,15 @@
+@import '../../../styles/variables';
+
+.input-group-btn {
+  background: $light-grey-2;
+  color: $charcoal;
+
+  select {
+    border-right: 1px solid $input-border;
+    border-radius: 0 0.25rem 0.25rem 0;
+
+    &:disabled {
+      border-right-color: $input-disabled-border;
+    }
+  }
+}

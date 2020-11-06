@@ -1,0 +1,5 @@
+export class Permissions {
+{{#each permissionSet}}
+    static readonly {{this.name}}: string = "{{this.name}}";
+{{/each}}
+}

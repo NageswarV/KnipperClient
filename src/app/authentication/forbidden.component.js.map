@@ -1,0 +1,1 @@
+{"version":3,"file":"forbidden.component.js","sourceRoot":"","sources":["forbidden.component.ts"],"names":[],"mappings":";AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAO1C;IAAA;IAEA,CAAC;IAFY,kBAAkB;QAL9B,SAAS,CAAC;YACP,QAAQ,EAAE,cAAc;YACxB,WAAW,EAAE,4BAA4B;YACzC,SAAS,EAAE,CAAC,4BAA4B,CAAC;SAC5C,CAAC;OACW,kBAAkB,CAE9B;IAAD,yBAAC;CAAA,AAFD,IAEC;SAFY,kBAAkB"}

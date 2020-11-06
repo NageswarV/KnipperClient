@@ -1,0 +1,211 @@
+::ng-deep .custom-dialog > mat-dialog-container {
+    background-color: white;
+  }
+  .Heading{
+    font-size: 24px;
+  }
+  .dataHaeding{
+  height:15%;
+  }
+  .oderInfoHeading,.oderInfoText,.contact,.address{
+    font-size: 14px;
+    color: #565656;
+
+  }
+  .OrderInfoHeading,.OderInfoText{
+    margin:3px 0px;
+  }
+  .removePadding{
+    padding:0px 0px;
+  }
+  hr{
+    margin: 5px -24px;
+    color:#cccccc;
+  }
+  .delwidth{
+    // width: 48px;
+    text-align: center;
+  }
+  .HeaderText{
+   height:36px;
+  }
+  .material-icons {
+    font-size: 18px;
+    // margin:2px;
+    color: rgba(0, 0, 0, 0.21);
+    cursor: pointer;
+  }
+  .del{
+    font-size: 22px;
+    color: white;
+    padding: 5px;
+    margin-top: 12px;
+    background: #cb2d4c;
+
+  }
+  .oderInfoText{
+      color:red;
+  }
+  .asterisk_input::after {
+    content:"  *"; 
+    color: #e32;
+    position: absolute; 
+}
+  .tableHeading{
+    background-color:var(--data-table-row-style-1) ;
+    }
+    .cancel{
+      font-size: 24px;
+      color:black;
+    }
+    .text1{
+    font-size: 17px;
+    padding :5px 0px 2px;
+    font-weight: 600;
+    }
+    .text2{
+      font-size: 14px;
+      font-style: italic;
+      color: #565656;
+    }
+    .data{
+      background-color:var(--data-table-row-style-1) ;
+      padding:5px;
+      height:70px;
+    }
+    .contact,.address{
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding :7px 0px;
+    }
+    .inputValue{
+      padding-top: 12px;
+      padding-left: 0px;
+    }
+    .mat-radio-button{
+      padding:2px;
+    }
+  input{
+    width:400px;
+  }
+  .content{
+    border: solid 1px #eaeaea;
+    margin:15px 0px;
+  }
+  .clearButton{
+    color: #01569c;
+    text-decoration: underline;
+    background-color: white;
+    display:inline-block;
+  }
+  .buttons{
+    padding:10px;
+  }
+  .addButton{
+    float:right;
+    color: white;
+    background-color: #7f7f7f;
+  }
+  .mat-dialog-content{
+    height:90%;
+  }
+  .backButton{
+    width: 90px;
+    height: 50px;
+    background-color: var(--btn-secondary-default);
+  }
+  .sendButton{
+    width: 90px;
+    height: 50px;
+    box-shadow: 2px 2px 1px 0 rgba(0, 0, 0, 0.1);
+    background-color: var(--spruce);
+    float:right;
+    color:white;
+    padding: 0 10px;
+  }
+  .send{
+    color:white;
+    // margin-top:6px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .mat-dialog-actions {
+    padding: 17px 0px;
+  }
+  .mat-dialog-actions{
+    padding: 0px;
+  }
+  @media only screen and (max-width: 1000px) {
+    input{
+      width:200px;
+    }
+    .HeaderText{
+      height:43px;
+     }
+  }
+  .label-color{
+    color: #565656;
+  }
+  .fw-600{
+    font-weight: 600;
+  }
+  .d-flex{
+    display: flex;
+  }
+  .flex-row{
+    flex-direction: row;
+  }
+  .p-1{
+    padding: 1rem;
+  }
+  .p-2{
+    padding: 2rem;
+  }
+  .mt-05{
+    margin-top: 0.5rem;
+  }
+  .pl-2{
+    padding-left: 2rem;
+  }
+  .mt-1{
+    margin-top: 1rem;
+  }
+  .ml-7{
+    margin-left: 7rem;
+  }
+  .ml-3{
+    margin-left: 3rem;
+  }
+  .pl-1{
+    padding-left: 1rem;
+  }
+  .input-box{
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: solid 1px var(--btn-secondary-default);
+    background-color: var(--white);
+  }
+  .py-1{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .px-05{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .d-flex{
+    display: flex;
+  } 
+  .flex-row{
+    flex-direction: row;
+  } 
+  .space-between{
+    justify-content: space-between;
+  }
+  .link-active{
+    color: #01569c;
+    text-decoration: underline;
+  }
+  .ff-open-sans{
+    font-family: Open Sans;
+  }

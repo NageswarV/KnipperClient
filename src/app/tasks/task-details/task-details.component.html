@@ -1,0 +1,135 @@
+<div class="container">
+    <div class="p-1 mr-1">
+        <div class="row mt-1">
+            <p><a [routerLink]="navigationBreadCrumb">Tasks</a> / Task Details:{{task?.description}}</p>
+        </div>
+        <div class="row mt-2 p-1">
+            <div class="row mb-2">
+                <div class="Task-Details-Etiam col-md-10"
+                    style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Task Details :
+                    {{task?.description}}</div>
+                <button type="button" class="p-1 bg-knipper-green col-md-2">CLOSE TASK</button>
+            </div>
+        </div>
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel style="background-color: white;" class="mb-2" expanded=true>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="Mat-Titles">
+                    Task Header
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row p-1">
+                <div class="col-xs-4">
+                    <div class="row ml-1">
+                        <div class="task-label">Creation Date</div>
+                        <div class="mt-1 task-value">{{task.creationTime?.toLocaleDateString()}}</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="task-label">Requestor Name</div>
+                        <div class="mt-1 task-value">{{task?.requestor.firstName}} {{task?.requestor.lastName}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row space-between mb-2 mt-1 p-1">
+                <div class="col-md-3 ml-1">
+                    <div class="task-label">
+                        Task Priority <span class="mandatory">*</span>
+                    </div>
+                    <div class="text-align-center">
+                        <div role="button" class="col-md-4 p-1 task-value bg-secondary" (click)="priorityLow()"
+                            [ngClass]="{'bg-knipper-blue': priority==='Low'}">
+                            LOW
+                        </div>
+                        <div role="button" class="col-md-4 p-1 task-value bg-secondary" (click)="priorityMedium()"
+                            [ngClass]="{'bg-knipper-blue': priority==='Medium'}">
+                            MEDIUM
+                        </div>
+                        <div role="button" class="col-md-4 p-1 task-value bg-secondary" (click)="priorityHigh()"
+                            [ngClass]="{'bg-knipper-blue': priority==='High'}">
+                            HIGH
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="task-label">Assigned To <span class="mandatory">*</span></div>
+                        <div class="form-group has-feedback">
+                            <select class="form-control" id="assignedInput" [value]="task?.assignedTo.firstName+task?.assignedTo.lastName">
+                                <option *ngFor="let user of users" [value]="user.fullName">{{user.fullName}}</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" id="assignedInput" [value]="task?.assignedTo.firstName+task?.assignedTo.lastName" /> -->
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="task-label">Requested Completion Date <span class="mandatory">*</span></div>
+                    <form class="form-group" [formGroup]="myform">
+                        <div class="datepicker-form">
+                            <my-date-picker name="startDate" id="startDate" type="date" formControlName="reqDate" [options]="myDatePickerOptions"
+                                sgValidateDatePicker>
+                            </my-date-picker>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <div class="task-label">Completion Date</div>
+                    <div class="mt-1 task-value">{{task.completionDate?.toLocaleDateString() || " "}}</div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
+        <mat-expansion-panel style="background-color: white;" class="mb-2" expanded=true>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="Mat-Titles">
+                    Task Description
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row mb-2 p-1">
+                <div class="task-label" style="margin-left: 3rem;">Task Description <span class="mandatory">*</span>
+                </div>
+                <textarea rows="4" class="TextArea-Styles"> {{task?.description}} </textarea>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
+        <mat-expansion-panel style="background-color: white;" expanded=true>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="Mat-Titles">
+                    Note
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row p-1">
+                <div class="task-label" style="margin-left: 3rem;">Note <span class="mandatory">*</span></div>
+                <textarea rows="4" class="TextArea-Styles" placeholder="Add Notes here ..."> </textarea>
+            </div>
+            <div class="Mat-Titles ml-1">
+                Previous Notes({{notes?.length}})
+            </div>
+            <sg-grid [columns]="columns" emptyText="No Records To Display" [items]="notes" [totalRecordCount]="notes?.length"
+                [pageSize]="pageSize" [currentPage]="currentPage" [loadMorePagination]="loadMorePagination"
+                (emitPageChange)="paginate($event)">
+                <ng-template let-note>
+                    <td class="columnHeader col-xs-6 col-md-6 form-group">
+                        <div class="text-primary">{{note.description}}</div>
+                    </td>
+                    <td class="columnHeader col-xs-3 col-md-3 form-group">{{note.loggedDate | sgCustomDate}} </td>
+                    <td class="columnHeader col-xs-3 col-md-3 form-group"> {{note.notesOwner?.firstName}} {{note.notesOwner?.lastName}} </td>
+                </ng-template>
+            </sg-grid>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div class="col-xs-12 ml-1 mt-1">
+        <div class="row">
+            <div class="d-flex flex-row">
+                <button mat-dialog-close class="p-2 bg-knipper-red mr-1">SAVE CHANGES</button>
+                <button mat-dialog-close class="p-2 bg-knipper-blue">DISCARD CHANGES</button>
+            </div>
+        </div>
+
+    </div>
+</div>

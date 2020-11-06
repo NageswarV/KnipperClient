@@ -1,0 +1,55 @@
+@import "../../../style/main.scss";
+
+.container-fluid {
+    margin-top: 2rem;
+}
+
+h1 {
+    margin: 0;
+}
+
+.busy-container {
+    border: solid 0.1px #cccccc;
+}
+.list-head {
+    display: flex;
+    border-bottom: solid 0.1px #dedede;
+    background-color: white;
+    height: 72px;
+    font-size: 0.85em;
+}
+
+.right-head {
+    margin: auto;
+    vertical-align: middle;
+    margin-right: 2em;
+    flex-wrap: nowrap;
+    display: flex;
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.displayCount {
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2em;
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.list-content {
+    background-color: #cccccc;
+    padding: 15px;
+}
+
+.form-control {
+    font-size: 0.9em !important;
+    color: black;
+    padding-top: 2px;
+    opacity: 1;
+    padding-bottom: 2px;
+    height: 32px;
+    border: solid 1px #e6e6e6;
+    background-color: white;
+}

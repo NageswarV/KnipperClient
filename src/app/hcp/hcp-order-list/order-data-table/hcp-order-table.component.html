@@ -1,0 +1,323 @@
+<mat-expansion-panel class="expansionPanel primary-expansion" (opened)="loadTableData()" (closed)="hideTableData()"
+    expanded=true>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <div style="display: flex;">
+                <div class="d-flex">
+                    <a
+                        style="text-decoration: underline; color: #ffcd00; font-size: 14px;font-weight: 600;font-stretch: normal;font-style: normal; display: flex;">{{hcpDataSet.lastName}},
+                        {{ hcpDataSet.firstName }}
+                    </a>
+                    <mat-icon style="color: #ffcd00;margin-left: 4px;background: none;">tv</mat-icon>
+                </div>
+                <div class="mat-rectangle">
+                    <div class="knipper-logo" [class.textError]="hcpDataSet.status === 'Inactive'"
+                        [class.textActive]="hcpDataSet.status === 'Active'"
+                        style="text-align: center;font-weight: 600;">
+                        <span class="vtext-align">{{hcpDataSet.status | uppercase}}</span>
+                    </div>
+                    <div class="exppanel-heading"
+                        style="opacity:1;margin-right: 1em;margin-top: auto;margin-bottom: auto;">
+                        <span style="opacity:0.7;font-size: 12px;">Total Orders Received:</span>
+                        <em style="font-size: 14px;color:white;"> {{hcpDataSet.totalReceivedOrders}} </em>
+                    </div>
+                    <div class="exppanel-heading"
+                        style="opacity:1;margin-right: 1em;margin-top: auto;margin-bottom: auto;">
+                        <span style="opacity:0.7;font-size: 12px;">Total Pending AOCs:</span>
+                        <em style="font-size: 14px;color:white;"> {{hcpDataSet.totalPendingAocs}} </em>
+                    </div>
+                    <div></div>
+                </div>
+                <a class="icon-focus">
+                    <mat-icon>add_task</mat-icon>
+                </a>
+                <a class="icon-focus" style="margin-left: 8px;">
+                    <mat-icon>save_alt</mat-icon>
+                </a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; margin-top: 1em;">
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Knipper ID:
+                    </div>
+                    <div class="exppanel-value">
+                        {{hcpDataSet.knipperId.substr(0, hcpDataSet.knipperId.indexOf('-'))}}
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Client ID:
+                    </div>
+                    <div class="exppanel-value">
+                        {{hcpDataSet.clientId}}
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Opt Out Details:
+                    </div>
+                    <div class="exppanel-value">
+                        N/A
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Professional Designation:
+                    </div>
+                    <div class="exppanel-value">
+                        {{hcpDataSet.professionalDesignation}}
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Speciality:
+                    </div>
+                    <div class="exppanel-value">
+                        {{hcpDataSet.primarySpeciality}}
+                    </div>
+                </div>
+            </div>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="tabs">
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'dtp'" (click)="changeTabs('dtp')">
+            Direct to Practitioner Activities
+        </div>
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'rep'" (click)="changeTabs('rep')">
+            Rep to Practitioner Orders
+        </div>
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'handCarry'" (click)="changeTabs('handCarry')">
+            Hand Carry Activities
+        </div>
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'address'" (click)="changeTabs('address')">
+            Associated Addresses
+        </div>
+    </div>
+    <div class="main-data busy-container">
+        <div class="button-filter" *ngIf="selectedTab === 'dtp'">
+            <input type="button" class="btn btn-primary" [value]="'ORDERS (' + dtpOrderCount + ')'" />
+            <input type="button" class="btn btn-default" value="SVLS" disabled />
+        </div>
+        <div class="button-filter" *ngIf="selectedTab === 'handCarry'">
+            <input type="button" class="btn" [value]="'DISBURSEMENTS (' + disbursementsData.length + ')'"
+                (click)="selectedButton('disbursement')"
+                [ngClass]="(selectedHCButton == 'disbursement') ? 'btn-primary' : 'btn-default'" />
+            <input type="button" class="btn" [value]="'SIGNATURE AUDITS (' + signatureAuditsData.length + ')'"
+                (click)="selectedButton('audit')"
+                [ngClass]="(selectedHCButton == 'audit') ? 'btn-primary' : 'btn-default'" />
+        </div>
+        <div class="status-filter" *ngIf="selectedTab === 'dtp' || selectedTab === 'rep'">
+            <div class="label">
+                Filter Results by Order Status
+            </div>
+            <select class="form-control">
+                <option value="all" selected>All Statuses</option>
+                <option *ngFor="let status of oderedStatusArray" value="{{status.classificationValueName}}">
+                    {{status.classificationValueName}}
+            </select>
+        </div>
+        <div [ngBusy]="busyPromises.rep">
+            <samplicity-responsive-datatable #table *ngIf="panelExpanded && selectedTab === 'dtp'" [perPage]="perPage"
+                [selectEnabled]=false [dialog]="false" name="hcpTableSet" [columns]="columnSchema"
+                [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                [staticItems]="getDataSet" [showEndOfList]="false" [disableSorting]="loading"
+                (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column" let-displayCreateIcon="false">
+                    <div *ngIf="column?.name === 'id'" class="d-flex" style="width: 12em;">
+                        <a [routerLink]="['dtporders',item.id]" class="id-color"> {{item.id}} </a>
+                        <!-- <a (click)="openCreateTaskDialog()" class="ml-1"><img
+                                src="../../../../resources/images/new-task-icon.PNG" height="24px" width="24px"
+                                alt="new-task"></a> -->
+                        <!-- <mat-icon style="font-size: 22px;" (click)="openCreateTaskDialog()" class="ml-1">create
+                        </mat-icon> -->
+                        <mat-icon class="Rectangle" (click)="openCreateTaskDialog()" style="margin-left: 6px;">add_task
+                        </mat-icon>
+                    </div>
+                    <div *ngIf="column?.name === 'shipToAddress'">
+                        {{item.shipToAddressLine1}} {{item.shipToAddressLine2 ? ', ' + item.shipToAddressLine2 : ''}},
+                        <br />
+                        {{item.shipToCity}}, {{item.shipToState}}, {{item.shipToZipCode}}
+                    </div>
+                    <span *ngIf="column?.name === 'programName'">
+                        {{item.programName}}
+                    </span>
+                    <span *ngIf="column?.name === 'salesRep'">
+                        <a class="link-color" (click)="goToRepPage(item,'dtpOrder')"> {{item.repFirstName}}
+                            {{item.repLastName}} </a>
+                    </span>
+                    <span *ngIf="column?.name === 'communicationLabel'">
+
+                        <a class="link-color" [routerLink]="['./']" (click)="openDialog(item)">
+                            {{item.communicationLabel}}</a>
+                    </span>
+                </ng-template>
+            </samplicity-responsive-datatable>
+            <samplicity-responsive-datatable #table *ngIf="panelExpanded && selectedTab === 'rep'" [perPage]="perPage"
+                [selectEnabled]=false [dialog]="false" name="hcpTableSet" [columns]="columnSchema"
+                [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                [staticItems]="getDataSet" [showEndOfList]="false" [disableSorting]="loading"
+                (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column">
+                    <div *ngIf="column?.name === 'id'" class="d-flex" style="width: 12em;">
+                        <a [routerLink]="['dtrorders',item.orderNumber]" class="id-color"> {{item.id}} </a>
+                        <!-- <a (click)="openCreateTaskDialog()" class="ml-1"><img
+                                src="../../../../resources/images/new-task-icon.PNG" height="24px" width="24px"
+                                alt="new-task"></a> -->
+                        <!-- <mat-icon style="font-size: 22px;" (click)="openCreateTaskDialog()" class="ml-1">create
+                        </mat-icon> -->
+                        <mat-icon class="Rectangle" (click)="openCreateTaskDialog()" style="margin-left: 6px;">add_task
+                        </mat-icon>
+                    </div>
+                    <div *ngIf="column?.name === 'shipToAddress'" style="width: 184px;">
+                        {{item.shipToFirstName}} {{item.shipToLastName}}, <br /> {{item.shipToAddressLine1}}
+                        {{item.shipToAddressLine2 ? ', ' + item.shipToAddressLine2 : ''}},<br /> {{item.shipToCity}},
+                        {{item.shipToState}} {{item.shipToZipCode}}, {{item.shipToCountry}}
+                    </div>
+                    <div *ngIf="column?.name === 'orderedByAddress'" style="width: 184px;">
+                        {{item.orderedByFirstName}} {{item.orderedByLastName}},<br /> {{item.orderedByAddressLine1}}
+                        {{item.orderedByAddressLine2 ? ', ' + item.orderedByAddressLine2 : ''}}<br />,
+                        {{item.orderedByCity}},
+                        {{item.orderedByState}} {{item.shipToZipCode}}, {{item.orderedByCountry}}
+                    </div>
+                    <span *ngIf="column?.name === 'programName'">
+                        Program {{item.programId}}
+                    </span>
+                    <span *ngIf="column?.name === 'rushOrder' && item.rushOrder">
+                        Rush
+                    </span>
+                </ng-template>
+            </samplicity-responsive-datatable>
+            <div class="continerAddress" *ngIf="panelExpanded && selectedTab === 'address'">
+                <div style="color:black" class=" info row" *ngFor="let address of addresses; let i = index">
+                    <div class="col-sm-2 col-md-2 col-lg-1">
+                        <div class="d-flex">
+                            <mat-icon class="Rectangle">add_task
+                            </mat-icon>
+                            <mat-icon class="Rectangle" style="margin-left: 6px;">tv</mat-icon>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-md-7 col-lg-7">
+
+                        <div>
+                            <div class="row data">
+                                <div class="col-xs-3 col-md-3 col-lg-3 ">
+                                    <span class="key">
+                                        Address Status:
+                                    </span>
+                                    <span class="value">
+                                        {{ address.status}}
+                                    </span>
+                                </div>
+                                <div class="col-xs-3 col-md-3 col-lg-3 ">
+                                    <span class="key">
+                                        Institution Address:
+                                    </span>
+                                    <span class="value">
+                                        {{ address.institutionAddress ? 'Yes':'No'}}
+                                    </span>
+                                </div>
+                                <div class="col-xs-3 col-md-3 col-lg-3">
+                                    <span class="key">
+                                        Bad Address:
+                                    </span>
+                                    <span class="value">
+                                        {{ address.badAddressFlag ? 'Yes':'No'}}
+                                    </span>
+                                </div>
+                                <div class="col-xs-3 col-md-3 col-lg-3">
+                                    <span class="key">
+                                        Address Type:
+                                    </span>
+                                    <span class="value">
+                                        {{address.addressType}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row data">
+                                <div class="col-xs-4 col-md-4 col-lg-4">
+                                    <span class="key">
+                                        Address Source:
+                                    </span>
+                                    <span class="value">
+                                        {{address.statAddressSourceus}}
+                                    </span>
+                                </div>
+                                <div class="col-xs-8 col-md-8 col-lg-8">
+                                    <span class="key">
+                                        Address:
+                                    </span>
+                                    <span class="value">
+                                        {{address.addressLine1}}
+                                        {{address.addressLine2 ? ', ' + address.addressLine2 : ''}},
+                                        {{address.city}},{{address.zipCode}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-4 addrFlags">
+                        <div *ngIf="address.dtpFlag || address.dtrFlag || address.handCarryFlag">
+                            <span *ngIf="address.dtpFlag">Direct To Practitioner</span>
+                            <span *ngIf="address.dtrFlag"
+                                [ngClass]="{'addrSp2': address.dtpFlag && address.dtrFlag}">Rep To Practitioner</span>
+                            <span *ngIf="address.handCarryFlag"
+                                [ngClass]="{'addrSp2': address.dtpFlag || address.dtrFlag}">
+                                HandCarry</span>
+                        </div>
+                        <!-- <div *ngIf="address.dtpFlag || address.dtpFlag">
+                            <span *ngIf="address.dtpFlag">Direct To Practitioner</span>
+                            <span *ngIf="address.dtpFlag" class="addrSp2">Rep To Practitioner</span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <samplicity-responsive-datatable #table
+                *ngIf="panelExpanded && selectedTab === 'handCarry' && selectedHCButton === 'disbursement'"
+                [perPage]="perPage" [selectEnabled]=false [dialog]="false" name="handCarryDisbursementTable"
+                [columns]="getDisbursementColumnSchema()" [disableDefaultPagination]="true"
+                (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()" [staticItems]="getDataSet"
+                [showEndOfList]="false" [disableSorting]="loading" (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column">
+                    <span *ngIf="column?.name === 'image' && item?.image">
+                        <a target="_blank" href="../../../../resources//images/logo.jpg" download="handcarry-img.jpg">
+                            <mat-icon class="image-icon">image</mat-icon>
+                        </a>
+                    </span>
+                    <span *ngIf="column?.name === 'repName'">
+                        <a class="link-color" (click)="goToRepPage(item,'disbursement')">{{item.rep.fullName}}</a>
+                    </span>
+                    <span *ngIf="column?.name === 'territoryName'">
+                        {{item.territory?.name}}
+                    </span>
+                    <span *ngIf="column?.name === 'validForRecon'">
+                        <mat-icon class="checkMark-icon" *ngIf="item?.validForRecon">
+                            check</mat-icon>
+                    </span>
+                </ng-template>
+            </samplicity-responsive-datatable>
+            <samplicity-responsive-datatable #table
+                *ngIf="panelExpanded && selectedTab === 'handCarry' && selectedHCButton === 'audit'" [perPage]="perPage"
+                [selectEnabled]=false [dialog]="false" name="handCarryAuditTable" [columns]="getSignatureColumnSchema()"
+                [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                [staticItems]="getDataSet" [showEndOfList]="false" [disableSorting]="loading"
+                (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column">
+                    <div *ngIf="column?.name === 'listName'">
+                        {{item.year}} {{item.quarter}} SVLs
+                    </div>
+                    <span *ngIf="column?.name === 'outboundSvlDocument'">
+                        <a target="_blank" href={{item.outboundSvlDocument}}
+                            class="link-color">{{item.outboundSvlDocument}}</a>
+                    </span>
+                    <span *ngIf="column?.name === 'inboundSvlDocument'">
+                        <a class="link-color" target="_blank"
+                            href={{item.inboundSvlDocument}}>{{item.inboundSvlDocument}}</a>
+                    </span>
+                    <span *ngIf="column?.name === 'employeeId'">
+                        <a class="link-color">{{item.employeeId}}</a>
+                    </span>
+                </ng-template>
+            </samplicity-responsive-datatable>
+        </div>
+    </div>
+</mat-expansion-panel>

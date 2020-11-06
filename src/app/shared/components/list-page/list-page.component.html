@@ -1,0 +1,47 @@
+<samplicity-side-filter (filter)="doSearch()" (clear)="onClearFilter(stickyResetItem)"
+  (toggle)="onToggleFilter($event)">
+  <div filter-content>
+    <form novalidate>
+      <ng-content></ng-content>
+    </form>
+  </div>
+  <div page-content>
+    <samplicity-notification #blackoutHoldNotificationWindow></samplicity-notification>
+    <button *ngIf="createLink && createLinkVisible && !hideCreateButton && (clientService.isCurrentClientActiveAsync | async)" mat-raised-button color="positive"
+      class="float-right list-page-create-btn" routerLink="{{createLink}}">
+      <mat-icon>add_circle</mat-icon>
+      <span l10nTranslate>{{createBtnText}}</span>
+    </button>
+    <div *ngFor="let option of options" class="button-right">
+      <button *ngIf="option && option.rightButtonShow" mat-raised-button (click)="option.rightButtonEvent.emit()"
+        color="{{option.rightButtonColor}}" [disabled]="option.rightButtonDisabled" class="mat-raised-button float-right" type="button">
+        <mat-icon>{{option.rightButtonIcon}}</mat-icon>
+        <span l10nTranslate>{{option.rightButton}}</span>
+      </button>
+    </div>
+
+    <h1 id="pageTitle" l10nTranslate>{{pageTitle}}</h1>
+    <p l10nTranslate>{{breadcrumbText}}</p>
+    <p class="text-right">{{table.pageDisplay}}</p>
+
+    <samplicity-notification #notificationWindow></samplicity-notification>
+
+    <div class="card">
+      <div class="row">
+        <form class="d-none col-md-6 offset-md-3" novalidate>
+          <samplicity-search-input name="search" [parentFormGroup]="searchForm" (search)="doSearch()">
+          </samplicity-search-input>
+        </form>
+      </div>
+      <samplicity-responsive-datatable #table [delayedLoadMore]="delayedLoadMore" [items]="items" [columns]="columns"
+        [loadMore]="loadMore" [hightlightProp]="hightlightProp" [fixedFooter]="true" id="resultsGrid"
+        [selectEnabled]="selectEnabled" [selectColumn]="selectColumn" [disableSelectSorting]="disableSelectSorting"
+        [itemSelectableProp]="itemSelectableProp" (selectEvent)="onSelect($event)">
+        <ng-template let-item="item" let-column="column">
+          <ng-template [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{ column: column, item: item }">
+          </ng-template>
+        </ng-template>
+      </samplicity-responsive-datatable>
+    </div>
+  </div>
+</samplicity-side-filter>

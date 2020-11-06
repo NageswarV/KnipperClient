@@ -1,0 +1,16 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired || forceRequiredLabel" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <div *ngIf="control && !control.disabled" class="d-flex">
+    <textarea *ngIf="!disabled" class="form-control" [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''"
+      [formControlName]="name" [rows]="rows" [maxLength]="maxLength" (blur)="onBlur()"></textarea>
+    <textarea *ngIf="disabled" class="form-control" [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''" [attr.disabled]="disabled"
+      [formControlName]="name" [rows]="rows" [maxLength]="maxLength"></textarea>
+    <span *ngIf="required && table" class="ml-2 required" l10nTranslate>Required</span>
+  </div>
+  <div *ngIf="control && control.disabled">
+    <p class="readonly">{{control.value ? control.value : ''}}</p>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

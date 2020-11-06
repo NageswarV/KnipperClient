@@ -1,0 +1,29 @@
+<dl class="row">
+  <ng-container *ngFor="let column of columns; trackBy: trackColumn">
+    <dd class="col-12 {{'li-visibility-' + column.visibility}}"
+      style="font-family: 'Open Sans'; font-size: 14px;text-decoration: none;margin-bottom: 3px;">
+      <span class="no-pointer" style="margin-left: 5em !important; color: gray;">
+        <span
+          [class.with-colon]="!column.colonNotRequired">{{column.displayName | translate:lang:translateParams}}</span>
+      </span>
+      <ng-template *ngIf="column.customTemplate && !column.expandedRowTemplateDifferent"
+        [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{ column: column, item: item }"></ng-template>
+      <ng-container *ngIf="!column.customTemplate || (column.customTemplate && column.expandedRowTemplateDifferent)">
+        <ng-container *ngIf="!column.linkRoute || column.disableLink">
+          <span *ngIf="!column.pipe"> {{column.subName ? item[column.name][column.subName] : item[column.name]}}</span>
+          <span *ngIf="column.pipe && column.async"
+            [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : column.pipeArg2 | async | tableExpanded"></span>
+          <span *ngIf="column.pipe && !column.tableArg && !column.async"
+            [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : column.pipeArg2 | tableExpanded"></span>
+          <span *ngIf="column.pipe && column.tableArg && !column.async"
+            [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : item[column.tableArg] | tableExpanded"></span>
+        </ng-container>
+        <ng-container *ngIf="column.linkRoute && !column.disableLink">
+          <a *ngIf="column.linkParam" [routerLink]="[column?.linkRoute, item[column.linkParam]]"
+            l10ntranslate> {{item[column.linkDisplay]}}</a>
+          <a *ngIf="!column.linkParam" [routerLink]="column.linkRoute" l10ntranslate>{{column?.linkDisplay}}</a>
+        </ng-container>
+      </ng-container>
+    </dd>
+  </ng-container>
+</dl>

@@ -1,0 +1,25 @@
+ <div class="container-fluid mt-2">
+  <div class="row">
+      <div class="col-xs-12 col-md-2 col-xl-2 product-filter-sidebar" [ngClass]="{'is-collapsed': isCollapsed}"
+          id="filter-sidebar" sgMyMatchHeight="sidebar-match-height">
+          <div class="filter sidebar-match-height" [ngClass]="{'is-collapsed': isCollapsed}">
+              <app-upload-report-filter (emitSearch)="applyFilter($event)"></app-upload-report-filter>
+          </div>
+          <div class="filter-strip sidebar-match-height" (click)="onCollapse()">
+              <i class="material-icons sidebar-chevron">{{isCollapsed ? 'chevron_right' : 'chevron_left'}}</i>
+              <p><span translate="yes">FILTER</span></p>
+          </div>
+          <div class="filter-strip-mobile" (click)="onCollapse()">
+              <i class="material-icons sidebar-chevron pull-right">{{isCollapsed ? 'expand_more' : 'expand_less'}}</i>
+              <p translate="yes">FILTER</p>
+          </div>
+      </div>
+
+      <div class="col-xs-12" [ngClass]="{'col-xs-12 col-sm-8 col-md-10 col-xl-10': !isCollapsed, 'is-collapsed': isCollapsed}"
+          id="page-content">
+          <div>
+            <app-uploaded-report-list></app-uploaded-report-list>
+          </div>
+      </div>
+  </div>
+</div>

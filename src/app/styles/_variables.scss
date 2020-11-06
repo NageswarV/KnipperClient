@@ -1,0 +1,239 @@
+/*Fonts*/
+$heading-font: "Open Sans";
+$body-font: "Open Sans";
+
+/*Colours*/
+$white: #FFFFFF;
+$black: #000000;
+
+$pale-grey: #F5F5F5;
+$light-grey: #F4F4F4;
+$light-grey-2: #C6C9CC;
+$dark-grey: #6F6F71;
+$charcoal: #222222;
+$knipper-blue: #00549D;
+$active-blue: #003399;
+$light-blue: #26A7EB; //New
+$cool-charcoal: #373737;
+$cool-charcoal-2: #5D5D5D;
+$active-cool-charcoal: #272626; //TODO: Apply to top nav bar
+$mid-grey: #737373;
+$cool-grey: #D4D4D5;
+$knipper-red: #BD0004;
+$dark-red: #993333;
+$bright-red: #FF746D;
+$light-pink: #FFEEEF;
+$light-pink-2: #FCDEDE;
+$yellow: #FAC00F;
+$dark-yellow: #E1AA05;
+$dark-orange: #F36701;
+$active-dark-orange: #DB5D00;
+$green: #2A7D21;
+$dark-green: #0D5B07;
+$active-green: #156E0B;
+$disabled-grey: #DCDCDC;
+$pastel-yellow: #FFFDDA;
+$pastel-blue: #D3F1FF;
+$pastel-green: #E2FFDD;
+$dark-red: #9E2323;
+$deep-red: #822323;
+$menu-grey: #666666;
+$dark-menu-grey: #515151;
+$arrow-grey: #646464;
+$chart-light-green: #5DAD4E;
+$chart-mid-green: #4A943D;
+$chart-aqua: #33E0DF;
+$chart-dark-aqua: #12BDBD;
+$chart-purple: #9562F9;
+$chart-dark-purple: #663DB7;
+$chart-light-orange: #FF983F;
+$chart-mid-orange: #DC7A26;
+$chart-pink: #F95FD0;
+$chart-dark-pink: #CE47A4;
+$chart-grey: #AEAEAE;
+$input-grey: #E6E6E6;
+
+/* Common Input */
+$input-border: $input-grey;
+$input-box-shadow: rgba(0,0,0,0.075);
+$input-background: $white;
+$input-border: $light-grey-2;
+$input-asterisk: $knipper-red;
+$input-text-color: $charcoal;
+$input-label-text-color: $dark-grey;
+$input-placeholder-text-color: $mid-grey;
+
+$input-focus-border: $light-blue;
+$input-focus-box-shadow: rgba(55,149,221,0.75);
+
+$input-disabled-background: $disabled-grey;
+$input-disabled-text-color: $dark-grey;
+$input-disabled-border: $disabled-grey;
+
+$input-selected-option-background: $knipper-blue;
+$input-selected-option-text-color: $white;
+
+$input-button-background: $knipper-blue;
+$input-button-color: $white;
+
+$input-prefix-background: $disabled-grey;
+$input-prefix-border: $disabled-grey;
+$input-prefix-color: $charcoal;
+
+$input-checkbox-border-active: $light-blue;
+$input-checkbox-selected-border: $light-blue;
+$input-checkbox-selected-background: $light-blue;
+$input-checkbox-selected-color: $white;
+$input-checkbox-disabled-background: $disabled-grey;
+$input-checkbox-disabled-color: $dark-grey;
+
+$input-radio-border-active: $light-blue;
+$input-radio-selected-border: $light-blue;
+$input-radio-selected-background: $light-blue;
+$input-radio-selected-color: $white;
+$input-radio-disabled-background: $disabled-grey;
+$input-radio-disabled-color: $dark-grey;
+
+$form-field-list-collapsible-border: $light-grey-2;
+$form-field-list-collapsible-color: $charcoal;
+
+$calendar-current-date-border: $light-grey-2;
+$calendar-selected-date-background: $knipper-blue;
+$calendar-selected-date-color: $white;
+$calendar-hover-date-background: $light-grey-2;
+
+
+/* */
+$text: $charcoal;
+
+
+
+
+/*
+$button-default-background: $white;
+$button-default-border: $dark-grey;
+$button-default-border-active: $cool-charcoal;
+
+$button-positive-background: $green;
+$button-positive-background-active: $active-green;
+
+$button-negative-background: $knipper-red;
+$button-negative-background-active: $dark-red;
+$button-warning-background: $yellow;
+$button-warning-border: $dark-yellow;
+$button-warning-background-active: $dark-yellow;
+
+
+$button-disabled-background: $disabled-grey;
+$button-disabled-color: $dark-grey;
+
+
+$button-link-color: $knipper-blue;
+$button-link-color-active: $active-blue;
+$button-link-disabled-color: $dark-grey;*/
+
+/**/
+
+$background-body: $light-grey;
+$background-card: $white;
+$background-well: $light-grey;
+$background-well-embed: $light-grey-2;
+
+$icon-white-expansion-header: $mid-grey;
+
+$sidenav-background: $white;
+$sidenav-label: $dark-grey;
+$sidenav-icons: $arrow-grey;
+$sidenav-icons-hover: $charcoal;
+$sidenav-link: $knipper-blue;
+$sidenav-link-hover: $active-blue;
+$sidenav-alert: $bright-red;
+$sidenav-warning: $dark-yellow;
+
+$notification-close-button: rgba(255, 255, 255, 0.50);
+$notification-close-button-hover: rgba(255, 255, 255, 1);
+
+$button-background-disabled: #efefef;
+$button-border-disabled: $input-disabled-background;
+$button-color-disabled: $dark-grey;
+$button-primary-background: $knipper-blue;
+$button-primary-color: $white;
+$button-primary-background-active: $active-blue;
+$button-secondary-background-hover: #5A5D5E;
+$button-secondary-font: #5A5D5E;
+$button-secondary-border: #DCDCDC;
+$button-positive-background: $green;
+$button-negative-background: $knipper-red;
+$button-warning-background: $yellow;
+$button-positive-background-hover: $dark-green;
+$button-negative-background-hover: $dark-red;
+$button-warning-background-hover: $dark-yellow;
+
+$checkbox-radio-button-frame: $light-grey-2;
+$checkbox-button-frame-hover: $knipper-blue;
+$checkbox-positive-frame-hover: $green;
+$checkbox-negative-frame-hover: $knipper-red;
+$checkbox-radio-disabled: $disabled-grey;
+
+$navbar-height-desktop: 3.5rem;
+$navbar-height-tablet: 7rem;
+$sidebar-width: 18rem;
+
+$navbar-menu-hover: #007BBD;
+$navbar-menu-hover-weight: 700;
+$navbar-menu-hover-background: #D3F1FF;
+
+$tab-slider-background: #E0E0E0;
+
+$table-header-background: $cool-grey;
+$table-subheader-background: $cool-grey;
+$table-header-font: $charcoal;
+$table-alt-row-background: $pale-grey;
+$table-border: $light-grey-2;
+$table-icon: $mid-grey;
+
+$table-selected-row-background: $pastel-blue; //New
+
+$tree-default: $arrow-grey;
+$tree-current: #7A7A7A;
+
+$table-breakpoint-min: 64rem;
+$table-breakpoint-xs: 69rem;
+$table-breakpoint-xs1: 71.5rem;
+$table-breakpoint-sm: 74rem;
+$table-breakpoint-sm1: 76.5rem;
+$table-breakpoint-md: 79rem;
+$table-breakpoint-md1: 81.5rem;
+$table-breakpoint-md2: 84rem;
+$table-breakpoint-md3: 86.5rem;
+$table-breakpoint-lg: 89rem;
+$table-breakpoint-lg1: 91.5rem;
+$table-breakpoint-lg2: 94rem;
+$table-breakpoint-lg3: 96.5rem;
+$table-breakpoint-xl: 99rem;
+$table-breakpoint-xl1: 101.5rem;
+$table-breakpoint-xl2: 104rem;
+$table-breakpoint-xl3: 106.5rem;
+$table-breakpoint-xxl: 109rem;
+$table-breakpoint-xxl1: 111.5rem;
+$table-breakpoint-xxl2: 114rem;
+$table-breakpoint-xxl3: 116.5rem;
+$table-breakpoint-xxl4: 129rem;
+
+// Adds extra 'xxl' breakpoint to Bootstrap 4 grid system
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1560px
+);

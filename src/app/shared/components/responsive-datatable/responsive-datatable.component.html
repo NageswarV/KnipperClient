@@ -1,0 +1,109 @@
+<div #tableContainer class="table-container">
+  <table #tableContent class="table" style="border: none !important;" [class.full-width]="!isCalculating"
+    [class.is-invalid]="!valid">
+    <thead #tableHeader style="border: none; background-color: white;">
+      <tr samplicity-table-header [readonly]="readonly" [columns]="columns" [selectEnabled]="selectEnabled"
+        [selectAllEnabled]="selectAllEnabled" [selectColumn]="selectColumn" [hideColumn]="hideSelect"
+        (sortEvent)="onSort($event)" (collapseEvent)="onCollapseChange($event)" (selectAllEvent)="onSelectAll($event)"
+        [disableSorting]="false" [disableSelectSorting]="disableSelectSorting" [translateParams]="translateParams" style="font-size: 14px;"></tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of items; let i = index; let odd = odd; let last = last; trackBy: trackById">
+        <ng-container *ngIf="!hideSelect || (hideSelect && checkSelected(item))">
+          <tr #rowColumns [class.odd]="odd" [class.even]="!odd" [class.highlight]="checkHightlight(item)" style="font-size: 14px;">
+            <td *ngIf="selectEnabled && !selectSingle && !hideSelect">
+              <mat-checkbox *ngIf="!readonly && checkSelectable(item)" #selectCheckbox color="primary"
+                [checked]="checkSelected(item) || (disablePreselected && checkSelected(item, preselectedItems))"
+                (change)="onSelect($event, item)"
+                [attr.disabled]="disablePreselected && checkSelected(item, preselectedItems)"></mat-checkbox>
+              <span *ngIf="readonly">{{checkSelected(item) | yesNo}}</span>
+            </td>
+            <td *ngIf="isCollapsed" (click)="toggleInfoRow(i, expandIcon)" class="collapse-btn">
+              <mat-icon #expandIcon style="height: fit-content;width: fit-content; color: #cccccc;">
+                arrow_drop_down_circle</mat-icon>
+            </td>
+            <ng-container *ngFor="let column of columns; trackBy: trackColumn">
+              <td #cellRef *ngIf="column.customTemplate" class="{{'column-visibility-' + column.visibility}}"
+                [class.required-cell]="cellRef.querySelector('.required-cell')">
+                <ng-template [ngTemplateOutlet]="cellTemplate"
+                  [ngTemplateOutletContext]="{ column: column, item: item, i: i, last: last }"></ng-template>
+              </td>
+              <td *ngIf="!column.customTemplate" class="{{'column-visibility-' + column.visibility}}"
+                [class.error]="checkStyleApplicable(item[column.name], column.errorProp)"
+                [class.warning]="checkStyleApplicable(item[column.name], column.warningProp)"
+                [class.success-text]="checkStyleApplicable(item[column.name], column.successProp)"
+                [class.waived-text]="checkStyleApplicable(item[column.name], column.waivedProp)"
+                >
+                <mat-icon class="tiny error float-left" *ngIf="checkStyleApplicable(item[column.name], column.errorProp)">info</mat-icon>
+                <mat-icon class="tiny warning float-left" *ngIf="checkStyleApplicable(item[column.name], column.warningProp)">warning</mat-icon>
+                <ng-container *ngIf="column.name===columns[0].name && selectSingle">
+                  <div style="float: left;">
+                    <mat-checkbox [checked]="onSingleSelectChecked(item)" (change)="onSelect($event, item)"
+                      color="primary"></mat-checkbox>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="!column.linkRoute || column.disableLink">
+                  <span
+                    *ngIf="!column.pipe">{{column.subName ? item[column.name][column.subName] : item[column.name]}}</span>
+                  <span
+                    *ngIf="!column.pipe && item[column.name] == '' && column.replaceLabel">{{column.replaceLabel | translate:lang:translateParams}}</span>
+                  <span *ngIf="column.pipe && column.async"
+                    [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : column.pipeArg2 | async"></span>
+                  <span *ngIf="column.pipe && !column.tableArg && !column.async"
+                    [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : column.pipeArg2"></span>
+                  <span *ngIf="column.pipe && column.tableArg && !column.async"
+                    [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : item[column.tableArg]"></span>
+                </ng-container>
+                <ng-container *ngIf="column.linkRoute && !column.disableLink">
+                  <a *ngIf="!column.pipe && column.linkParam" [routerLink]="[column?.linkRoute, item[column.linkParam]]"
+                    target="{{column.linkAnchorTarget}}" l10ntranslate>
+                    <span>{{item[column.linkDisplay]}}</span>
+                  </a>
+                  <a *ngIf="column.pipe && column.linkParam" [routerLink]="[column?.linkRoute, item[column.linkParam]]"
+                    target="{{column.linkAnchorTarget}}"
+                    [innerHTML]="column.subName ? item[column.name][column.subName] : item[column.name] | pipeHandler: column.pipe : column.pipeArg : item[column.tableArg]">
+                  </a>
+                  <a *ngIf="!column.linkParam" [routerLink]="column.linkRoute" target="{{column.linkAnchorTarget}}"
+                    l10ntranslate><span>{{column?.linkDisplay}}</span></a>
+                </ng-container>
+              </td>
+            </ng-container>
+          </tr>
+          <tr *ngIf="expandedRows[i] && isCollapsed" class="info-row-container">
+            <ng-container>
+              <td samplicity-expandable-table-row class="info-row" [item]="item" [columns]="columns"
+                [colSpan]="rowColumns.childElementCount" (sortEvent)="onInfoRowSort($event)">
+                <ng-template let-item="item" let-column="column">
+                  <ng-template [ngTemplateOutlet]="cellTemplate"
+                    [ngTemplateOutletContext]="{ column: column, item: item }"></ng-template>
+                </ng-template>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading" class="table-progress"></mat-progress-bar>
+</div>
+
+<div></div>
+<div
+  style="font-size: 0.9em;border-top: solid 1px #ccc !important;display: flex; align-items: center;justify-content: center;height:4em;">
+  <p style="color:gray; margin-top: auto; margin-bottom: auto; font-size: 14px;">{{pageDisplay}}</p>
+  <a *ngIf="totalCount >= endCount && endCount !== totalCount" (click)="showMore()"
+    style="text-decoration: underline;  margin-left: 2em; margin-top: auto; margin-bottom: auto; font-size: 14px;">Click here to load
+    more</a>
+  <a *ngIf="perPage > 10" (click)="showLess()"
+    style="text-decoration: underline; margin-left: 2em; margin-top: auto; margin-bottom: auto; font-size: 14px;">Show less</a>
+</div>
+<div *ngIf="showEndOfList && (noMoreItems || items?.length === 0)" class="d-flex justify-content-center">
+  <p l10nTranslate *ngIf="noMoreItems"><em>EndOfList</em></p>
+  <!--p l10nTranslate *ngIf="limitReached"><em>LimitReached</em></p-->
+  <p l10nTranslate *ngIf="(noResultsFound || items?.length === 0) && !isLoading"><em>{{noResultsMessage}}</em></p>
+</div>
+<samplicity-table-pagination *ngIf="!disableDefaultPagination" [pageDisplay]="pageDisplay" [totalCount]="totalCount"
+  [perPage]="perPage" [pageNum]="pageNum" [dialog]="dialog" [fixedFooter]="fixedFooter"
+  (paginateEvent)="onPaginate($event)">
+</samplicity-table-pagination>
+<samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>

@@ -1,0 +1,47 @@
+<th *ngIf="selectColumn && selectEnabled && !readonly && !hideColumn" class="select-header" [class.check-box]="selectAllEnabled" (click)="!disableSelectSorting && onSort(selectColumn)">
+  <div class="header-content"
+       [class.sort-asc]="selectColumn.sortDir ==='asc' && !disableSorting && !disableSelectSorting" 
+       [class.sort-desc]="selectColumn.sortDir ==='desc' && !disableSorting && !disableSelectSorting">
+    <div class="standard-header-container custom-flex">
+      <div>
+        <mat-checkbox *ngIf="!readonly && selectAllEnabled" color="primary" class="no-margin" [checked]="selectColumn.selectAll"
+                      (click)="$event.stopPropagation()" (change)="onSelectAll($event)"></mat-checkbox>
+        <span l10nTranslate>{{selectColumn.displayName}}</span>
+      </div>
+    </div>
+  </div>
+</th>
+<th *ngIf="selectColumn && selectEnabled && readonly && !hideColumn" class="select-header">
+  <div class="header-content">
+    <div class="standard-header-container custom-flex">
+      <div>
+        <span l10nTranslate>{{selectColumn.displayName}}</span>
+      </div>
+    </div>
+  </div>
+</th>
+<th *ngFor="let column of columns; let first = first; let last = last" (click)="onSort(column)"
+    class="{{'column-visibility-' + column.visibility}}" [attr.colspan]="getColSpan(first)" [class.multi-col]="first && isCollapsed">
+  <div class="header-content"
+       [class.sort-asc]="column.sortDir ==='asc'" [class.sort-desc]="column.sortDir ==='desc'">
+    <div class="standard-header-container custom-flex">
+      <p *ngIf="column.headerParams" [l10nTranslate]="column.headerParams">
+        {{column.displayName}}
+        <br *ngIf="column.subDisplayName" />
+        {{column.subDisplayName}}
+      </p>
+      <p *ngIf="!column.headerParams">
+        {{column.displayName | translate:lang:translateParams}}
+        <br *ngIf="column.subDisplayName" />
+        {{column.subDisplayName | translate:lang:translateParams}}
+      </p>
+    </div>
+
+    <div *ngIf="displayFixedHeaders" class="fixed-header-container d-flex align-items-middle">
+      <span *ngIf="column.headerParams" [l10nTranslate]="column.headerParams">
+        {{column.displayName}}
+      </span>
+      <span *ngIf="!column.headerParams">{{column.displayName | translate:lang:translateParams}}</span>
+    </div>
+  </div>
+</th>

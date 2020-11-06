@@ -1,0 +1,419 @@
+<div class="container mt-3">
+    <div class="row">  
+        <div class="col-xs-12" >
+            <div class="fs-12"><a class="nav-breadcrumb" [routerLink]="breadCrumbNavigationUrl">{{breadCrumbs}}</a> / Transaction Details : {{transactionID}} (Transfer Out)</div>
+        </div>
+    </div>
+    <div class="hand-carry-contanier" >
+        <div class="hand-carry-label">Hand Carry</div>
+    </div>
+    <div class="col-xs-12 mt-2">  
+        <div class="row">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="head-left">{{transactionID}} (Transfer Out) <mat-icon>launch</mat-icon></div>
+                    <div class="ml-3 rectangle-red">UNLINKED</div>
+                    <div class="ml-2 rectangle-red">DISCREPANT</div>
+                </div>
+                <div>
+                    <input type="button" class="btn btn-default" value="Print Transaction"/>
+                    <input type="button" class="btn btn-default ml-1" value="View Image"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container ">
+    <div class="busy-container">
+        <div [ngBusy]="busyPromise">
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Transaction Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="panel-body">
+                    <div class="d-flex flex-row row">
+                        <div class="col-md-3">
+                            <div class="panel-label">Transaction Type</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.trasactionType}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Transfer Status</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.transferStatus}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Transfer Link Status</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.transferLinkStatus}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel-label">Confirmation #</div>
+                            <div class="panel-value mt-1 fw-500">{{order?.confirmationNumber}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-expansion-panel class="expansionPanel dark-expansion" expanded=true>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="panel-head">
+                                        Transfer Out Information
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="panel-body">
+                                    <div class="d-flex flex-row row">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transaction ID</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transactionId}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Type </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transferType}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Employee Last Name </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transferOutEmployeeLastName}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Employee First Name </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transferOutEmployyeFirstName}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Employee ID </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transferOutEmployeeId}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Territory Code </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transferOUtTettitoryCode}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Date  </div>
+                                            <div class="panel-value mt-1 fw-bold incorrect-date d-flex flex-row align-items-center"><span class="material-icons fs-20px mr-1">warning</span><span>{{order?.transferOutInformation?.transferOutDate | date : 'M/d/yyyy'}}</span></div>
+                                            <div class="panel-value mt-1 fw-500 incorrect-date fs-12px">Correction detected. Correction type: Incorrect transaction date</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Reference # </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutInformation?.transferOutRef}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Out Valid for Reconciliation? </div>
+                                            <div class="panel-value mt-1 fw-500">
+                                                <span *ngIf="order?.transferOutInformation?.isValidReconciallation">Yes</span>
+                                                <span *ngIf="!(order?.transferOutInformation?.isValidReconciallation)">No</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-expansion-panel class="expansionPanel dark-expansion" expanded=true>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="panel-head">
+                                        Transfer In Information
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="panel-body">
+                                    <div class="d-flex flex-row row">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transaction ID</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transactionId}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Type </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transactionType}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In Employee Last Name </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transferInEmployeeLastName}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In Employee First Name </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transferInEmployeeFirstName}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In Employee ID </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transferInEmployeeID}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In Territory Code </div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transferInTerritoryCode}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer Received?</div>
+                                            <div class="panel-value mt-1 fw-500">
+                                                <span *ngIf="order?.transferInInformation?.transferReceived">Yes</span>
+                                                <span *ngIf="!(order?.transferInInformation?.transferReceived)">No</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In (Received) Date </div>
+                                            <div class="panel-value mt-1 fw-bold incorrect-date d-flex flex-row align-items-center"><span class="material-icons fs-20px mr-1">warning</span><span>{{order?.transferInInformation?.transferInReceivedDate | date : "M/d/yyyy"}}</span></div>
+                                            <div class="panel-value mt-1 fw-500 incorrect-date fs-12px">Correction detected. Correction type: Incorrect transaction date</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In Reference #</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInInformation?.transferInRef}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Transfer In Valid for Reconciliation? </div>
+                                            <div class="panel-value mt-1 fw-500">
+                                                <span *ngIf="order?.transferInInformation?.transferInValidForReconcillation">Yes</span>
+                                                <span *ngIf="!(order?.transferInInformation?.transferInValidForReconcillation)">No</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel> 
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        <div class="col-md-7">
+                            <div class="row">
+                                Transfer Out Products ({{order?.transferOutProducts?.length}})
+                            </div> 
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                Transfer In Products ({{order?.transferInProducts?.length}})
+                            </div>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div id="transfer-panel" class="panel-body">
+                    <div class="col-xs-7">
+                        <div class="row">
+                            <sg-grid [columns]="transfersOutColumns" emptyText="Products not available" [items]="order?.transferOutProducts" [totalRecordCount]="order?.transferOutProducts?.length" >
+                                <ng-template let-product >
+                                    <td class="pl-25px color-black">{{product?.transferOutProduct}}</td>
+                                    <td>{{product?.transferOutLotNumber}}</td>
+                                    <td>{{product?.transferOutQty}}</td>
+                                    <td>{{product?.transferOutCorrectionType}}</td>
+                                    <td>{{product?.linkStatus}}</td>
+                                </ng-template>
+                            </sg-grid>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="row">
+                            <sg-grid [columns]="transfersInColumns" emptyText="Products not available" [items]="order?.transferInProducts" [totalRecordCount]="order?.transferInProducts?.length" >
+                                <ng-template let-product >
+                                    <td class="pl-25px color-black">{{product?.transferInProduct}}</td>
+                                    <td>{{product?.transferInLotNumber}}</td>
+                                    <td>{{product?.transferInQty}}</td>
+                                    <td>{{product?.transferInCorrectionType}}</td>
+                                </ng-template>
+                            </sg-grid>
+                        </div>
+                    </div>
+                    
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Comments ({{order?.comments?.length}})
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div >
+                    <sg-grid [columns]="commentsColumns" emptyText="Comments not available" [items]="comments" [totalRecordCount]="0" >
+                        <ng-template let-comment >
+                            <td class="pl-25px color-black">{{comment?.comment}}</td>
+                            <td>{{comment?.commentType}}</td>
+                            <td>{{comment?.commentSource}}</td>
+                            <td>{{comment?.commentVisibility}}</td>
+                            <td>{{comment?.commentIncludedOnReconReport}}</td>
+                            <td>{{comment?.commentAuthor}}</td>
+                            <td>{{comment?.commentDate}}</td>
+                            <td>{{comment?.commentFile}}</td>
+                        </ng-template>
+                    </sg-grid>     
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-head">
+                        Footer
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-expansion-panel class="expansionPanel dark-expansion" expanded=true>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="panel-head">
+                                        Transfer Out Footer Information
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="panel-body">
+                                    <div class="d-flex flex-row row">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Scan Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.scanDate | date : 'M/d/yyyy'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Verifier ID</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.verifierID}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Verified Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.verifiedDate | date : 'M/d/yyyy'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Status</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.status}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Batch Number</div>
+                                            <div class="panel-value mt-1 fw-500">- - -</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Version #</div>
+                                            <div class="panel-value mt-1 fw-500">- - -</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Source</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.source}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Device Timestamp</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.deviceTimeStamp | date : 'M/d/yyyy h:mm a z'}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Create Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.createDate | date : 'M/d/yyyy h:mm a z'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Creator ID</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.creatorID}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Last Update Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.lastUpdateDate | date : 'M/d/yyyy h:mm a z'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Last Updater</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferOutFooterInformation?.lastUpdater}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </mat-expansion-panel>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-expansion-panel class="expansionPanel dark-expansion" expanded=true>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="panel-head">
+                                        Transfer In Footer Information
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="panel-body">
+                                    <div class="d-flex flex-row row">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Scan Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.scanDate | date : 'M/d/yyyy'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Verifier ID</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.verifierID}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Verified Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.verifiedDate | date : 'M/d/yyyy'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Status</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.status}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Batch Number</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.batchNumber}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Version #</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.versionNumber}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Source</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.source}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Device Timestamp</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.deviceTimeStamp | date : 'M/d/yyyy h:mm a z'}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Create Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.createDate | date : 'M/d/yyyy h:mm a z'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Creator ID</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.creatorID}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Last Update Date</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.lastUpdateDate | date : 'M/d/yyyy h:mm a z'}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel-label">Last Updater</div>
+                                            <div class="panel-value mt-1 fw-500">{{order?.transferInFooterInformation?.lastUpdater}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </mat-expansion-panel>
+                        </div>
+                        
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </div>
+</div>
+
+
+
+  
+
+
+
+
+

@@ -1,0 +1,318 @@
+@import '../../style/main.scss';
+
+.navbar-header {
+    @media (min-width: 768px) and (max-width: 830px) {
+        padding-right: 30px;
+    }
+
+    display: inline-flex;
+
+    @media screen and (max-width: 992px) {
+        display: inherit;
+    }
+}
+
+#hidden-xs-navbar-icons {
+    .ordercart-icon {
+        padding     : 23px 0px 11px 0px;
+        margin-right: 20px;
+        height      : 100%;
+    }
+
+    .notification-badge {
+        bottom: 67px;
+    }
+
+    .sp-user-name {
+        display : inline-block;
+        bottom  : 10px;
+        position: relative;
+
+        &.user-mimic {
+            padding-left: 0;
+            bottom      : 3px;
+        }
+    }
+
+    .sp-user-name-mimic-label {
+        position  : absolute;
+        top       : 10px;
+        font-style: italic;
+    }
+
+    .account-icon {
+        padding: 15px 0px 11px 0px;
+    }
+
+    .open {
+        .account-icon {
+            color           : #ffffff;
+            background-color: $primary-color;
+        }
+    }
+}
+
+#ul-main-links {
+    .nav-announcements {
+        .notification-badge {
+            bottom: 60px;
+            left  : 125px;
+        }
+    }
+}
+
+#xs-navbar-icons {
+    .account-icon {
+        padding: 20px 0px 19px 0px;
+        display: block;
+    }
+
+    .dropdown-menu {
+        margin-top: 0px;
+    }
+
+    .ordercart-icon {
+        padding-top : 20px;
+        margin-right: 20px;
+        display     : block;
+
+        .notification-badge {
+            bottom: 50px;
+            left  : 25px;
+        }
+    }
+}
+
+#ul-main-links {
+    @media not all and (max-width: 767.9px) {}
+}
+
+@media screen and (max-width: 990px) {
+    .nav-username {
+        display: none;
+    }
+
+    #hidden-xs-navbar-icons {
+        .sp-user-name {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .notification-badge {
+        bottom: 47px;
+        left  : 20px;
+    }
+
+    .nav {
+        li {
+            a {
+                padding: 10px 22px 10px 22px;
+
+                &.announcement-offset {
+                    padding-top: 0;
+                }
+            }
+        }
+    }
+
+    #ul-main-links {
+        .nav-announcements {
+            .notification-badge {
+                display: inline-block;
+                bottom : 50px
+            }
+        }
+    }
+}
+
+.profile-dropdown-icon {
+    position : relative;
+    top      : 6px;
+    left     : 5px;
+    font-size: 24px;
+}
+
+.navbar-default {
+    .navbar-nav {
+        .open {
+            a {
+                @media screen and (max-width: 992px) {
+                    background: $secondary-color;
+
+                    &:hover {
+                        background: $primary-color;
+                    }
+                }
+
+                padding: 15px 22px 12px 22px;
+
+                &.user-account-button {
+                    padding-top: 10px;
+                }
+
+                &.announcement-offset {
+                    padding-top: 0;
+                }
+
+                &.account-submenu {
+                    padding: 10px 30px 10px 40px;
+                    color  : $white;
+
+                    @media screen and (max-width: 992px) {
+                        background: $secondary-color;
+
+                        &:hover {
+                            background: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navbar-fixed-top {
+    .navbar-collapse {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+.red-item {
+    -webkit-text-fill-color: red;
+}
+
+.red-item>i {
+    font-size: 30px;
+}
+
+.black-item {
+    -webkit-text-fill-color: black;
+}
+
+.black-item>i {
+    font-size: 30px;
+}
+
+.shoppingcart-style {
+    margin-top: -3%;
+    height    : 89px;
+    width     : 89px;
+}
+
+.dropdown-width {
+    width: 100%;
+}
+
+.mimic-icon {
+    width     : 30%;
+    float     : right;
+    margin-top: 4%;
+}
+
+.logout-icon {
+    width: 30%;
+}
+
+.impersonate-div {
+    width: 70%;
+    float: left;
+}
+
+@media (max-width: 992px) {
+    .navbar-header {
+        float  : none;
+        display: inherit;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-collapse.collapse.in {
+        background: #004A87;
+        display   : block !important;
+    }
+
+    .navbar-nav {
+        float : none !important;
+        margin: 7.5px -15px;
+    }
+
+    .navbar-nav>li {
+        float: none;
+    }
+
+    .navbar-nav>li>a {
+        padding-top   : 10px;
+        padding-bottom: 10px;
+    }
+}
+
+.stop-mimic-mat-icon {
+    font-size    : 1.2em;
+    margin       : auto 0.4em auto 0px;
+    border-radius: 100%;
+    border       : solid red 0.14px;
+    padding      : 0.08em;
+}
+
+.navbar-default .navbar-nav .open a {
+    padding: 16px;
+}
+
+a.subMenu {
+    padding: 0px 0px 0 10px !important;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav > .active > a {
+    background-color: #00386b;
+}
+.dropdown-menu > .active > a{
+    background-color: #00386b;
+    color: #fff !important;
+}
+.userArrowDown {
+    font-size: 15px;
+    top: -10px;
+    left: 10px;
+}
+#hidden-xs-navbar-icons .account-icon {
+    padding: 17px 0px 3px 0px;
+    margin-top: -7px;
+    margin-left: 10px;
+}
+#hidden-xs-navbar-icons .open .account-icon {
+    color: #ffffff;
+    background-color: #00386b;
+}
+.active {
+    border: 1px solid #00386b;
+}
+.nav > li a{
+    line-height: 46px;
+}
+.nav-search {
+    width: 200px;
+    color: #fff;
+    margin-top: 6%;
+    border: 1px solid #fff;
+    height: 35px;
+    background: #fff;
+}
+.nav-search:focus {
+    border: 1px solid #fff !important;
+    box-shadow: none;
+}

@@ -1,0 +1,21 @@
+<li class="user-wrapper nav-item" id="loggedUser">
+  <a class="nav-link nav-action profile-menu" [matMenuTriggerFor]="profileMenu">
+    <mat-icon class="align-middle">person</mat-icon><span class="nav-action-text align-middle"></span><mat-icon class="align-middle menu-caret">arrow_drop_down</mat-icon>
+  </a>
+  <mat-menu #profileMenu="matMenu" [overlapTrigger]="false" style="width:300px" xPosition="before">
+    <div *ngIf="userAccess?.username" class="row user-info" (click)=refreshUserAccess()>
+        <div class="col-3">
+            <div><mat-icon class="align-middle">account_circle</mat-icon></div>
+        </div>
+        <div class="col-9" >
+            <div class="row name-styling">{{userAccess?.name}}</div>
+            <div class="row text-styling">{{userAccess?.username}}</div>
+            <div class="row text-styling">{{userAccess?.roleName}}</div>
+        </div>
+    </div>
+    <button mat-menu-item class="align-middle border-top" (click)=signout()>
+      <mat-icon>exit_to_app</mat-icon>
+      <span class="nav-action-text align-middle">Sign Out</span>
+    </button>
+  </mat-menu>
+</li>

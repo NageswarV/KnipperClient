@@ -1,0 +1,63 @@
+<div *ngIf="loadMorePagination && totalRecordCount > 0">
+    <p
+        style="color:gray; margin-top: auto; margin-bottom: auto; text-align: center;line-height: 50px; font-weight: 400;border-top:1px solid #ddd">
+        {{pageDisplay}}
+        <a *ngIf="pageSize < totalRecordCount" (click)="showMore()"
+            style="text-decoration: underline;  margin-left: 2em; margin-top: auto; margin-bottom: auto;">Click here to
+            load more</a>
+        <a *ngIf="pageSize > bkpPageSize" (click)="showLess()"
+            style="text-decoration: underline; margin-left: 2em; margin-top: auto; margin-bottom: auto;">Show less</a>
+    </p>
+</div>
+
+<div *ngIf=!loadMorePagination [hidden]="autoHide && totalRecordCount <= pageSize">
+    <pagination-template #pagination="paginationApi" [maxSize]="maxSize" [id]="componentId"
+        (pageChange)="changePage($event)">
+        <div style="display: flex;align-items: center;font-size: 0.9em;"
+            [ngStyle]="{'justify-content' : fromAnnouncement || fromReport ? 'space-between' : 'center' }">
+
+            <div [ngStyle]="{'color': fromAnnouncement ? 'white':'black'}" *ngIf="fromAnnouncement">
+                {{pageDisplayText}}
+            </div>
+            <div style="color:black;" *ngIf=" fromReport">
+                Display ({{(pagination.getCurrent()-1)*pageSize+1}} -
+                {{pagination.getCurrent()*pageSize>totalRecordCount?totalRecordCount:pageSize*pagination.getCurrent()}})
+                of {{totalRecordCount}} results
+            </div>
+            <nav class="text-center pagination-wrapper" [class.floating]="paginationFloating"
+                [ngClass]="{'pagination-nav':fromAnnouncement}">
+                <select *ngIf="(pageSizeOptions != null && pageSizeOptions != undefined && pageSizeOptions.length > 0)"
+                    class="form-control pull-left" [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange(size)">
+                    <option *ngFor="let size of pageSizeOptions" [value]="size">{{size}}</option>
+                </select>
+                <ul class="pagination">
+                    <li class="pagination-previous" [class.disabled]="pagination.isFirstPage()"
+                        (click)="!pagination.isFirstPage() ? pagination.previous() : $event.stopPropagation()">
+                        <span aria-hidden="true">&lsaquo; <span class="expanded-text" translate="yes">PREV</span></span>
+                    </li>
+
+                    <!-- <ng-template ngFor let-page [ngForOf]="pages">
+                        <li><span role="button" value="page" [ngClass]="{'activebox':page===currentPage,'box':page!==currentPage}" (click)="getPage($event)" >{{page}}</span></li>
+                    </ng-template> -->
+                    <ng-template ngFor let-page [ngForOf]="pagination.pages">
+                        <li (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() !== page.value">
+                            <span>{{ page.label }}</span>
+                        </li>
+                        <li *ngIf="pagination.getCurrent() === page.value" class="active">
+                            <span>{{ page.label }}</span>
+                        </li>
+                    </ng-template>
+                    <li class="pagination-next" [class.disabled]="pagination.isLastPage()"
+                        (click)="!pagination.isLastPage() ? pagination.next() : $event.stopPropagation()">
+                        <span aria-hidden="true"><span class="expanded-text" translate="yes">NEXT</span> &rsaquo;</span>
+                    </li>
+                </ul>
+                <button class="btn btn-default btn-sm pull-right" type="button" (click)="scrollToTop()"
+                    *ngIf="!fromAnnouncement || fromReport">
+                    <span translate="yes">Scroll to Top</span>
+                    <span class="glyphicon glyphicon-chevron-up" style="padding: 5px;"></span>
+                </button>
+            </nav>
+        </div>
+    </pagination-template>
+</div>

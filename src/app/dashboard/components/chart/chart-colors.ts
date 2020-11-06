@@ -1,0 +1,27 @@
+export const ChartColors = {
+  Red: 'rgba(189, 0,4)',
+  Blue: 'rgba(57, 177, 255)',
+  SkyBlue: 'rgba(135,206,250, 0.8)',
+  Yellow: 'rgba(250, 192, 15)',
+  Pink: 'rgb(249, 95, 208)',
+  Orange: 'rgb(255, 152, 63)',
+  DarkOrange: 'rgb(238, 118, 0)',
+  Charcoal: 'rgb(34, 34, 34)',
+  Purple: 'rgb(149, 98, 249)',
+  Green: 'rgb(0, 204, 0)',
+  DarkGreen: 'rgb(0, 153, 0)',
+  DarkGrey: 'rgb(174, 174, 174)',
+  Grey: 'rgb(211, 211, 213)',
+  Teal: 'rgb(51, 224, 223)',
+  KnipperBlue: 'rgb(0,84,157)',
+  Gold: 'rgb(212, 175, 55)',
+  Violet: 'rgb(66,28,94)',
+  LightGreen: 'rgb(180,231,0)',
+  Aqua: 'rgb(0,255,255)',
+  Black: 'rgb(0,0,0)',
+  LightOrange: 'rgb(255, 165, 0)',
+  ChartPink: 'rgba(255,105,180, 0.8)',
+  DarkRed: 'rgb(139,0,0)',
+  ChartLightGreen: 'rgb(144,238,144)'
+};
+

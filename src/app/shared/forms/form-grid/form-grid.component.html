@@ -1,0 +1,87 @@
+<div *ngIf="titleLabel" class="form-group">
+  <div class="form-row">
+    <label class="col-form-label">
+      <span class="tableLabel with-colon" l10nTranslate>{{titleLabel}}</span>
+      <span *ngIf="required" class="required" l10nTranslate>Required</span>
+    </label>
+  </div>
+</div>
+<table *ngIf="showTable" class="table form-grid" [class.reducedPadding]="reducedPadding" [formGroup]="parentFormGroup">
+  <thead>
+    <tr>
+      <ng-container *ngFor="let column of columns; let first = first;">
+        <th *ngIf="!column.isHidden" [style.width]="column.width? column.width : 'none'"
+          [style.max-width]="column.width ? column.width : 'none'" [style.min-width]="column.width? column.width : 'none'">
+          <div *ngIf="selectAllEnabled && first" class="d-flex">
+            <mat-checkbox color="primary" (change)="onSelectAll($event)" [checked]="selectAllChecked"></mat-checkbox>
+            <span>{{column.header | translate:lang:translateParams}}</span>
+          </div>
+          <ng-container *ngIf="(!first || !selectAllEnabled) && !column.sortName; else sortHeader">
+            <span *ngIf="!selectAllEnabled || !first">{{column.header | translate:lang:translateParams}}</span>
+            <span *ngIf="column.required" class="required" l10nTranslate>Required</span>
+            <div class="header-helper" *ngIf="column.headerHelperText && !formArray.disabled">
+              <samplicity-field-description [description]="column.headerHelperText"></samplicity-field-description>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="column.sortName && !(first && selectAllEnabled)">
+            <div class="samp-grid-sort-header" [class.sort-asc]="column.sortDirAsc && (column.sortName == currentSort)" [class.sort-desc]="!column.sortDirAsc && (column.sortName == currentSort)"
+              (click)="onSort(column.sortName, !column.sortDirAsc, column.sortTransformFn); column.sortDirAsc = !column.sortDirAsc;">
+              <div class="standard-header-container">
+                <span *ngIf="!selectAllEnabled || !first">{{column.header | translate:lang:translateParams}}</span>
+                <span *ngIf="column.required" class="required" l10nTranslate>Required</span>
+                <div class="header-helper" *ngIf="column.headerHelperText && !formArray.disabled">
+                  <samplicity-field-description [description]="column.headerHelperText"></samplicity-field-description>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </th>
+      </ng-container>
+      <th class="tool-col" *ngIf="hasAddDeleteColumn && !formArray.disabled && !readonly" l10nTranslate>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let form of formArray.controls; let i = index; let odd = odd; let last = last;">
+      <tr *ngIf="showItem(i)" [class.selected]="checkSelected(form)" [class.new]="checkNew(form)" [class.error]="checkError(form)"
+        class="samp-form-grid-row">
+        <ng-container *ngFor="let column of columns">
+          <td *ngIf="!column.isHidden"
+            [style.max-width]="column.width? column.width : 'none'" [style.min-width]="column.width? column.width : 'none'">
+            <div>
+              <ng-template [ngTemplateOutlet]="column.cellTemplate" [ngTemplateOutletContext]="{ $implicit: {form: form}, form: form, i:i, last:last, total: formArray.controls.length}"></ng-template>
+            </div>
+          </td>
+        </ng-container>
+
+        <td *ngIf="hasAddDeleteColumn && !form.disabled && !readonly">
+          <div [formGroup]="form">
+            <div class="row d-flex align-items-center justify-content-center text-center">
+                <mat-icon class="mat-danger" (click)="deleteRow(i)">cancel</mat-icon>
+            </div>
+          </div>
+          <!--<mat-icon *ngIf="showDeleteButton(i,last)" (click)="deleteRow(i)">delete</mat-icon>-->
+          <!--<mat-icon *ngIf="showAddButton(i,last)" (click)="addRow(i)">add_circle</mat-icon>-->
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="formArray.controls.length === 0">
+      <tr>
+        <td class="text-center" [attr.colspan]="emptyDescriptionColspan">
+          <i l10nTranslate>{{emptyGridDescription}}</i>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<div class="form-group mt-2">
+  <samplicity-table-pagination [pageDisplay]="pageDisplay" [totalCount]="totalCount" [perPage]="perPage" [pageNum]="pageNum"
+    [fixedFooter]="false" (paginateEvent)="onPaginate($event)">
+  </samplicity-table-pagination>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>
+<div *ngIf="hasAddDeleteColumn && buttonLabel && !readonly && !formArray.disabled">
+  <button mat-raised-button color="default" type="button" (click)="addRow(formArray.length)">
+    <mat-icon>add_circle</mat-icon>
+    <span l10nTranslate>{{buttonLabel}}</span>
+  </button>
+</div>

@@ -1,0 +1,31 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched || isInvalid"
+  [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="!table && (!!label || isInlineRequired)" [inputId]="id" [labelTranslated]="labelTranslated"
+    [label]="label" [colon]="colon" [required]="required || forceRequiredLabel || isRequired" [labelParameters]="labelParameters"></samplicity-field-label>
+  <div [ngClass]="{'inline-required': isInlineRequired && ngContentRef?.children?.length > 0}" #ngContentRef>
+    <ng-content select="[select-content]"></ng-content>
+  </div>
+  <div [class.input-group]="table" class="select-div-container">
+    <mat-icon *ngIf="icon" class="select-icon" [style.color]="iconColor">{{icon}}</mat-icon>
+    <select *ngIf="control && !control?.disabled && ngContentRef.children.length === 0" [attr.disabled]="readonly || (disabled ? '' : null)" class="form-control"
+      [id]="id" [formControlName]="name" [compareWith]="compareLanguageDto" (change)="change.emit($event)"
+      [ngClass]="{'inline-required': isInlineRequired, 'placeholder': !value }">
+      <option class="placeholder" value="" l10nTranslate *ngIf="showDefaultOption">{{placeholder}}</option>
+      <ng-container *ngFor="let option of items">
+        <option *ngIf="!itemNamesTranslated" samplicity-display-translation [values]="option[namesProp]" [ngValue]="getValue(option)"></option>
+        <option *ngIf="itemNamesTranslated" [ngValue]="getValue(option)">{{option[namesProp]}}</option>
+      </ng-container>
+    </select>
+    <div *ngIf="control && !control?.disabled && showRequiredLabel">
+      <span class="required ml-2" *ngIf="table && (required || forceRequiredLabel)" l10nTranslate>Required</span>
+    </div>
+  </div>
+  <div *ngIf="control?.disabled">
+    <p *ngIf="itemNamesTranslated || valuesTranslated" class="readonly">{{value}}</p>
+    <p *ngIf="!itemNamesTranslated && !valuesTranslated" class="readonly">
+      <samplicity-display-translation [values]="value"></samplicity-display-translation>
+    </p>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

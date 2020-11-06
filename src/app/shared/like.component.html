@@ -1,0 +1,10 @@
+<div>
+  <i class="material-icons like-button" [ngClass]="{'is-like': likeFlag}"
+     (click)="onToggleLike()">
+    thumb_up
+  </i>
+  <i class="material-icons like-button" [ngClass]="{'is-dislike': disLikeFlag}"
+     (click)="onToggleDisLike()">
+    thumb_down
+  </i>
+</div>

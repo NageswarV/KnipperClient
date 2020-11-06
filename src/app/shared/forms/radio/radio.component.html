@@ -1,0 +1,20 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [colon]="colon" [inputId]="id" [label]="label" [required]="required || forceRequiredLabel || isRequired" [labelTranslated]="labelTranslated"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <div #ngContentRef>
+    <ng-content select="[radio-content]"></ng-content>
+  </div>
+  <div *ngIf="control.disabled">
+    <p class="readonly">{{value ? value : '--'}}</p>
+  </div>
+  <div class="radio-content" *ngIf="!control.disabled && ngContentRef.children.length === 0">
+    <mat-radio-group [class.radio-group-vertical]="vertical" [formControlName]="name" #group="matRadioGroup" (change)="change.emit($event)" [disabled]="forceDisabled || disabled">
+      <mat-radio-button [disabled]="disabled" *ngFor="let item of items" color="primary" [value]="item.value" (click)="set(item.value)">
+        {{item.label}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <span *ngIf="required && table" class="required" l10nTranslate>Required</span>
+  </div>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

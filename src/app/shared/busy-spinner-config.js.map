@@ -1,0 +1,1 @@
+{"version":3,"file":"busy-spinner-config.js","sourceRoot":"","sources":["busy-spinner-config.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,mBAAmB,EAAE,MAAM,kBAAkB,CAAC;AAEvD,MAAM,CAAC,IAAM,UAAU,GAAgB;IACrC,QAAQ,EAAE,IAAI;IACd,QAAQ,EAAE,mBAAmB;IAC7B,KAAK,EAAE,CAAC;IACR,WAAW,EAAE,CAAC;IACd,OAAO,EAAE,IAAI;CACd,CAAC"}

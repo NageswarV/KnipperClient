@@ -1,0 +1,76 @@
+<div class="col-xs-12">
+    <div class="row">
+    <div class="">
+        <div class="d-flex flex-row space-between">
+            <div mat-dialog-title class="Heading fw-600 ff-open-sans">Recipients</div>
+            <div mat-dialog-actions class="Heading">
+                <i class="material-icons cancel fw-600" (click)="close()">close</i>
+            </div> 
+        </div>
+    </div>
+    <div mat-dialog-content>
+        <div class="order d-flex flex-row">
+             <div class="">
+                 <div class="OderInfoHeading label-color">Attachment Type</div>
+                 <div class="OderInfoText fw-600 mt-1">{{data.data.attachmentType}}</div>
+             </div>
+             <div class="ml-7">
+                <div class="OderInfoHeading  label-color">OutBound Attachment Name</div>
+                <div class="OderInfoText link-active mt-1 ">{{data.data.attachmentName}}</div>
+             </div>
+        </div>
+        <div class="content">
+            <div class="tableHeading p-2">
+                <!-- <span >
+                 Communications ({{(data.show).length}})
+               <br>
+                    You can select the doucment(s) below to resend
+                </span> -->
+                <div class="text1">
+                    Recipients and Method of contact
+                </div>
+                <div class="text2">
+                    Click the add button in the table to add recipient and set the method of contact
+                </div>
+            </div>
+            <div class="HeaderText">
+                <div class="col-xs-1 col-md-1 col-lg-1"></div>
+               <div class="asterisk_input contact col-xs-3 col-md-3 col-lg-3  pl-1">
+                    Choose Contact Method
+                </div>
+                <div class="asterisk_input address col-xs-7 col-md-7  col-lg-7">
+                    Email Address/Fax Number
+                </div>
+            </div>
+            <div class="data ">
+                <!-- <div class="col-xs-1 col-md-1 col-lg-1"></div> -->
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 removePadding delwidth">
+                    <i class="material-icons del ">delete</i>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 removePadding">
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button value="1" [checked]="true" class="ff-open-sans">Email</mat-radio-button><br>
+                        <mat-radio-button value="2" [checked]="false" class="ff-open-sans">Fax</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div  class="inputValue col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                   <input type="text" class="input-box py-1 px-05"  value={{data.data.emailRecipient}}>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="clearButton ff-open-sans" mat-flat-button>Clear All</button>
+                <button class="addButton ff-open-sans" mat-flat-button>+ADD RECIPIENT</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="padding: 14px 0px 0px;">
+        <div class="col-xs-6 col-md-6 col-lg-6"> <button class="backButton ff-open-sans" mat-flat-button
+                (click)="close()">BACK</button></div>
+        <div class="col-xs-6 col-md-6 col-lg-6">
+            <button class="sendButton ff-open-sans" mat-flat-button>
+                <mat-icon class="send ">send</mat-icon>SEND
+            </button>
+        </div>
+    </div>
+</div>

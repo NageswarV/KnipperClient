@@ -1,0 +1,104 @@
+<ng-container *ngIf="!collapsible; else collapsiblePanel;">
+  <div class="select-all-container" *ngIf="selectAll">
+
+    <mat-checkbox *ngIf="!readonly" #selectAll color="primary" class="select-all-check" [checked]="allItemsSelected"
+                  (change)="onSelectAll($event)" [attr.disabled]="!listItems || listItems.length === 0">
+      <ng-container *ngIf="!selectAllText; else selectAllLabel">
+        <span *ngIf="!title && !selectAllButton?.checked" l10nTranslate>SelectAll</span>
+        <span *ngIf="!title && selectAllButton?.checked" l10nTranslate>DeselectAll</span>
+        <samplicity-display-translation [values]="title"></samplicity-display-translation>
+      </ng-container>
+      <ng-template #selectAllLabel>
+          <span l10nTranslate>{{selectAllText}}</span>
+      </ng-template>
+
+    </mat-checkbox>
+
+    <ng-container *ngIf="readonly">
+      <samplicity-display-translation class="select-all-check readonly-text" [values]="title"></samplicity-display-translation>
+    </ng-container>
+  </div>
+
+  <div [style.height]="height" [class.no-well]="noWell" [style.max-height]="maxHeight" [ngClass]="{'checkbox-list-container': true, 'well': true, 'checkbox-list-container-collapsible': collapsible, 'checkbox-list-container-not-collapsible': !collapsible,  'readonly': readonly}" *ngIf="!collapsed">
+    <div class="form-check" *ngFor="let item of listItems; trackBy: trackById">
+      <mat-checkbox *ngIf="!readonly" color="primary" [checked]="checkSelected(item)"
+                    (change)="onSelect($event, item)" [attr.disabled]="disabledItem">
+        <span *ngIf="namesTranslated">{{item[namesProperty]}}</span>
+        <samplicity-display-translation *ngIf="!namesTranslated" [values]="item[namesProperty]"></samplicity-display-translation>
+      </mat-checkbox>
+
+      <ng-container *ngIf="readonly && checkSelected(item)">
+        <!-- <mat-icon *ngIf="checkSelected(item)" class="check-icon">check</mat-icon>
+        <mat-icon *ngIf="!checkSelected(item)" class="uncheck-icon">close</mat-icon> -->
+        <ng-container *ngIf="namesTranslated">
+          <span class="readonly-text">{{item[namesProperty]}}</span>
+        </ng-container>
+        <ng-container *ngIf="!namesTranslated">
+          <ng-container *ngFor="let name of item[namesProperty]">
+            <ng-container *ngIf="name.language === currentLanguage">
+              <span class="readonly-text">{{name.value}}</span>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-template #collapsiblePanel>
+  <ng-template [ngIf]="renderPanel">
+    <mat-expansion-panel class="samp-multi-select-collapse" [expanded]="true">
+      <mat-expansion-panel-header [expandedHeight]="'auto'" [collapsedHeight]="'auto'">
+        <mat-panel-title>
+          <ng-container *ngIf="selectAll">
+            <mat-checkbox *ngIf="!readonly" #selectAll color="primary" class="select-all-check" [checked]="allItemsSelected"
+              (change)="onSelectAll($event)" [attr.disabled]="!listItems || listItems.length === 0" (click)="$event.stopPropagation();">
+              <ng-container *ngIf="!selectAllText; else selectAllLabel">
+                <span *ngIf="!title && !selectAllButton?.checked" l10nTranslate>SelectAll</span>
+                <span *ngIf="!title && selectAllButton?.checked" l10nTranslate>DeselectAll</span>
+                <samplicity-display-translation [values]="title"></samplicity-display-translation>
+              </ng-container>
+              <ng-template #selectAllLabel>
+                <span l10nTranslate>{{selectAllText}}</span>
+              </ng-template>
+            </mat-checkbox>
+            <ng-container *ngIf="readonly">
+              <ng-container *ngIf="selectAllText">
+                <mat-checkbox [disabled]="true">
+                  <span l10nTranslate>{{selectAllText}}</span>
+                </mat-checkbox>
+              </ng-container>
+              <samplicity-display-translation *ngIf="!selectAllText" class="select-all-check readonly-text" [values]="title"></samplicity-display-translation>
+            </ng-container>
+          </ng-container>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div [style.height]="height" [class.no-well]="noWell" [style.max-height]="maxHeight" [ngClass]="{'checkbox-list-container': true, 'well': true, 'checkbox-list-container-collapsible': collapsible, 'checkbox-list-container-not-collapsible': !collapsible,  'readonly': readonly}" *ngIf="!collapsed">
+        <div class="form-check" *ngFor="let item of listItems; trackBy: trackById">
+          <mat-checkbox *ngIf="!readonly" color="primary" [checked]="checkSelected(item)"
+            (change)="onSelect($event, item)" [attr.disabled]="disabledItem">
+            <span *ngIf="namesTranslated">{{item[namesProperty]}}</span>
+            <samplicity-display-translation *ngIf="!namesTranslated" [values]="item[namesProperty]"></samplicity-display-translation>
+          </mat-checkbox>
+
+          <ng-container *ngIf="readonly">
+            <mat-icon *ngIf="checkSelected(item)" class="check-icon">check</mat-icon>
+            <mat-icon *ngIf="!checkSelected(item)" class="uncheck-icon">close</mat-icon>
+            <ng-container *ngIf="namesTranslated">
+              <span class="readonly-text">{{item[namesProperty]}}</span>
+            </ng-container>
+            <ng-container *ngIf="!namesTranslated">
+              <ng-container *ngFor="let name of item[namesProperty]">
+                <ng-container *ngIf="name.language === currentLanguage">
+                  <span class="readonly-text">{{name.value}}</span>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </ng-template>
+
+</ng-template>

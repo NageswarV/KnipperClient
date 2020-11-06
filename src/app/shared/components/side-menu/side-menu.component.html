@@ -1,0 +1,20 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true" [ngClass]="{'side-menu': true}">
+    <ng-content select="[filter-content]"></ng-content>
+  </mat-sidenav>
+  <div class="filter-strip" (click)="sidenav.toggle(); toggleMenu(sidenav.opened)">
+    <mat-icon [class.open]="sidenav.opened" style="font-size: 24px;">chevron_right</mat-icon>
+    <p style="text-orientation: sideways-right;">
+      <span> {{sidebarTitle}}</span>
+    </p>
+    <!-- <div *ngIf="error" class="mat-icon-error">
+      <mat-icon class="error">error_outline</mat-icon>
+    </div>
+    <div *ngIf="warning" class="mat-icon-warning">
+      <mat-icon class="warning">warning</mat-icon>
+    </div> -->
+  </div>
+  <div class="container-with-sidemenu">
+    <ng-content select="[page-content]"></ng-content>
+  </div>
+</mat-sidenav-container>

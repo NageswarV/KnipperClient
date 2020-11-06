@@ -1,0 +1,515 @@
+<div class="list-content busy-container">
+  <div [ngBusy]="busyPromise">
+    <div class="panel"
+      *ngFor="let repActivity of repsActivitiesPerPage | paginate: { currentPage: currentPage, itemsPerPage: pageSize, totalItems: totalRecordCount }; let i=index"
+      #page>
+      <mat-expansion-panel class="expansionPanel primary-expansion" expanded=true>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div style="display: flex;">
+              <div class="d-flex">
+                <a style="text-decoration: underline; color: #ffcd00;">{{repActivity.Rep.firstName}},
+                  {{repActivity.Rep.lastName}}</a>
+                <mat-icon style="color: #ffcd00;margin-left: 4px;">tv</mat-icon>
+              </div>
+              <div class="mat-rectangle">
+                <div class="knipper-logo textActive" style="text-align: center;font-weight: 600;font-size: 0.8em;">
+                  <span class="vtext-align">ACTIVE</span>
+                </div>
+                <div class="exppanel-heading" style="opacity:1;margin-right: 1em;margin-top: auto;margin-bottom: auto;">
+                  <span style="opacity:0.7;">Total Orders Received:</span>
+                  <em style="font-size: 1.2em;color:white;"> {{repActivity.Rep.totalOrdersReceived}} </em>
+                </div>
+              </div>
+              <a class="icon-focus">
+                <mat-icon>add_task</mat-icon>
+              </a>
+              <a class="icon-focus" style="margin:0 14px 0 8px;">
+                <mat-icon>save_alt</mat-icon>
+              </a>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; margin-top: 1em;">
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Rep ID:
+                </div>
+                <div class="exppanel-value">
+                  {{repActivity.Rep.clientRepNbrCode}}
+                </div>
+              </div>
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Thearapeutic Class:
+                </div>
+                <div class="exppanel-value">
+                  {{repActivity.Rep.therapeuticClass}}
+                </div>
+              </div>
+              <div class="value-box">
+                <div class="exppanel-heading">
+                  Current Territory:
+                </div>
+                <div class="exppanel-value">
+                  {{repActivity.Rep?.currentTerritory?.code}} - {{repActivity.Rep?.currentTerritory?.name}}
+                  <span *ngIf="repActivity.Rep.oldTerritoriesCount > 0" class="RepName"
+                    (click)="$event.stopPropagation();" (click)="openDialogue(repActivity?.Rep?.id)">
+                    (+{{repActivity.Rep.oldTerritoriesCount}} old territories
+                    )</span>
+                </div>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-panel-description>
+          <div class="col-xs-12 tab-container box-0">
+            <mat-tab-group mat-stretch-tabs class="salesRepMainTab">
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <span>Direct Practitioner Activities</span>
+                </ng-template>
+                <div class="status-filter">
+                  <div class="label">
+                      Filter Results by Order Status
+                  </div>
+                  <select class="form-control">
+                      <option value="all" selected >All Statuses</option>
+                      <option *ngFor="let status of oderedStatusArray" value="{{status.classificationValueName}}">{{status.classificationValueName}}
+                  </select>
+                </div>
+                <div [ngBusy]="busyPromises.repDtpOrders" class="col-xs-12 margined">
+                  <sg-grid [columns]="dtpcolumns" emptyText="No Orders" [items]="repActivity.Rep.dtpOrders"
+                    [totalRecordCount]="repActivity.Rep.dtpOrders.length" [pageSize]="10" [loadMorePagination]="true">
+                    <ng-template let-order>
+                      <td class="col-xs-3">
+                        <a [routerLink]="['dtporders',order.id]" routerLinkActive="active">{{order.orderNumber}}</a>
+                        <mat-icon class="Rectangle-color" style="margin-left: 6px;">add_task
+                        </mat-icon>
+                      </td>
+                      <td class="col-xs-3">
+                        {{order.shipToAddressLine1}}
+                        {{order.shipToAddressLine2 ? ', ' + order.shipToAddressLine2 : ''}},
+                        <br />
+                        {{order.shipToCity}}, {{order.shipToState}}, {{order.shipToZipCode}}
+                      </td>
+                      <td class="col-xs-2">{{order.orderDate}}</td>
+                      <td class="col-xs-2" [ngClass]="getClass(order.status)">
+                        <i class="glyphicon glyphicon-info-sign" *ngIf="order.status === 'Rejected'"></i>
+                        <i class="glyphicon glyphicon-warning-sign" *ngIf="order.status === 'Pending Approval'"></i>{{order.status}}
+                      </td>
+                      <td class="col-xs-2">{{order.orderSource}}</td>
+                      <td class="col-xs-2">{{order.programName}}</td>
+                      <td class="col-xs-2"><a [routerLink]="['./']"
+                          (click)="openDialog(order.id)">{{order.communicationLabel}}</a></td>
+                    </ng-template>
+                  </sg-grid>
+                </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <span (click)="loadDtrOrders(repActivity.Rep.id)">My Rep Center Orders</span>
+                </ng-template>
+                <div class="status-filter">
+                  <div class="label">
+                      Filter Results by Order Status
+                  </div>
+                  <select class="form-control">
+                      <option value="all" selected >All Statuses</option>
+                      <option *ngFor="let status of oderedStatusArray" value="{{status.classificationValueName}}">{{status.classificationValueName}}
+                  </select>
+                </div>
+                <div [ngBusy]="busyPromises.repDtrOrders" class="col-xs-12 margined">
+                  <sg-grid [columns]="dtrcolumns" emptyText="No Orders" [items]="repActivity.DtrOrders"
+                    [totalRecordCount]="repActivity.DtrOrders.length" [pageSize]="10" [loadMorePagination]="true">
+                    <ng-template let-order>
+                      <td class="col-xs-2"><a [routerLink]="['dtrorders',order.orderNumber]">{{order.orderNumber}}</a>
+                        <mat-icon class="Rectangle-color" style="margin-left: 6px;">add_task
+                        </mat-icon>
+                      </td>
+                      <td class="col-xs-2" [ngClass]="getClass(order.status)">
+                        <i class="glyphicon glyphicon-info-sign" *ngIf="order.status === 'Cancelled'"></i>
+                        <i class="glyphicon glyphicon-warning-sign" *ngIf="order.status === 'Pending Approval'"></i>{{order.status}}
+                      </td>
+                      <td class="col-xs-1">{{order.orderDate}}</td>
+                      <td class="col-xs-1">{{order.orderType}}</td>
+                      <td class="col-xs-1">{{order.rushOrder}}</td>
+                      <td class="col-xs-3">
+                        {{order.orderedByAddressLine1}}, {{order.orderedByAddressLine2}},<br />
+                        {{order.orderedByCity}}, {{order.orderedByState}}, {{order.orderedByZipCode}}
+                      </td>
+                      <td class="col-xs-3">
+                        {{order.shipToAddressLine1}}, {{order.shipToAddressLine2}},<br />
+                        {{order.shipToCity}}, {{order.shipToState}}, {{order.shipToZipCode}}
+                      </td>
+                    </ng-template>
+                  </sg-grid>
+                </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <span (click)="loadHandCarryTransactionByRep(repActivity.Rep.id)">Hand Carry Activities</span>
+                </ng-template>
+                <div class="status-filter">
+                  <div class="label">
+                    Filter Results By Transaction Status
+                  </div>
+                  <select class="form-control filterDropdown">
+                    <option value="all" selected>All Statuses</option>
+                  </select>
+                </div>
+                <mat-tab-group mat-stretch-tabs class="salesRepHandCarry">
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <span>TRANSACTIONS</span>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.repDtrOrders" class="col-xs-12 margined">
+                      <sg-grid [columns]="handCarryTransactions" emptyText="No Orders" [items]="repActivity.DtrOrders"
+                        [totalRecordCount]="repActivity.DtrOrders.length" [pageSize]="10" [loadMorePagination]="true">
+                        <ng-template let-order>
+                          <td class="col-xs-1">
+                            <a *ngIf="order.transactionType==='Disbursement'"
+                              [routerLink]="['handcarry/disbursement',order.id]" class="link">{{order.id}}</a>
+                              <div *ngIf="!(order.transactionType==='Disbursement')" class="d-flex align-items-center">
+                                <span *ngIf="order.transactionType==='Adjustment'" class="material-icons fs-20 mr-1rem"><span class="active-link">link</span></span>
+                                <span *ngIf="order.transactionType==='Shipment'" class="material-icons  fs-20 mr-1rem"><span class="broken-link">link_off</span></span>
+                                <a [routerLink]="['handcarry/transaction',order.id]" class="link">{{order.id}}</a>
+                              </div>
+                          </td>
+                          <!-- <td class="col-xs-1"><img src="{{order.image }}" height="20" width="20"></td> -->
+                          <td class="col-xs-1">
+                            <a target="_blank" href="../../../resources/images/logo.jpg" download="handcarry-img.jpg">
+                              <mat-icon class="image-icon">image</mat-icon>
+                            </a>
+                          </td>
+                          <td class="col-xs-2">{{order.transactionType}}</td>
+                          <td class="col-xs-1">{{order.transactionNumber}}</td>
+                          <td class="col-xs-1">{{order.transactionDate | sgCustomDate}}</td>
+                          <td class="col-xs-1" [ngClass]="getClass(order.status)">
+                            <i class="glyphicon glyphicon-warning-sign" *ngIf="order.status === 'Pending Approval'"></i>
+                            <i class="glyphicon glyphicon-info-sign" *ngIf="order.status === 'Exception'"></i>
+                            {{order.status}}
+                          </td>
+                          <td class="col-xs-1">
+                            <mat-icon class="checkMark-icon" *ngIf="order?.validForRecon">
+                              check</mat-icon>
+                          </td>
+                          <td class="col-xs-1">{{order.repId}}</td>
+                        </ng-template>
+                      </sg-grid>
+                    </div>
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <span (click)="loadHandCarryInventoriesByRep(repActivity.Rep.id)">INVENTORY ON HAND</span>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.rep">
+                      <samplicity-responsive-datatable #table [perPage]="perPage"
+                      [selectEnabled]=false [dialog]="false" name="handCarryInventory" [columns]="columnSchema"
+                      [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                      [staticItems]="repActivity.HandCarryInventoryData" [showEndOfList]="false" [disableSorting]="loading"
+                      (columnSortChange)="updateColumnSort($event)">
+                      <ng-template let-item="item" let-column="column" let-displayCreateIcon="false">
+                          <div *ngIf="column?.name === 'territoryId'" style="width: 12em;">
+                              <a [routerLink]="['dtporders',item.territoryId]" class="id-color"> {{item.territoryId}} </a>
+                          </div>
+                          <div *ngIf="column?.name === 'reportedDate'">
+                            {{item.reportedDate}}
+                          </div>
+                           <span *ngIf="column?.name === 'productId'">
+                            ({{item.productId}})
+                          </span>
+                          <span *ngIf="column?.name === 'lotNumber'">
+                            {{item.lotNumber}}
+                          </span>
+                          <span *ngIf="column?.name === 'Lot# Expire Date'">
+                            {{item.lotExpiryDate}}
+                          </span>
+                          <span *ngIf="column?.name === 'Days to Expire/Expired'">
+                            {{item.transferIn}}
+                          </span>
+                          <span *ngIf="column?.name === 'totalInventory'">
+                            {{item.totalInventory}}
+                          </span>
+                          <span *ngIf="column?.name === 'disbursements'">
+                            {{item.disbursements}}
+                          </span>
+                          <span *ngIf="column?.name === 'shipments'">
+                            {{item.shipments}}
+                          </span>
+                          <span *ngIf="column?.name === 'returnAcknowledgements'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.returnAcknowledgements}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'transferOut'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.transferOut}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'transferIn'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.transferIn}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'returns'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.returns}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'returnAcknowledgements'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.returnAcknowledgements}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'thefts'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.thefts}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'losses'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.losses}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'adjustments'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.adjustments}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'quantityOnHand'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.quantityOnHand}}</a>
+                          </span>
+                      </ng-template>
+                  </samplicity-responsive-datatable>
+                    </div>
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <span (click)="loadHandCarrySignatureAudits(repActivity.Rep.id)">SIGNATURE AUDITS</span>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.rep">
+                      <samplicity-responsive-datatable #table [perPage]="perPage"
+                      [selectEnabled]=false [dialog]="false" name="handCarrySignature" [columns]="columnSchemSignature"
+                      [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                      [staticItems]="handCarrySignatureData" [showEndOfList]="false" [disableSorting]="loading"
+                      (columnSortChange)="updateColumnSort($event)">
+                      <ng-template let-item="item" let-column="column" let-displayCreateIcon="false">
+                          <div *ngIf="column?.name === 'signatureAuditListName'" style="width: 12em;">
+                              <a [routerLink]="['dtporders',item.signatureAuditListName]" class="id-color"> {{item.signatureAuditListName}}</a>
+                          </div>
+                          <div *ngIf="column?.name === 'auditStartDate'">
+                            {{item.auditStartDate | sgCustomDate}}
+                          </div>
+                           <span *ngIf="column?.name === 'auditEndDate'">
+                            {{item.auditEndDate | sgCustomDate}}
+                          </span>
+                          <span *ngIf="column?.name === 'signatureAuditType'">
+                            {{item.signatureAuditType}}
+                          </span>
+                          <span *ngIf="column?.name === 'auditReason'">
+                            {{item.auditReason}}
+                          </span>
+                          <span *ngIf="column?.name === 'outboundSVLDocument'">
+                            {{item.outboundSVLDocument}}
+                          </span>
+                          <span *ngIf="column?.name === 'inboundSvlDocument'">
+                            {{item.inboundSvlDocument}}
+                          </span>
+                          <span *ngIf="column?.name === 'selectedTransactionCount'">
+                            {{item.selectedTransactionCount}}
+                          </span>
+                          <span *ngIf="column?.name === 'selectedHcpCount'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.selectedHcpCount}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'totalTransactionCOunt'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.totalTransactionCOunt}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'undeliverable'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.undeliverable}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'pending'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.pending}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'positiveResponses'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.positiveResponses}}</a>
+                          </span>
+                          <span *ngIf="column?.name === 'negativeResponses'">
+                            <a class="link-color" [routerLink]="['./']" (click)="openDialog(item.id)">
+                              {{item.negativeResponses}}</a>
+                          </span>
+                         
+                      </ng-template>
+                  </samplicity-responsive-datatable>
+                    </div>
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <div  (click)="loadHandCarryReconciliation(repActivity.Rep.id)">
+                        <label class="sublbl">Reconciliation</label>
+                      <span>ZERO VARIANCE</span>
+                      </div>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.repDtrOrders" class="col-xs-12 margined">
+                      <sg-grid [columns]="handCarryReconcilation" emptyText="No Orders" [items]="HandCarryReconciliationData"
+                        [totalRecordCount]="HandCarryReconciliationData.length" [pageSize]="10" [loadMorePagination]="true">
+                        <ng-template let-order>
+                          <td class="col-xs-1">
+                            {{order.inventoryStartDate | sgCustomDate}}
+                          </td>
+                          <td class="col-xs-1">{{order.inventoryEndDate  | sgCustomDate}}</td>
+                          <td class="col-xs-1">{{order.initialReconciliation}}</td>
+                          <td class="col-xs-1">{{order.finalReConciliation}}</td>
+                          <td class="col-xs-1">{{order.analystNotes}}</td>
+                        </ng-template>
+                      </sg-grid>
+                    </div>
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <div (click)="loadHandCarryReconciliation(repActivity.Rep.id)">
+                        <label class="sublbl">Reconciliation</label>
+                      <span>WITHIN <br>THRESHOLD</span>
+                      </div>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.repDtrOrders" class="col-xs-12 margined">
+                      <sg-grid [columns]="handCarryReconcilation" emptyText="No Orders" [items]="HandCarryReconciliationData"
+                        [totalRecordCount]="HandCarryReconciliationData.length" [pageSize]="10" [loadMorePagination]="true">
+                        <ng-template let-order>
+                          <td class="col-xs-1">
+                            {{order.inventoryStartDate | sgCustomDate}}
+                          </td>
+                          <td class="col-xs-1">{{order.inventoryEndDate  | sgCustomDate}}</td>
+                          <td class="col-xs-1">{{order.initialReconciliation}}</td>
+                          <td class="col-xs-1">{{order.finalReConciliation}}</td>
+                          <td class="col-xs-1">{{order.analystNotes}}</td>
+                        </ng-template>
+                      </sg-grid>
+                    </div>
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <div (click)="loadHandCarryReconciliation(repActivity.Rep.id)">
+                        <label class="sublbl">Reconciliation</label>
+                      <span>OVER THRESHOLD <br> POSITIVE</span>
+                      </div>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.repDtrOrders" class="col-xs-12 margined">
+                      <sg-grid [columns]="handCarryReconcilation" emptyText="No Orders" [items]="HandCarryReconciliationData"
+                      [totalRecordCount]="HandCarryReconciliationData.length" [pageSize]="10" [loadMorePagination]="true">
+                      <ng-template let-order>
+                        <td class="col-xs-1">
+                          {{order.inventoryStartDate | sgCustomDate}}
+                        </td>
+                        <td class="col-xs-1">{{order.inventoryEndDate  | sgCustomDate}}</td>
+                        <td class="col-xs-1">{{order.initialReconciliation}}</td>
+                        <td class="col-xs-1">{{order.finalReConciliation}}</td>
+                        <td class="col-xs-1">{{order.analystNotes}}</td>
+                      </ng-template>
+                    </sg-grid>
+                    </div>
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <div (click)="loadHandCarryReconciliation(repActivity.Rep.id)">
+                        <label class="sublbl">Reconciliation</label>
+                      <span>OVER THRESHOLD <br>NAGATIVE</span>
+                      </div>
+                    </ng-template>
+                    <div [ngBusy]="busyPromises.repDtrOrders" class="col-xs-12 margined">
+                      <sg-grid [columns]="handCarryReconcilation" emptyText="No Orders" [items]="HandCarryReconciliationData"
+                      [totalRecordCount]="HandCarryReconciliationData.length" [pageSize]="10" [loadMorePagination]="true">
+                      <ng-template let-order>
+                        <td class="col-xs-1">
+                          {{order.inventoryStartDate | sgCustomDate}}
+                        </td>
+                        <td class="col-xs-1">{{order.inventoryEndDate  | sgCustomDate}}</td>
+                        <td class="col-xs-1">{{order.initialReconciliation}}</td>
+                        <td class="col-xs-1">{{order.finalReConciliation}}</td>
+                        <td class="col-xs-1">{{order.analystNotes}}</td>
+                      </ng-template>
+                    </sg-grid>
+                    </div>
+                  </mat-tab>
+                </mat-tab-group>
+
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <span (click)="loadAddressData(repActivity.Rep.id)">Associated Addresses</span>
+                </ng-template>
+                <sg-grid emptyText="No Addresses" [items]="addresses" [totalRecordCount]="addresses.length"
+                  [pageSize]="10" [loadMorePagination]="true">
+                  <ng-template let-address>
+                    <td class="col-xs-3">
+                      <div class="row info">
+                        <div class="col-sm-2 col-md-2 col-lg-1">
+                          <div class="d-flex">
+                            <mat-icon class="Rectangle-color" (click)="openCreateTaskDialog()">add_task
+                            </mat-icon>
+                            <mat-icon class="Rectangle-color" style="margin-left: 6px;">tv</mat-icon>
+                          </div>
+                        </div>
+                        <div class="col-sm-7 col-md-7 col-lg-7 assAddress">
+                            <div class="data">
+                                <span class="key">
+                                  Address Status:
+                                </span>
+                                <span class="value colorSuccess">
+                                  {{ address.status}}
+                                </span>
+                                <span class="key">
+                                  Address Type :
+                                </span>
+                                <span class="value">
+                                  <label class="assaVal">
+                                    <span>{{address.addressType}}</span>
+                                  </label>
+                                </span>
+                                <span class="key">
+                                  Address Source :
+                                </span>
+                                <span class="value">
+                                  <label class="assaVal">
+                                    <span>{{address.statAddressSourceus}}</span>
+                                  </label>
+                                </span><br>
+                                <span class="key">
+                                  Address :
+                                </span>
+                                <span class="value">
+                                  <label class="assaVal">
+                                    <span>{{address.addressLine1}}, {{address.addressLine2}}</span>
+                                    <span>{{address.city}}, {{address.state}}, {{address.zipCode}}</span>
+                                  </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-4 addrFlags">
+                          <!-- <p *ngIf="address.dtpFlag || address.dtpFlag">
+                            <span *ngIf="address.dtpFlag">Direct To Practitioner</span>
+                            <span *ngIf="address.dtrFlag">Rep To Practitioner</span>
+                            <span *ngIf="address.handCarryFlag">Hand Carry</span>
+                          </p> -->
+                          <div *ngIf="address.dtpFlag || address.dtrFlag || address.handCarryFlag">
+                            <span *ngIf="address.dtpFlag">Direct To Practitioner</span>
+                            <span *ngIf="address.dtrFlag"
+                                [ngClass]="{'addrSp2': address.dtpFlag && address.dtrFlag}">Rep To Practitioner</span>
+                            <span *ngIf="address.handCarryFlag"
+                                [ngClass]="{'addrSp2': address.dtpFlag || address.dtrFlag}">
+                                HandCarry</span>
+                        </div>
+                        </div>
+                      </div>
+
+                    </td>
+                  </ng-template>
+                </sg-grid>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>
+<sg-pagination [totalRecordCount]="totalRecordCount" [pageSize]="pageSize" [currentPage]="currentPage"
+  (emitPageChange)="pageChange($event)"></sg-pagination>

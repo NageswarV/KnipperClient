@@ -1,0 +1,188 @@
+<mat-expansion-panel class="expansionPanel primary-expansion" (opened)="loadTableData()" (closed)="hideTableData()"
+    expanded=true>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <div style="display: flex;">
+                <div style="flex: 0 30%;">
+                    {{productDataSet.name}} (ID: {{ productDataSet.code }})
+                </div>
+                <div class="mat-rectangle">
+                    <div class="knipper-logo"></div>
+                    <div class="exppanel-heading" style="opacity:1;margin:auto auto auto 0;padding-left: 10px;">
+                        <span class="exppanel-heading">Inventory Status: </span>
+                        <em style="font-size: 14px;" [class.textWarning]="productDataSet.inventoryStatus === 'On Hold'"
+                            [class.textError]="productDataSet.inventoryStatus === 'Expired'"
+                            [class.textActive]="productDataSet.inventoryStatus === 'Active'">
+                            {{productDataSet.inventoryStatus}} </em>
+                    </div>
+                    <div class="exppanel-heading" style="opacity:1;margin: auto 0;">
+                        <span class="exppanel-heading">Total Available Quantity:</span>
+                        <em style="font-size: 14px;color:white;"> {{productDataSet.availableInventory}} </em>
+                    </div>
+                </div>
+                <a class="icon-focus">
+                    <mat-icon>add_task</mat-icon>
+                </a>
+                <a class="icon-focus" style="margin:0 14px 0 8px;">
+                    <mat-icon>save_alt</mat-icon>
+                </a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; margin-top: 10px;">
+                <div class="value-box">
+                    <div class="exppanel-heading">Product Type : </div>
+                    <div class="exppanel-value">{{productDataSet.productType}}</div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Drug Schedule :
+                    </div>
+                    <div class="exppanel-value">
+                        {{productDataSet?.drugSchedule}}
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Short Day :
+                    </div>
+                    <div class="exppanel-value">
+                        {{productDataSet?.shortDay}}
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Storage conditions :
+                    </div>
+                    <div class="exppanel-value">
+                        {{productDataSet?.storageCondition}}
+                    </div>
+                </div>
+                <div class="value-box">
+                    <div class="exppanel-heading">
+                        Product Description :
+                    </div>
+                    <div class="exppanel-value"
+                        [innerHtml]="(productDataSet.description.length>6)? (productDataSet.description | slice:0:20)+'...':(productDataSet.description) | safeHtml">
+                    </div>
+                </div>
+            </div>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="tabs">
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'dtp'" (click)="changeTabs('dtp')">
+            Direct to Practitioner Activities
+        </div>
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'rep'" (click)="changeTabs('rep')">
+            Rep to Practitioner Orders
+        </div>
+        <div class="tab-data" [class.selected-tab]="selectedTab === 'hc'" (click)="changeTabs('hc')">
+            Hand Carry Activities
+        </div>
+    </div>
+    <div class="main-data busy-container">
+        <div class="status-filter" *ngIf="selectedTab === 'dtp' || selectedTab === 'rep' || selectedTab ==='hc'">
+            <div class="label" *ngIf="selectedTab === 'dtp' || selectedTab === 'rep'">
+                Filter Results by Order Status
+            </div>
+            <div class="label" *ngIf="selectedTab === 'hc'">
+                Filter Results By Transaction Status
+            </div>
+            <select class="form-control">
+                <option value="all" selected>All Statuses</option>
+            </select>
+        </div>
+        <div [ngBusy]="busyPromise">
+            <samplicity-responsive-datatable #table *ngIf="panelExpanded && selectedTab === 'dtp'" [perPage]="perPage"
+                [selectEnabled]=false [dialog]="false" name="hcpTableSet" [columns]="columnSchema"
+                [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                [staticItems]="getDataSet" [showEndOfList]="false" [disableSorting]="loading"
+                (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column">
+                    <div *ngIf="column?.name === 'id'" style="width: 12em;">
+                        <a [routerLink]="['dtporders',item.id]" class="id-color"> {{item.id}} </a>
+                        <mat-icon class="Rectangle-color" (click)="openCreateTaskDialog()" style="margin-left: 6px;">
+                            add_task
+                        </mat-icon>
+                    </div>
+                    <div *ngIf="column?.name === 'shipToAddress'" style="width: 184px;">
+                        {{item.shipToAddressLine1}} {{item.shipToAddressLine2 ? ', ' + item.shipToAddressLine2 : ''}},
+                        <br />
+                        {{item.shipToCity}}, {{item.shipToState}}, {{item.shipToZipCode}}
+                    </div>
+                    <span *ngIf="column?.name === 'programName'">
+                        {{item.programName}}
+                    </span>
+                    <span *ngIf="column?.name === 'salesRep'">
+                        <a style="text-decoration: underline; color: #23527c !important;" (click)="goToRepPage(item)">
+                            {{item.repFirstName}}
+                            {{item.repLastName}} </a>
+                    </span>
+                    <span *ngIf="column?.name === 'communicationLabel'">
+                        <a style="text-decoration: underline; color: #23527c !important;" [routerLink]="['./']"
+                            (click)="openDialog(item)">
+                            {{item.communicationLabel}}</a>
+                    </span>
+                </ng-template>
+            </samplicity-responsive-datatable>
+            <samplicity-responsive-datatable #table *ngIf="panelExpanded && selectedTab === 'rep'" [perPage]="perPage"
+                [selectEnabled]=false [dialog]="false" name="hcpTableSet" [columns]="columnSchema"
+                [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                [staticItems]="getDataSet" [showEndOfList]="false" [disableSorting]="loading"
+                (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column">
+                    <div *ngIf="column?.name === 'id'" style="width: 12em;">
+                        <a [routerLink]="['dtrorders',item.orderNumber]" class="id-color"> {{item.orderNumber}} </a>
+                        <mat-icon class="Rectangle-color" (click)="openCreateTaskDialog()" style="margin-left: 6px;">
+                            add_task
+                        </mat-icon>
+                    </div>
+                    <div *ngIf="column?.name === 'shipToAddress'" style="width: 184px;">
+                        {{item.shipToFirstName}} {{item.shipToLastName}}, {{item.shipToAddressLine1}}, <br />
+                        {{item.shipToAddressLine2}}, {{item.shipToCity}},
+                        {{item.shipToState}} {{item.shipToZipCode}}, {{item.shipToCountry}}
+                    </div>
+                    <div *ngIf="column?.name === 'orderedByAddress'" style="width: 184px;">
+                        {{item.orderedByFirstName}} {{item.orderedByLastName}}, {{item.orderedByAddressLine1}}, <br />
+                        {{item.orderedByAddressLine2}} {{item.orderedByCity}},
+                        {{item.orderedByState}} {{item.shipToZipCode}}, {{item.orderedByCountry}}
+                    </div>
+                    <span *ngIf="column?.name === 'programName'">
+                        Program {{item.programId}}
+                    </span>
+                    <span *ngIf="column?.name === 'rushOrder' && item.rushOrder">
+                        Rush
+                    </span>
+                </ng-template>
+            </samplicity-responsive-datatable>
+            <samplicity-responsive-datatable #table *ngIf="panelExpanded && selectedTab === 'hc'" [perPage]="perPage"
+                [selectEnabled]=false [dialog]="false" name="hcpTableSet" [columns]="columnSchema"
+                [disableDefaultPagination]="true" (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()"
+                [staticItems]="getDataSet" [showEndOfList]="false" [disableSorting]="loading"
+                (columnSortChange)="updateColumnSort($event)">
+                <ng-template let-item="item" let-column="column">
+                    <span *ngIf="column?.name === 'id'">
+                        <a *ngIf="item.transactionType==='Disbursement'"
+                            [routerLink]="['handcarry/disbursement',item.id]" class="link">{{item.id}}</a>
+                        <div *ngIf="!(item.transactionType==='Disbursement')" class="d-flex align-items-center">
+                            <span *ngIf="item.transactionType==='Adjustment'" class="material-icons fs-20 mr-1"><span
+                                    class="active-link">link</span></span>
+                            <span *ngIf="item.transactionType==='Shipment'" class="material-icons  fs-20 mr-1"><span
+                                    class="broken-link">link_off</span></span>
+                            <a [routerLink]="['handcarry/transaction',item.id]" class="link">{{item.id}}</a>
+                        </div>
+                    </span>
+                    <span *ngIf="column?.name === 'image'">
+                        <a target="_blank" href="../../../../resources/images/logo.jpg" download="handcarry-img.jpg">
+                            <mat-icon class="image-icon">image</mat-icon>
+                        </a>
+                    </span>
+                    <span *ngIf="column?.name === 'validForRecon'">
+                        <mat-icon class="checkMark-icon" *ngIf="item?.validForRecon">
+                            check</mat-icon>
+                    </span>
+
+                </ng-template>
+            </samplicity-responsive-datatable>
+
+        </div>
+    </div>
+</mat-expansion-panel>

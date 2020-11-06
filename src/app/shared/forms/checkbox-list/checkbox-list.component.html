@@ -1,0 +1,21 @@
+<div class="form-group d-flex flex-column" [formGroup]="formGroup" [class.is-invalid]="isInvalid" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [label]="label" [required]="required" [labelTranslated]="labelTranslated"></samplicity-field-label>
+  <small *ngIf="isInvalid" class="samp-checklist-feedback invalid-feedback mt-0 d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+    <mat-icon color="danger">error</mat-icon>
+    <span l10nTranslate>Validation.Required</span>
+  </small>
+  <ng-container *ngFor="let control of controls; let i = index;">
+    <mat-checkbox *ngIf="formGroup.get(control).enabled" [disabled]="disabled" [color]="color" [formControlName]="control" l10nTranslate>{{checkboxLabels[i]}}</mat-checkbox>
+    <div class="d-flex" *ngIf="formGroup.get(control).disabled && !disabled">
+      <mat-icon *ngIf="formGroup.get(control).value" class="check-icon">check</mat-icon>
+      <mat-icon *ngIf="!formGroup.get(control).value" class="uncheck-icon">close</mat-icon>
+      <span class="ml-2" l10nTranslate>{{checkboxLabels[i]}}</span>
+    </div>
+    <div class="d-flex" *ngIf="formGroup.get(control).disabled && disabled">
+      <span *ngIf="formGroup.get(control).value" class="ml-2" l10nTranslate>{{checkboxLabels[i]}}</span>
+    </div>
+  </ng-container>
+
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>
+

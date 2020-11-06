@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <samplicity-notification #blackoutHoldNotificationWindow></samplicity-notification>
+  <h1>
+    <span *ngIf="!isCreatingNew" l10nTranslate>{{options.title}}</span>
+    <span *ngIf="!isCreatingNew">{{detailName}}</span>
+    <span *ngIf="isCreatingNew" l10nTranslate>{{options.createTitle}}</span>
+  </h1>
+  <p *ngIf="!options.hideBreadcrumb">
+    <span *ngIf="options.menuBreadcrumb">
+      <span l10nTranslate>{{options.menuBreadcrumb}}</span>
+      <span> ></span>
+    </span>
+    <span *ngIf="options.breadcrumb"><a routerLink="{{options.listLink}}" l10nTranslate>{{options.breadcrumb}}</a> ></span>
+    <span *ngIf="isCreatingNew" l10nTranslate>{{options.createTitle}}</span>
+    <span *ngIf="!isCreatingNew">{{detailName}}</span>
+  </p>
+  <p class="keep-height">
+    <button *ngIf="options.backButton" mat-raised-button color="default" routerLink="{{options.listLink}}" class="float-left" type="button">
+      <mat-icon>chevron_left</mat-icon>
+      <span>{{backButtonText}}</span>
+    </button>
+    <button *ngIf="options.rightButtonShow && !hideCreateButton && clientService.isCurrentClientActive" mat-raised-button class="mat-raised-button float-right" type="button"
+      (click)="options.rightButtonEvent.emit()" color="{{options.rightButtonColor}}">
+      <mat-icon>{{options.rightButtonIcon}}</mat-icon>
+      <span l10nTranslate>{{options.rightButton}}</span>
+    </button>
+  </p>
+  <samplicity-form #form (save)="save.emit()" (discard)="onDiscard()" (resetEvent)="onReset()" objectName="{{options.objectName}}"
+    [isCreatingNew]="isCreatingNew" [hideSaveButton]="hideSaveButton" [menuState]="menuState" [alwaysShowSnackbar]="options.alwaysShowSnackbar"
+    [saveButton]="options.saveButton" [saveButtonColor]="options.saveButtonColor">
+    <h2 l10nTranslate>{{options.formTitle}}</h2>
+    <ng-content></ng-content>
+  </samplicity-form>
+</div>
+<samplicity-footer></samplicity-footer>

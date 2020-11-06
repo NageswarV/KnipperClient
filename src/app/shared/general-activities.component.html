@@ -1,0 +1,32 @@
+<div class="busy-container">
+    <div style="font-style: italic;opacity: 0.9;margin-bottom: 1em;font-size: 0.9em;">{{timeFrameDesc}}</div>
+    <div style="opacity: 0.9; font-size: 0.9em;">Select Timeframe <span style="color:red">*</span></div>
+    <div style="display: flex; width: 100%;margin-top:0.5em;">
+        <input type="button" *ngIf="timeFrameFilterOptions.quarterly" class="btn"
+            [ngClass]="(timeFrameSelected === 'QUARTERLY') ? 'btn-primary' : 'btn-default'"
+            [style.width]="getButtonWidth+'%'" value="QUARTERLY" (click)="changeTimeFrame('QUARTERLY')" />
+        <input type="button" *ngIf="timeFrameFilterOptions.monthly" class="btn"
+            [ngClass]="(timeFrameSelected === 'MONTHLY') ? 'btn-primary' : 'btn-default'"
+            [style.width]="getButtonWidth+'%'" value="MONTHLY" (click)="changeTimeFrame('MONTHLY')" />
+        <input type="button" *ngIf="timeFrameFilterOptions.weekly" class="btn"
+            [ngClass]="(timeFrameSelected === 'WEEKLY') ? 'btn-primary' : 'btn-default'"
+            [style.width]="getButtonWidth+'%'" value="WEEKLY" (click)="changeTimeFrame('WEEKLY')" />
+    </div>
+    <div style="display: flex; margin: 1.2em 0 1.2em 0;"
+        [ngBusy]="this.dtpActivity ? busyPromises.dtp : busyPromises.hc">
+        <i class="material-icons" style="font-size: 1.7em; cursor: pointer;" [class.disable]="disableLeftArrow"
+            (click)="getPrevSet()">arrow_back</i>
+        <div style="margin: auto; font-weight: 600;">{{ orderMetrics | sgCustomDateRange : 1 : timeFrameSelected}}</div>
+        <i class="material-icons" style="font-size: 1.7em; right:0; cursor: pointer;"
+            [class.disable]="disableRightArrow" (click)="getNextSet()">arrow_forward</i>
+    </div>
+    <div style="font-style: italic;opacity: 0.9;margin-bottom: 1em;font-size: 0.9em;">{{transactionDetailDesc}}</div>
+    <div style="display: flex;width: 100%; flex-wrap: wrap;">
+        <div *ngFor="let transaction of orderMetrics?.metrics;index as i " style="width: 33.3%;">
+            <sg-activitiy [transaction]="transaction" [errorCapsule]="checkIfError(transaction)"
+                [warningCapsule]="checkIfWarning(transaction)" [link]="transactionLink"
+                [timeFrameSelected]="timeFrameSelected" [capsuleIndex]="i">
+            </sg-activitiy>
+        </div>
+    </div>
+</div>

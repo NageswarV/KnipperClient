@@ -1,0 +1,24 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.samp-no-label]="noLabel"
+  [class.is-invalid]="isInvalid || control && control.invalid && control.dirty && control.touched">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [required]="required || isRequired" [labelTranslated]="labelTranslated"></samplicity-field-label>
+  <div *ngIf="!hideUnchecked">
+    <mat-checkbox [disabled]="disabled" color="primary" [formControlName]="name" (change)="onChange($event)" [value]="value" >
+      <span *ngIf="!textValueTranslated" l10nTranslate>
+          {{textValue}}
+      </span>
+      <span *ngIf="textValueTranslated">
+          {{textValue}}
+      </span>
+    </mat-checkbox>
+  </div>
+  <div *ngIf="hideUnchecked && isChecked">
+      <span *ngIf="!textValueTranslated" l10nTranslate>
+          {{textValue}}
+      </span>
+      <span *ngIf="textValueTranslated">
+          {{textValue}}
+      </span>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

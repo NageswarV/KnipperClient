@@ -1,0 +1,115 @@
+<div class="header-image"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8">
+      <h1>Hello, {{authenticationService.userInformation.fullName}}</h1>
+      <p>Your last login was on
+        {{authenticationService.userInformation.lastLoginTime | sgCustomDateTime : true : 1}}</p>
+    </div>
+    <div class="col-md-7">
+      <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2>Hand Carry Transaction Activities</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="pad-fix">
+          <sg-general-activities [timeFrameFilterOptions]="getHCTimeFrameOptions"
+            timeFrameDesc="Please select a timeframe to compare transactional activities within the hand carry line of business."
+            transactionDetailDesc="Click on the hyperlink to view transactions in more detail on the Sales Reps page."
+            [dtpActivity]="false"></sg-general-activities>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2>Direct to Practitioner Orders Activities</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="pad-fix">
+          <sg-general-activities [timeFrameFilterOptions]="getDTPTimeFrameOptions"
+            timeFrameDesc="Please select a timeframe to compare order activities within the direct to practitioner line of business."
+            transactionDetailDesc="Click on the hyperlink to view orders in more detail on the HCPs page."
+            [dtpActivity]="true"></sg-general-activities>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2>Links to Portal Services</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <sg-external-services></sg-external-services>
+      </mat-expansion-panel>
+    </div>
+    <div class="col-md-5">
+      <div class="primary-expansion">
+        <mat-expansion-panel hideToggle disabled expanded=true style="margin-top: 2em;">
+          <mat-expansion-panel-header style="border-bottom: solid 0.1px white; padding: 0.7em 1.2em 0.7em 1.2em ">
+            <h2 style="font-weight: 300;color: white;margin-top:10px">Active Announcements ({{announcementsCount}})</h2>
+          </mat-expansion-panel-header>
+          <div class="pad-fix" [ngBusy]="busyPromise">
+            <sg-announcements [announcements]="announcementsArray" *ngIf="announcements"
+              [totalRecordCount]="announcementsCount" [pageSize]="pageSize" [currentPage]="currentPage">
+            </sg-announcements>
+          </div>
+        </mat-expansion-panel>
+        <div class="pagination-div">
+          <sg-pagination [totalRecordCount]="announcementsCount" [pageSize]="pageSize" [fromAnnouncement]="true"
+            [currentPage]="currentPage" [disableScroll]="true" [disableFloating]="true" [maxSize]="3"
+            (emitPageChange)="pageChange($event)" [pageDisplayText]="pageDisplay">
+          </sg-pagination>
+        </div>
+      </div>
+      <sg-view-activity (searchName)="searchTag($event)" *ngIf="searchByComponentName == ''"></sg-view-activity>
+      <sg-search-by-hcp (searchName)="searchTag($event)" *ngIf="searchByComponentName == 'HCP'"></sg-search-by-hcp>
+      <sg-search-by-product *ngIf="searchByComponentName == 'product'" (searchName)="searchTag($event)">
+      </sg-search-by-product>
+      <sg-search-by-rep *ngIf="searchByComponentName == 'Rep'" (searchName)="searchTag($event)"></sg-search-by-rep>
+    </div>
+  </div>
+  <!-- <hr /> -->
+
+  <!-- <h2>Terms & Conditions</h2>
+  <p class="p-dark">
+    Nullam vel molestie augue. Morbi ut nisi felis. Phasellus augue felis, accumsan quis venenatis vitae, ornare vel
+    libero. Quisque in enim elit. Praesent eget scelerisque nisi. Nunc ante nibh, tempor in facilisis id, pharetra in
+    erat. Aliquam enim metus, suscipit a ligula et, laoreet congue ligula. Quisque hendrerit pellentesque ligula, vel
+    euismod nisl elementum eget. Ut tempor enim gravida libero imperdiet aliquam. Quisque sit amet massa nec ipsum
+    efficitur bibendum.
+  </p>
+  <p class="p-dark">
+    Donec dictum quam ac risus finibus tincidunt id in ante. Mauris cursus ipsum sed risus condimentum, a ultricies
+    risus laoreet. Nam bibendum ultricies nulla, sed posuere sapien efficitur eget. Proin cursus ornare euismod.
+    Aliquam in tellus sit amet mauris faucibus egestas. Donec tincidunt tristique ultrices. Nam et massa in ipsum
+    posuere consectetur ac vitae augue. Donec a augue id dui elementum lobortis et quis tortor.
+  </p>
+  <div class="light-expansion row" style="display: flex; padding: 0 1em 0 2em;">
+    <div style="display: flex;">
+      <img src="../../resources/images/assets-logo-knipper-colored@2x.png" class="media-object" alt="Logo" />
+    </div>
+    <div style="padding: 2em; font-weight: 600; opacity: 0.6; text-align: justify;">
+      Sed sagittis magna eu orci eleifend, eu finibus dui molestie. Donec risus augue, molestie ac nisi non, egestas
+      hendrerit sem. Vestibulum felis massa, aliquam non faucibus in, ullamcorper et neque. Phasellus enim nulla,
+      volutpat vitae ipsum et, aliquet molestie tortor. Phasellus a laoreet tortor, nec vestibulum leo. Integer vel
+      bibendum arcu. Maecenas est diam, tempor et fermentum id, scelerisque non dolor. In accumsan urna eget finibus
+      egestas. Praesent et lectus euismod, semper nunc ac, semper nisl.
+    </div>
+  </div>
+</div> -->
+
+
+  <ng-template #privacypolicy let-c="close">
+    <div class="modal-body margin-bottom">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <p translate="yes">repportal-privacy-policy-content-msg</p>
+        <p translate="yes">repportal-privacy-policy-content-cookie-msg</p>
+        <p translate="yes">repportal-privacy-policy-content-link <span><a target="_blank"
+              href="https://www.knipper.com/privacy-policy/"
+              translate="yes">repportal-privacy-policy-content-here-link</a></span></p>
+      </div>
+      <div class="pull-right">
+        <button class="btn btn-default" (click)="c($event);" translate="yes">repportal-authentication-ok</button>
+      </div>
+    </div>
+  </ng-template>

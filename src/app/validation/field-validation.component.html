@@ -1,0 +1,7 @@
+<div [hidden]="hidden" class="alert alert-danger validation-message"><span translate="yes">{{message}}</span></div>
+<div class="alert alert-danger validation-message" *ngIf="(errorMessages && errorMessages.length > 0 && hidden)">
+    <p *ngFor="let errorMessage of errorMessages" class="no-margin"><span>{{errorMessage}}</span></p>
+</div>
+<div class="alert alert-warning validation-message" *ngIf="(warningMessages && warningMessages.length > 0 && hidden)">
+    <p *ngFor="let warningMessage of warningMessages" class="no-margin"><span>{{warningMessage}}</span></p>
+</div>

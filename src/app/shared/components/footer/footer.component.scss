@@ -1,0 +1,10 @@
+@import '../../../styles/variables';
+
+.footer-links {
+  margin: 2rem 0;
+  padding-bottom: 5rem;
+
+  span {
+    color: $text;
+  }
+}

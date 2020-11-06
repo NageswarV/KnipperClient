@@ -1,0 +1,315 @@
+@import '../../../styles/variables';
+@import '../../../styles/styles';
+
+.table-progress {
+  position: relative;
+}
+
+.table-container {
+  -webkit-box-shadow: inset 0px 0px 0px 1px $table-border;
+  -moz-box-shadow: inset 0px 0px 0px 1px $table-border;
+  box-shadow: inset 0px 0px 0px 1px $table-border;
+
+  .fixed-table-head {
+    height: 0 !important;
+    position: fixed;
+    top: $navbar-height-desktop;
+    right: 0;
+    left: 0;
+    background: $table-header-background;
+    border-bottom: 1px solid $table-border;
+    z-index: 1;
+
+    @media screen and (max-width: 1199px) {
+      height: $navbar-height-tablet;
+    }
+  }
+
+  .collapse-btn {
+    cursor: pointer;
+    color: $mid-grey;
+    border-right: 1px solid transparent;
+    padding-right: 0.5em;
+    vertical-align: middle;
+    .mat-icon {
+      transform: rotate(-90deg);
+      color: $table-icon;
+
+      &.expanded {
+        transform: rotate(0deg);
+      }
+    }
+  }
+
+  .mat-icon {
+    font-size: 2em;
+    height: 2em;
+    width: 2em;
+    transition: transform 0.15s ease-in-out;
+
+    &:hover {
+      color: $charcoal;
+    }
+  }
+
+  .mat-icon.tiny {
+    font-size: 1.5em;
+    height: 1.5em;
+    width: 1.5em;
+    padding-right: 1.75em;
+  }
+
+  .mat-icon.error{
+    color: $knipper-red !important;
+    height: fit-content !important;
+    padding: 0 !important;
+    vertical-align: middle;
+  }
+
+  .mat-icon.warning{
+    color: #8a6116 !important;
+    height: fit-content !important;
+    padding: 0 !important;
+    vertical-align: middle;
+  }
+
+  table {
+    width: auto;
+    font-size: 0.9em;
+    &.full-width {
+      width: 100%;
+    }
+    ::ng-deep th {
+      cursor: pointer;
+      font-weight: 600;
+      vertical-align: text-top !important;
+      border: none !important;
+    }
+    tr.highlight {
+      background-color: $pastel-green !important;
+    }
+
+    td.error {
+      color: $knipper-red !important;
+      vertical-align: middle !important;
+      background-color: #fbeae5;
+      border: solid 1px $knipper-red !important;
+    }
+    td.warning {
+      vertical-align: middle !important;
+      color: var(--medium-brown);
+      background-color: #fffdda;
+      border: solid 1px #ffcd00 !important;
+    }
+    td.success-text{
+      vertical-align: middle !important;
+      color: var(--spruce) !important;
+    }
+    td.waived-text{
+      vertical-align: middle !important;
+      color: #979797 !important;
+    }
+
+    ::ng-deep td {
+      vertical-align: middle;
+      border: none !important;
+      &:first-of-type {
+        padding-left: 1.5em;
+
+        &.collapse-btn {
+          padding: 0.7em;
+          padding-right: 0;
+        }
+      }
+
+      &:last-of-type {
+        padding-right: 1.5em;
+      }
+
+      &.column-visibility-collapsed {
+        display: none;
+      }
+
+      &.column-visibility-xs1 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xs1) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-sm {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-sm) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-sm1 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-sm1) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-md {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-md) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-md1 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-md1) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-md2 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-md2) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-md3 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-md3) {
+          display: table-cell;
+        }
+      }
+
+
+      &.column-visibility-lg {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-lg) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-lg1 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-lg1) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-lg2 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-lg2) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-lg3 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-lg3) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xl {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xl) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xl1 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xl1) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xl2 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xl2) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xl3 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xl3) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xxl {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xxl) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xxl1 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xxl1) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xxl2 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xxl2) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xxl3 {
+        display: none;
+
+        @media screen and (min-width: $table-breakpoint-xxl3) {
+          display: table-cell;
+        }
+      }
+
+      &.column-visibility-xxl4 {
+        display: none;
+
+        @media (min-width: $table-breakpoint-xxl4) {
+          display: table-cell;
+        }
+      }
+    }
+
+    tr.info-row-container {
+      transition: height 0.3s ease-in-out;
+      background: $white;
+      font-size: 0.8em;
+      border-left: 1px solid $table-border;
+      border-right: 1px solid $table-border;
+
+      td.info-row {
+        border: none;
+        padding-top: 1em;
+        padding-bottom: 0;
+        white-space: nowrap;
+      }
+
+      &:last-of-type {
+        border-bottom: 1px solid $table-border;
+      }
+    }
+  }
+}
+

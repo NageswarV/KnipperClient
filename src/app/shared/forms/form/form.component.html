@@ -1,0 +1,99 @@
+<samplicity-notification #notificationWindow></samplicity-notification>
+<samplicity-notification #notificationWindow2></samplicity-notification>
+<samplicity-notification #notificationWindow3></samplicity-notification>
+<form *ngIf="formGroup; else placeholder" [formGroup]="formGroup" novalidate>
+  <ng-content></ng-content>
+</form>
+<ng-template #placeholder>
+  <div class="card pt-0 px-0">
+      <mat-progress-bar class="mb-5" mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-template>
+<!-- Hide snackbar until form is dirty for both new and exisitng entities -->
+<div class="form-footer-container" *ngIf="alwaysShowSaveButton || alwaysShowSnackbar || isCreatingNew || (formIsDirty && !hideSnackBar)"
+  [class.menu-opened]="menuState === false" [class.menu-closed]="menuState === true" >
+  <div class="form-footer">
+    <button mat-raised-button *ngIf="(alwaysShowSaveButton && saveButton) || (!isCreatingNew && !hideSaveButton && saveButton)" class="btn-success" color="{{saveButtonColor}}" (click)="save.emit()" l10nTranslate>
+      {{saveButton}}
+    </button>
+    <button mat-raised-button *ngIf="(alwaysShowSaveButton && !saveButton ) || (!isCreatingNew && !hideSaveButton && !saveButton)" class="form-save-btn" color="primary" (click)="save.emit()" l10nTranslate>
+      Forms.Save
+    </button>
+    <button mat-raised-button *ngIf="isCreatingNew && !hideSaveButton" class="form-create-btn" color="positive" (click)="save.emit()">
+      <span l10nTranslate>Forms.SnackbarCreateButton</span>
+    </button>
+    <button *ngIf="formIsDirty" mat-raised-button color="default" class="form-discard-btn" type="button" (click)="openDiscardDialog()" l10nTranslate>
+      Forms.Discard
+    </button>
+    <ng-container *ngIf="customActions">
+      <button mat-raised-button *ngFor="let customAction of customActions" [color]="customAction.color" (click)="action.emit(customAction.name)" l10nTranslate>
+        {{customAction.label}}
+      </button>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #discardDialog>
+  <div class="dialog-header dialog-warning d-flex">
+    <span class="dialog-header-text align-middle" l10nTranslate>Forms.DiscardChangesTitle</span>
+    <mat-icon class="dialog-close align-middle ml-auto" (click)="dialogRef.close()">close</mat-icon>
+  </div>
+  <div class="dialog-body">
+    <p *ngIf="isCreatingNew" l10nTranslate>Forms.DiscardChangesNewMessage</p>
+    <p *ngIf="!isCreatingNew" l10nTranslate>Forms.DiscardChangesExistingMessage</p>
+  </div>
+  <div class="dialog-footer d-flex">
+    <button mat-raised-button (click)="dialogRef.close()" color="default" class="discard-dialog-cancel-btn" type="submit" l10nTranslate>
+      Forms.DiscardChangesCancel
+    </button>
+    <button mat-raised-button (click)="onDiscardChanges()" color="warn" type="submit" class="discard-dialog-discard-btn">
+      <span l10nTranslate>Forms.DiscardChangesConfirm</span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #unsavedDialog>
+  <div class="dialog-header dialog-warning">
+    <span class="dialog-header-text align-middle" l10nTranslate>Forms.UnsavedChangesTitle</span>
+    <mat-icon class="dialog-close align-middle float-right" (click)="dialogRef.close()">close</mat-icon>
+  </div>
+  <div class="dialog-body">
+    <p l10nTranslate>Forms.UnsavedChangesMessage</p>
+  </div>
+  <div class="dialog-footer d-flex">
+    <button mat-raised-button (click)="dialogRef.close()" color="default" class="discard-dialog-cancel-btn" type="submit" l10nTranslate>
+      Forms.DiscardChangesCancel
+    </button>
+    <button mat-raised-button (click)="save.emit();dialogRef.close()" color="default" type="submit" class="unsaved-dialog-save-btn" l10nTranslate>
+      Forms.SaveChanges
+    </button>
+    <button mat-raised-button (click)="onNavigateAway()" color="warn" type="submit" class="unsaved-dialog-discard-btn">
+      <span l10nTranslate>Forms.DiscardChangesConfirm</span>
+    </button>
+  </div>
+</ng-template>
+
+<!-- This dialog can be used to display an additional info/error/warning/success message -->
+<ng-template #genericDialog>
+  <div class="dialog-generic">
+    <div class="dialog-header dialog-generic {{genericDialogClass}}">
+      <span class="dialog-header-text align-middle" l10nTranslate>{{genericDialogProperties?.title}}</span>
+      <mat-icon class="dialog-close align-middle float-right" (click)="dialogRef.close()">close</mat-icon>
+    </div>
+    <div class="dialog-body">
+      <p *ngIf="genericDialogProperties?.translateMessage" l10nTranslate>{{genericDialogProperties?.message}}</p>
+      <p *ngIf="!genericDialogProperties?.translateMessage">{{genericDialogProperties?.message}}</p>
+      <p *ngIf="genericDialogProperties?.translateMessage && genericDialogProperties?.message2" l10nTranslate>{{genericDialogProperties?.message2}}</p>
+      <p *ngIf="!genericDialogProperties?.translateMessage && genericDialogProperties?.message2">{{genericDialogProperties?.message2}}</p>
+    </div>
+    <div class="dialog-footer d-flex justify-content-between">
+      <button *ngIf="genericDialogProperties.button1Show"  mat-raised-button (click)="genericDialogProperties?.button1Event?.emit()" color="{{genericDialogButton1Color}}" class="ml-auto discard-dialog-cancel-btn" type="submit" l10nTranslate>
+        {{genericDialogProperties?.button1Text}}
+      </button>
+      <button *ngIf="genericDialogProperties.button2Show" mat-raised-button (click)="genericDialogProperties?.button2Event?.emit()" color="{{genericDialogButton2Color}}" class="unsaved-dialog-discard-btn" type="submit">
+        <span l10nTranslate>{{genericDialogProperties?.button2Text}}</span>
+      </button>
+    </div>
+  </div>
+</ng-template>
+<samplicity-spinner-overlay [messageText]="spinnerText" *ngIf="isSaving$ | async"></samplicity-spinner-overlay>

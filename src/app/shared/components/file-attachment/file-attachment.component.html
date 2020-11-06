@@ -1,0 +1,62 @@
+<samplicity-form-primary-well *ngIf="!whiteBackground && !formArray.disabled" [header]="uploadTitle" [isCard]="true">
+  <samplicity-file-attachment-description *ngIf="parentForm && !readonly" [fileControlName]="fileControlName"
+    [allowOverwrites]="allowOverwrites"
+    [descControlName]="descControlName" [parentFormGroup]="parentForm" [readonly]="readonly" [descLabel]="options.inputDescription"
+    [uploadButton]="options.uploadButton" [attachButton]="options.attachButton"
+    (upload)="uploadAttachment($event)" (delete)="clearAttachment()" [canEdit]="canEdit"
+    (create)="createAttachment($event)" [userAccessId]="userAccessId"
+    (duplicateFileName)="onDuplicateFileName()" [allowDuplicateFileName]="allowDuplicateFileName" 
+    [attachments]="allowDuplicateFileName === true ? null : formArray.controls"
+    [acceptsTypes]="acceptsTypes">
+  </samplicity-file-attachment-description>
+</samplicity-form-primary-well>
+
+<samplicity-form-section *ngIf="whiteBackground && !formArray.disabled" [header]="uploadTitle" isCard="true">
+  <samplicity-file-attachment-description *ngIf="parentForm && !readonly" [fileControlName]="fileControlName"
+    [allowOverwrites]="allowOverwrites"
+    [descControlName]="descControlName" [parentFormGroup]="parentForm" [readonly]="readonly" 
+    [descLabel]="options.inputDescription"
+    [uploadButton]="options.uploadButton" [attachButton]="options.attachButton"
+    (upload)="uploadAttachment($event)" (delete)="clearAttachment()" [canEdit]="canEdit"
+    (create)="createAttachment($event)" [userAccessId]="userAccessId"
+    (duplicateFileName)="onDuplicateFileName()" [allowDuplicateFileName]="allowDuplicateFileName" 
+    [attachments]="allowDuplicateFileName === true ? null : formArray.controls"
+    [acceptsTypes]="acceptsTypes">
+  </samplicity-file-attachment-description>
+</samplicity-form-section>
+
+<div class="mt-3" *ngIf="formArray.controls.length > 0">
+  <label class="table-label with-colon" l10nTranslate>{{options.tableTitle}}</label><ng-container *ngIf="showCount"> {{formArray.length}}</ng-container>
+  <samplicity-responsive-datatable #table [staticItems]="formArray.controls" [columns]="columns" [hightlightProp]="highlightProp" [disableSorting]="loading">
+    <ng-template let-item="item" let-column="column" let-i="i">
+      <ng-template [ngTemplateOutlet]="cellTemplate"
+                   [ngTemplateOutletContext]="{ column: column, item: item, index: index }">
+      </ng-template>
+      <ng-container *ngIf="column?.name === 'fileDescription'">
+        {{ noFileUploadProperty ? item.get('fileDescription')?.value : item.get('fileUpload')?.value.fileDescription}}
+      </ng-container>
+      <ng-container *ngIf="column?.name === 'fileName'" class="table-icon-buttons">
+        <a [download]="noFileUploadProperty ? item.get('fileName')?.value : item.get('fileUpload')?.value.fileName"
+          [href]="sanitizer.bypassSecurityTrustResourceUrl(item.contains('location') ? item.get('location')?.value : item.get('fileUpload')?.value.location)"
+          [target]="_blank">
+          <mat-icon class="mr-2">insert_drive_file</mat-icon>
+          <span>{{noFileUploadProperty ? item.get('fileName')?.value : item.get('fileUpload')?.value.fileName}}</span>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="column?.name === 'creatorUserId'">
+        {{ item.get('creatorUserId')?.value | userName}}
+      </ng-container>
+      <ng-container *ngIf="column?.name === 'creationTime'">
+        {{ item.get('creationTime')?.value | momentDateTime}}
+      </ng-container>
+      <ng-container *ngIf="column?.name === 'deletedFlag' && !formArray.disabled && !readonly" class="table-icon-buttons">
+        <div *ngIf="item.get('attachmentTypeClassificationValueId')?.value != mitigationAttachmentType 
+        && item.get('attachmentTypeClassificationValueId')?.value != srfAttachmentType
+        && item.get('attachmentTypeClassificationValueId')?.value != dorAttachmentType" class="table-icon-buttons" (click)="removeAttachment(i)" aria-label="cancel">
+          <mat-icon class="mat-danger">cancel</mat-icon>
+        </div>
+      </ng-container>
+    </ng-template>
+  </samplicity-responsive-datatable>
+</div>
+<label *ngIf="readonly && !formArray.controls.length" class="table-label samp-italic" l10nTranslate>{{options.noAttachments}}</label>

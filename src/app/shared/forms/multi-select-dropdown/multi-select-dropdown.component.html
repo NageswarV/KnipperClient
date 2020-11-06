@@ -1,0 +1,23 @@
+<div class="form-group" [class.is-invalid]="control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="!table && (!!label || isInlineRequired)" [colon]="colon" [inputId]="id"
+    [label]="label" [required]="required || forceRequiredLabel || isRequired"></samplicity-field-label>
+  <ng-multiselect-dropdown *ngIf="!loading && !control?.disabled" [placeholder]="placeholder" [data]="items" [(ngModel)]="selectedItems"
+   [settings]="dropdownSettings" [disabled]="forceDisabled || disabled"
+   (ngModelChange)="modelChanged.emit($event)">
+  </ng-multiselect-dropdown>
+    <div *ngIf="control && control.disabled" >
+      <p class="readonly">
+        <ng-container *ngIf="!!control.value && control.value.length > 0; else noValue">
+          <ng-container *ngFor="let item of control.value; let last = last;">
+            <ng-container *ngIf="!last">{{item.label}}, </ng-container>
+            <ng-container *ngIf="last">{{item.label}}</ng-container>
+          </ng-container>
+        </ng-container>
+        <ng-template #noValue>
+          --
+        </ng-template>
+      </p>
+    </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

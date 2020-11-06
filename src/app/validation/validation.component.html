@@ -1,0 +1,73 @@
+<div class="row alert alert-success message {{cssClass}}" *ngIf="successMessageList.length > 1">
+  <div class="col-xs-11">
+    <p><b><span translate="yes">hcpportal-validation-success</span>:</b></p>
+    <p *ngFor="let message of successMessageList; let i = index; ">{{i + 1}}. {{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideSuccessMessage(componentId)">clear</i>
+  </div>
+</div>
+<div class="row alert alert-success message {{cssClass}}" *ngIf="successMessageList.length == 1">
+  <div class="col-xs-11">
+    <p *ngFor="let message of successMessageList; let i = index; "><b translate="yes">hcpportal-validation-success</b><b>: </b>{{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideSuccessMessage(componentId)">clear</i>
+  </div>
+</div>
+
+<div class="row alert alert-danger message {{cssClass}}" *ngIf="errorMessageList.length > 1 && !errorHeading">
+  <div class="col-xs-11">
+    <p><b><span translate="yes">hcpportal-validation-error</span>:</b></p>
+    <p *ngFor="let message of errorMessageList; let i = index;">{{i + 1}}. {{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideErrorMessage(componentId)">clear</i>
+  </div>
+</div>
+<div class="row alert alert-danger message {{cssClass}}" *ngIf="errorMessageList.length == 1 && !errorHeading">
+  <div class="col-xs-11">
+    <p *ngFor="let message of errorMessageList; let i = index;"><b translate="yes">hcpportal-validation-error</b><b>: </b>{{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideErrorMessage(componentId)">clear</i>
+  </div>
+</div>
+
+
+<div class="row alert alert-danger message {{cssClass}}" *ngIf="errorMessageList.length > 1 && errorHeading">
+  <div class="col-xs-11">
+    <p><b translate="yes">{{errorHeading}}</b></p>
+    <p *ngFor="let message of errorMessageList; let i = index;">{{i + 1}}. {{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideErrorMessage(componentId)">clear</i>
+  </div>
+</div>
+<div class="row alert alert-danger message {{cssClass}}" *ngIf="errorMessageList.length == 1 && errorHeading">
+  <div class="col-xs-11">
+    <p><b translate="yes">{{errorHeading}}</b> </p>
+    <p>{{errorMessageList[0].messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideErrorMessage(componentId)">clear</i>
+  </div>
+</div>
+
+<div class="row alert alert-warning message {{cssClass}}" *ngIf="warningMessageList.length > 1">
+  <div class="col-xs-11">
+    <p><b><span translate="yes">hcpportal-validation-warning</span>:</b></p>
+    <p *ngFor="let message of warningMessageList; let i = index;">{{i + 1}}. {{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideWarningMessage(componentId)">clear</i>
+  </div>
+</div>
+<div class="row alert alert-warning message {{cssClass}}" *ngIf="warningMessageList.length == 1">
+  <div class="col-xs-11">
+    <p *ngFor="let message of warningMessageList; let i = index;"><b translate="yes">hcpportal-validation-warning</b><b>: </b>{{message.messageCode}}</p>
+  </div>
+  <div class="col-xs-1 clear-button">
+    <i class="material-icons" (click)="hideWarningMessage(componentId)">clear</i>
+  </div>
+</div>

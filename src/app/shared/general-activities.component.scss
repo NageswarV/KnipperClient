@@ -1,0 +1,15 @@
+@import '../../style/main.scss';
+
+input {
+    padding-top: 0.5em !important; 
+    padding-bottom: 0.5em !important; 
+    height: fit-content !important; 
+    margin:0px;
+    font-size: 0.9em;
+}
+.disable {
+    color: gray;
+    opacity: 0.9;
+    pointer-events: none;
+    cursor: none;
+}

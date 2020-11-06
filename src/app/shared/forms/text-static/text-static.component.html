@@ -1,0 +1,65 @@
+<div *ngIf="parentFormGroup" class="form-group" [formGroup]="parentFormGroup" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [labelTranslated]="labelTranslated" [required]="required || isRequired"
+    [labelParameters]="labelParameters"></samplicity-field-label>
+  <div #ngContentRef>
+    <ng-content select="[text-static-content]"></ng-content>
+  </div>
+  <ng-container *ngIf="ngContentRef.children.length === 0">
+    <ng-container *ngIf="isArray">
+      <ng-container *ngIf="isArrayEmpty && emptyValue">
+        <div class="static-text" l10nTranslate>{{emptyValue}}</div>
+      </ng-container>
+      <ng-container *ngIf="!isArrayEmpty">
+        <ng-container *ngIf="!lineBreak">
+          <ng-container *ngFor="let arrItem of control?.value; last as isLast">
+            <samplicity-display-translation class="static-text" [values]="arrItem[valueProp]"></samplicity-display-translation>
+            <span *ngIf="delimiter && !isLast">{{delimiter}}</span>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="lineBreak">
+          <ul class="unordered-list">
+            <ng-container *ngFor="let arrItem of control?.value; last as isLast">
+              <li>
+                <samplicity-display-translation class="static-text" [values]="arrItem[valueProp]"></samplicity-display-translation>
+                <span *ngIf="delimiter && !isLast">{{delimiter}}</span>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!isArray && !listItems">
+      <ng-container *ngIf="control?.value?.names">
+        <samplicity-display-translation class="static-text" [values]="control?.value?.names"></samplicity-display-translation>
+      </ng-container>
+
+      <div *ngIf="!isArray && !control?.value?.names && !pipe" class="static-text">
+        {{control?.value}}
+      </div>
+    </ng-container>
+    <ng-container *ngIf="listItems">
+      <ng-container *ngFor="let item of listItems">
+        <ng-container *ngIf="item[idProp] === control?.value">
+          <samplicity-display-translation class="static-text" [values]="item[valueProp]"></samplicity-display-translation>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!isArray && pipe">
+      <span class="static-text">{{control?.value | pipeHandler: pipe}}</span>
+    </ng-container>
+    <div *ngIf="!control?.value && control?.value !== 0"></div>
+  </ng-container>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>
+
+<div *ngIf="!parentFormGroup" class="form-group">
+  <samplicity-field-label *ngIf="label" [inputId]="id" [label]="label" [labelParameters]="labelParameters"></samplicity-field-label>
+  <ng-container *ngIf="value && value[valueProp]">
+    <samplicity-display-translation class="static-text" [values]="value[valueProp]"></samplicity-display-translation>
+  </ng-container>
+
+  <div *ngIf="!value || !value[valueProp]" class="static-text">{{value || value === 0 ? value : ''}}</div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+</div>

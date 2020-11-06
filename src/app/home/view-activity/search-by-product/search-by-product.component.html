@@ -1,0 +1,27 @@
+<div class="search-container light-expansion">
+    <mat-expansion-panel hideToggle disabled expanded=true>
+        <div class="d-flex" (click)="back()">
+            <i class="material-icons">keyboard_arrow_left</i>
+            <a>Back</a>
+        </div>
+        <h2>Search Activities by Product</h2>
+        <p><i>Please enter the following details to narrow down the search results.</i></p>
+        <form action="">
+            <div class="form-group">
+                <label for="productID">Product ID</label>
+                <input type="text" id="productID" class="form-control" name="productID"
+                    placeholder="Enter Product ID" />
+            </div>
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" class="form-control" name="productName"
+                    placeholder="Enter Product Name" />
+            </div>
+
+            <div class="d-flex">
+                <button class="btn btn-primary" style="margin-right: 15px;" routerLink="/products">Search</button>
+                <button class="btn btn-default" routerLink="/products">Skip And Continue</button>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</div>

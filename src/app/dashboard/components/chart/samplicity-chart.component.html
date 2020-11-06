@@ -1,0 +1,44 @@
+<samplicity-form-section [header]="title" [headerParameters]="{count: count}" [isCard]="true" *ngIf="isCollapsible; else nonCollapsible">
+  <div *ngIf="showNavpanel" class="d-flex align-content-center align-middle">
+    <div>
+      <button class="unstyled-button" *ngIf="!disableLeftArrow" (click)="monthChangeClicked('left')">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button class="unstyled-button" *ngIf="disableLeftArrow" disabled="true">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+    </div>
+    <div class="ml-auto mr-auto"><span>{{displayValue}}</span></div>
+    <div><button class="unstyled-button" *ngIf="!disableRightArrow" (click)="monthChangeClicked('right')">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <button class="unstyled-button" *ngIf="disableRightArrow" disabled="true">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="noData" class="d-flex justify-content-center">
+    <p l10nTranslate><em>{{noRecordsMessage}}</em></p>
+  </div>
+  <div *ngIf="showNoOrdersMessage && noData" class="d-flex justify-content-center">
+    <p l10nTranslate><em>Dashboard.Charts.Orders.NoOrdersPastStatus</em></p>
+  </div>
+  <div class="chart-container" *ngIf="!noData">
+    <canvas baseChart [chartType]="config.type" [options]="options" [legend]="legend" [datasets]="datasets" [labels]="labels"
+      [colors]="config.colors" (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</samplicity-form-section>
+
+<ng-template #nonCollapsible>
+  <samplicity-form-primary-well [header]="title" [headerParameters]="{count: count}">
+    <div *ngIf="noData" class="d-flex justify-content-center">
+      <p l10nTranslate><em>{{noRecordsMessage}}</em></p>
+    </div>
+    <div class="chart-container" *ngIf="!noData">
+      <canvas baseChart [chartType]="config.type" [options]="options" [legend]="legend" [datasets]="datasets" [labels]="labels"
+        [colors]="config.colors" (chartClick)="chartClicked($event)">
+      </canvas>
+    </div>
+  </samplicity-form-primary-well>
+</ng-template>

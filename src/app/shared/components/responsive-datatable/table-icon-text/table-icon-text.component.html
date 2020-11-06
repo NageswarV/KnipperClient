@@ -1,0 +1,11 @@
+<div class="icon-container d-flex align-items-center" [class.justify-content-center]="center">
+  <div *ngIf="showIcon" class="icon {{iconClass}}">
+    <mat-icon>{{icon}}</mat-icon>
+  </div>
+  <div *ngIf="iconText" class="icon-text {{iconClass}} {{textClass}}">
+    <p>{{iconText}}</p>
+  </div>
+</div>
+<div *ngIf="iconTextExpanded" class="icon-text-expanded {{textClass}}">
+  <b>{{iconTextExpanded}}</b>
+</div>

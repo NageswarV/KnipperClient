@@ -1,0 +1,117 @@
+<div class="panel panel-accordion filter-container">
+    <div class="panel-accordion-buttons">
+        <button class="btn btn-primary btn-sm" (click)="onSubmit()" translate="yes">APPLY FILTERS</button>
+        <button class="btn btn-default btn-sm reset" (click)="resetFilter()" translate="yes">Reset</button>
+    </div>
+    <br />
+    <ngb-accordion #accordian="ngbAccordion"
+        activeIds="ngb-panel-product, ngb-panel-product-expiring, ngb-panel-colored-signal,">
+
+        <ngb-panel id="ngb-panel-product">
+            <ng-template ngbPanelTitle>
+                <div class="accordion-label"><span translate="yes">Product Filters</span></div>
+                <div class="accordion-caret">
+                    <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                    <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <input type="text" id="productId" name="productId" class="form-control" placeholder="Product ID" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="productName" name="productName" class="form-control"
+                        placeholder="Product Name" [(ngModel)]='productName' />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="productType" name="productType" class="form-control"
+                        placeholder="Product Type" />
+                </div>
+                <div class="form-group">
+                    <label for="status" style="margin-bottom: 0;color: #565656;">Fulfillment Party</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Knipper Fulfilled
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Client Name Fulfilled
+                        </label>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel id="ngb-panel-product-expiring">
+            <ng-template ngbPanelTitle>
+                <div class="accordion-label"><span translate="yes">Product Expiring Between</span></div>
+                <div class="accordion-caret">
+                    <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                    <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <!-- <label for="orderReceivedFrom" style="color: #565656;margin-bottom: 8px;">Received From</label> -->
+                    <div class="datepicker-form">
+                        <my-date-picker name="startDate" id="startDate" type="date" [options]="myDatePickerOptions"
+                            sgValidateDatePicker>
+                        </my-date-picker>
+                        <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                            [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                        <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                            [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                        </sg-field-validation> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="endDate" style="color: #565656;margin-bottom: 8px;">--</label>
+                    <div class="datepicker-form">
+                        <my-date-picker name="endDate" id="endDate" type="date" [options]="myDatePickerOptions"
+                            sgValidateDatePicker>
+                        </my-date-picker>
+                        <!-- <sg-field-validation [message]="'repportal-validation-allocation-startdaterequired'"
+                            [hidden]="startDate.valid || startDate.pristine"></sg-field-validation>
+                        <sg-field-validation [message]="'repportal-validation-allocation-startbeforeend'"
+                            [hidden]="!startDateBeforeEnd || startDate.pristine || endDate.pristine">
+                        </sg-field-validation> -->
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+
+        <ngb-panel id="ngb-panel-colored-signal">
+            <ng-template ngbPanelTitle>
+                <div class="accordion-label"><span translate="yes">Colored Signal Filters</span></div>
+                <div class="accordion-caret">
+                    <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                    <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Display records with <span class="red-badge">Red</span> singals
+                        </label>
+                        <div class="info-div">
+                            <i class="material-icons" style="font-size:13px">info</i>
+                            Records with red singals are usually with negative status such as “Error” or “Canceled” etc.
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Display records with <span class="yellow-badge">Yellow</span> singals
+                        </label>
+                        <div class="info-div">
+                            <i class="material-icons" style="font-size:13px">info</i>
+                            Records with yellow singals are usually with attentive or transitional status such as
+                            “Warning” or “Pending” etc.
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

@@ -1,0 +1,24 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-warning]="warningMessage" [class.samp-no-label]="noLabel"
+  [class.is-invalid]="control && control.invalid && control.dirty && control.touched || isInvalid">
+  <samplicity-field-label *ngIf="label && label != null && label != undefined" [inputId]="id" [label]="label" [labelTranslated]="labelTranslated"
+    [required]="!hideRequiredLabel && required || forceRequiredLabel" [labelParameters]="labelParameters"></samplicity-field-label>
+  <div *ngIf="control.enabled" class="input-group center-input-group-layout">
+    <!-- <input *ngIf="disabled" [attr.disabled]="disabled" #textInput type="search" class="form-control" id="{{id}}" [placeholder]="translatedPlaceholder" formControlName="{{name}}"> -->
+    <input [attr.disabled]="disabled ? true : null" [disabled]="disabled" #textInput type="search" class="form-control" [min]="min" [max]="max" [matDatepicker]="picker" id="{{id}}" [placeholder]="translatedPlaceholder" formControlName="{{name}}" [matDatepickerFilter]="filter">
+    <mat-datepicker #picker [disabled]="disabled" ></mat-datepicker>
+    <span class="input-group-btn">
+      <button [disabled]="disabled" mat-raised-button (click)="setLocale(); picker.open()"
+              color="primary" class="btn btn-secondary datepicker-btn" type="button">
+        <mat-icon>date_range</mat-icon>
+      </button>
+    </span>
+    <span class="static-text date-before-hyphen" *ngIf="dateBefore && hasHyphen">-</span>
+  </div>
+  <div *ngIf="control.disabled">
+    <p class="readonly">{{control.value | momentDate}}</p>
+  </div>
+  <samplicity-field-errors [control]="control"></samplicity-field-errors>
+  <samplicity-field-warnings [message]="warningMessage" [control]="control"></samplicity-field-warnings>
+  <samplicity-field-description *ngIf="description" [description]="description"></samplicity-field-description>
+  <span *ngIf="!hideRequiredLabel && !label && required" class="required" l10nTranslate>Required</span>
+</div>

@@ -1,0 +1,57 @@
+﻿@import "../../style/main.scss";
+
+@media screen and (max-width: 767px) {
+    .expanded-text {
+        display: none;
+    }
+}
+
+.pagination-wrapper {
+    select {
+        margin-top: 11px;
+        width: 9%;
+        height: 35px;
+        margin-left: 10px;
+    }
+}
+
+.pagination-nav {
+    background: none;
+    text-align: end;
+    height: auto;
+
+    ul {
+        margin: 0;
+
+        li > span {
+            background-color: #e6e6e6;
+        }
+
+        .active {
+            border: none;
+
+            span {
+                background-color: #ffcd00;
+            }
+        }
+    }
+}
+.box {
+    box-sizing: border-box;
+    width: 35px;
+    height:35px;
+    float: left;
+    background-color:lightgrey;
+    text-align:center;
+    padding:5px
+  }
+  .activebox{
+    box-sizing: border-box;
+    width: 37px;
+    height:37px;
+    float: left;
+    background-color:blue;
+    color:white;
+    text-align:center;
+    padding:5px
+  }

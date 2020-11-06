@@ -1,0 +1,212 @@
+.expansionPanel {
+    margin: 2em 0 2em 0;
+}
+
+.primary-expansion {
+    color: white;
+    margin-top: 0;
+    font-family: "Open Sans";
+    background-color: white;
+    mat-expansion-panel-header {
+        background-color: #00488a;
+        height: fit-content !important;
+        padding: 15px;
+        align-items: baseline;
+    }
+
+    mat-panel-title {
+        display: block !important;
+    }
+}
+
+// ::ng-deep .mat-expansion-indicator {
+//     margin-bottom: auto !important;
+// }
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0px;
+}
+
+.exppanel-heading {
+    opacity: 0.7;
+    // font-size: 0.8em;
+    font-size: 12px;
+}
+
+.exppanel-value {
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.value-box {
+    // margin: auto auto auto 0;
+    flex: auto;
+}
+
+.mat-expansion-indicator {
+    margin-bottom: auto !important;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    color: black;
+}
+
+.tab-data {
+    font-size: 1em;
+    color: gray;
+    width: 33.333%;
+    font-weight: 500;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: solid 0.1px #cccccc;
+    transition: color 0.1s ease-in-out, border-bottom 0.1s ease-in-out, font-weight 0.1s ease-in-out;
+}
+
+.selected-tab {
+    border-bottom: solid 2px #00488a !important;
+    color: #00488a;
+    font-weight: bold;
+    transition: color 0.1s ease-in-out, border-bottom 0.1s ease-in-out, font-weight 0.1s ease-in-out;
+}
+
+.button-filter {
+    margin-top: 16px;
+    padding-left: 16px;
+    display: flex;
+    input {
+        margin: 0 !important;
+        width: 177px;
+        padding: 5px 15px 5px 15px !important;
+        cursor: pointer;
+    }
+}
+
+.status-filter {
+    margin-top: 16px;
+    display: flex;
+    padding-left: 16px;
+    margin-bottom: 16px;
+    .label {
+        font-size: 1em;
+        color: gray;
+        font-weight: 500;
+        padding: 0 !important;
+        margin-right: 1em;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    select {
+        width: 200px;
+        height: 32px;
+        font-size: 0.8em;
+        color: gray;
+        opacity: 0.7;
+        font-weight: 600;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+::ng-deep samplicity-responsive-datatable > * {
+    color: black;
+    border: none !important;
+}
+
+.mat-rectangle {
+    display: flex;
+    width: 450px;
+    height: 23px;
+    border-radius: 11.5px;
+    background-image: linear-gradient(to left, var(--knipper-blue), #003668);
+    margin-right: auto;
+    margin-left: 2rem;
+}
+
+.knipper-logo {
+    margin-right: 1em;
+    width: 66px;
+    height: 23px;
+    border-radius: 12px;
+    box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.5);
+    border: solid 1px #349bfe;
+    background-color: var(--white);
+    background-image: url("/resources/images/assets-logo-knipper-white-labeled-copy.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: none;
+}
+
+.textWarning {
+    color: var(--sunflower-yellow);
+}
+.textError {
+    color: var(--knipper-red);
+}
+.textActive {
+    color: var(--wintergreen);
+}
+.success-recon {
+    color: var(--spruce);
+}
+.ml-1 {
+    margin-left: 1rem;
+}
+.id-color {
+    color: #23527c;
+}
+.active-link {
+    color: var(--spruce);
+}
+.broken-link {
+    color: #979797;
+}
+.fs-20 {
+    font-size: 20px;
+}
+.mr-05 {
+    margin-right: 0.5rem;
+}
+.link {
+    color: #01569c;
+}
+.mr-1 {
+    margin-right: 1rem;
+}
+
+.material-icons {
+    font-size: 18px;
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.image-icon {
+    color: #00488a;
+}
+
+.checkMark-icon {
+    color: #0d6c38;
+    margin-left: 2px;
+}
+
+.icon-focus:hover {
+    background-color: #01569c;
+}
+
+.Rectangle-color {
+    background-color: #01569c;
+}
+
+.mat-rectangle {
+    display: flex;
+    margin-right: auto;
+    margin-left: 2rem;
+    width: 450px;
+    height: 23px;
+    border-radius: 11.5px;
+    background-image: linear-gradient(to left, var(--knipper-blue), #003668);
+}

@@ -1,0 +1,31 @@
+<div class="input-group" [class.is-invalid]="(exceedsMax || exceedsMin) && control.dirty || isInvalid">
+  <input class="form-control mr-2" [class.is-invalid]="(!hour || invalidHour) && hourInput.dirty  && hourInput.touched" #hourInput="ngModel" type="text" placeholder="HH" [(ngModel)]="hour"
+    (change)="updateTime()" (click)="onTouched()" [textMask]="{mask: masks['positiveInteger']}"
+    maxlength="2" [disabled]="isDisabled">
+  <span class="time-colon">:</span>
+  <input class="form-control ml-2" [class.is-invalid]="(!minute || invalidMinute) && minuteInput.dirty && minuteInput.touched" #minuteInput="ngModel" type="text" placeholder="MM" [(ngModel)]="minute"
+    (change)="updateTime()"  (click)="onTouched()" [textMask]="{mask: masks['positiveInteger']}"
+    maxlength="2" [disabled]="isDisabled">
+  <select class="form-control mr-2" (click)="onTouched()" [(ngModel)]="amPm" id="options" (change)="updateTime()" [disabled]="isDisabled">
+      <option value="am" l10nTranslate >Forms.AM</option>
+      <option value="pm" l10nTranslate selected="selected">Forms.PM</option>
+  </select>
+  <span class="form-control timezone">EST</span>
+</div>
+<samplicity-field-errors *ngIf="(!invalidHour && !invalidMinute && !exceedsMin && !exceedsMax) || (!hour) || (!minute)"  [control]="control"></samplicity-field-errors>
+<small *ngIf="invalidHour && ((hourInput.dirty && hourInput.touched) || control.dirty)" class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+  <mat-icon color="danger">error</mat-icon>
+  <span l10nTranslate>Validation.TimeHoursInvalid</span>
+</small>
+<small *ngIf="invalidMinute && ((minuteInput.dirty && minuteInput.touched) || control.dirty)" class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+  <mat-icon color="danger">error</mat-icon>
+  <span l10nTranslate>Validation.TimeMinsInvalid</span>
+</small>
+<small *ngIf="(!invalidHour && !invalidMinute) && minTime && exceedsMin && control.dirty" class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+  <mat-icon color="danger">error</mat-icon>
+  <span>{{'Validation.TimeMinInvalid' | translate:lang:{ maxTime: minTime.format('hh:mm a') } }}</span>
+</small>
+<small *ngIf="(!invalidHour && !invalidMinute) && maxTime && exceedsMax && control.dirty" class="invalid-feedback d-flex align-items-middle field-errors" [style.display]="'block'" role="alert">
+  <mat-icon color="danger">error</mat-icon>
+  <span>{{'Validation.TimeMaxInvalid' | translate:lang:{ maxTime: maxTime.format('hh:mm a') } }}</span>
+</small>

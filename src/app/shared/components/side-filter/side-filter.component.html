@@ -1,0 +1,19 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <div class="sidenav-filter-header">
+      <button *ngIf="isFilter" class="mat-raised-button mb-1 mat-default sidefilter-filter-btn" (click)="filter.emit()" l10nTranslate>ApplyFilter</button>
+      <span *ngIf="isFilter" class="link sidefilter-clear-btn"><a (click)="clear.emit()" l10nTranslate>ResetFilter</a></span>
+    </div>
+    <div class="sidenav-filter-content">
+      <ng-content select="[filter-content]"></ng-content>
+    </div>
+  </mat-sidenav>
+  <div class="filter-strip shadow-2" (click)="sidenav.toggle(); toggleFilter()">
+    <mat-icon [class.open]="sidenav.opened">chevron_right</mat-icon>
+    <p l10nTranslate>{{sidebarTitle}}</p>
+  </div>
+  <div class="container-fluid container-with-sidenav">
+    <ng-content select="[page-content]"></ng-content>
+  </div>
+  <samplicity-footer></samplicity-footer>
+</mat-sidenav-container>

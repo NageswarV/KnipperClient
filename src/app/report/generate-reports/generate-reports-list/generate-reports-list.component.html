@@ -1,0 +1,38 @@
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8">
+        <h1>GenerateReports({{collection?.length}})</h1>
+      </div>
+    </div>
+    <div class="row mt-1" [ngBusy]="busyPromises.Reports">
+      <div class="col-sm-12">
+        <sg-grid [columns]="columns" emptyText="No Reports" [items]="collection" [totalRecordCount]="collection?.length"
+          [pageSize]="10" [currentPage]="currentPage" [totalPages]="totalPages" [pages]="pages"
+          [disablePaginationFloating]="true" (emitPageChange)="paginate($event)" [fromReport]="fromReport"
+          [loadMorePagination]="true" class="generateReports">
+          <ng-template let-report>
+            <td class="col-xs-2 Cell-Text"><a role="button" (click)="displayDetails($event)">{{report.name}}</a></td>
+            <td class="col-xs-3 Cell-Text">{{report.description || " "}}</td>
+            <td class="col-xs-2 Cell-Text">{{report.modules[0].module || " "}}</td>
+            <td class="col-xs-2 Cell-Text">{{report.category || " "}}</td>
+          </ng-template>
+        </sg-grid>
+      </div>
+    </div>
+
+
+
+
+<ng-template #privacypolicy let-c="close">
+  <div class="modal-body margin-bottom">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <p translate="yes">repportal-privacy-policy-content-msg</p>
+      <p translate="yes">repportal-privacy-policy-content-cookie-msg</p>
+      <p translate="yes">repportal-privacy-policy-content-link <span><a target="_blank"
+            href="https://www.knipper.com/privacy-policy/"
+            translate="yes">repportal-privacy-policy-content-here-link</a></span></p>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-default" (click)="c($event);" translate="yes">repportal-authentication-ok</button>
+    </div>
+  </div>
+</ng-template>

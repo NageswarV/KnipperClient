@@ -1,0 +1,97 @@
+<div class="panel panel-accordion filter-container">
+    <div class="panel-accordion-buttons">
+        <button class="btn btn-primary btn-sm" (click)="onSubmit()" translate="yes">APPLY FILTERS</button>
+        <button class="btn btn-default btn-sm reset" (click)="resetFilter()" translate="yes">Reset</button>
+    </div>
+    <br />
+    <ngb-accordion #accordian="ngbAccordion" activeIds="ngb-panel-report">
+
+        <ngb-panel id="ngb-panel-report">
+            <ng-template ngbPanelTitle>
+                <div class="flex-box">
+                    <div class="accordion-label"><span translate="yes">Report Filters</span></div>
+                    <div class="accordion-caret">
+                        <i class="material-icons caret-up dropdown">keyboard_arrow_up</i>
+                        <i class="material-icons caret-down dropdown">keyboard_arrow_down</i>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="form-group">
+                    <label for="orderReceivedFrom" style="color: #565656;margin-bottom: 8px;">Report Uploaded
+                        Date</label>
+                    <div class="datepicker-form">
+                        <my-date-picker name="reportUploadedDate" id="reportUploadedDate" type="date"
+                            [options]="myDatePickerOptions" sgValidateDatePicker>
+                        </my-date-picker>
+                    </div>
+                </div>
+                <div>
+                    <label for="uploader" style="color: #565656;margin-bottom: 8px;">Uploader</label>
+                    <div class="form-group">
+                        <input type="text" id="uploaderFirstName" name="uploaderFirstName" class="form-control"
+                            placeholder="Uploader First Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="uploaderLastName" name="uploaderLastName" class="form-control"
+                            placeholder="Uploader Last Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reportrType" style="color: #565656;margin-bottom: 8px;">Report Type</label>
+                    <select class="form-control" id="designation" name="designation">
+                        <option>--All--</option>
+                        <option>Open AOC Report</option>
+                        <option>Return Report</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reportCategory" style="margin-bottom: 0;color: #565656;">Report Category</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">--All--
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Allocation
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Inventory
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Order
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">Program Configuration
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reportCategory" style="margin-bottom: 0;color: #565656;">Report Category</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">.CSV
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">.PDF
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">.XLSX
+                        </label>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

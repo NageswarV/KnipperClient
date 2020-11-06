@@ -1,0 +1,166 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <br />
+            <div ><a class="nav-breadcrumb" [routerLink]="breadCrumbNavigationUrl">{{breadCrumbs}}</a> /
+                Order Details: {{orderID}}</div>
+        </div>
+    </div>
+    <div
+        style="display: flex; width: 159px;height: 28px;border-radius: 14px;background-color: #01569c;color: white; text-align: center; margin-top: 3rem;">
+        <div class="Direct-to-Practition">Direct to Practitioner</div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-xs-12 col-md-6 col-xl-2">
+            <div class="head-left">Order: {{orderID}} <mat-icon>launch</mat-icon>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-xl-2">
+            <div class="pull-right form-inline">
+                <input type="button" class="btn btn-default" value="VIEW ORDER REQUEST FORM" />
+            </div>
+        </div>
+    </div>
+    <div class="busy-container">
+        <div [ngBusy]="busyPromise">
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-size: 24px !important;font-weight: bold !important;">
+                        Order Header Details
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="d-flex flex-row" style="width: 100%; padding-left: 24px; padding-right: 24px;">
+                    <div style="width: 25%;">
+                        <div class="exphead"> External Order Number</div>
+                        <div class="expvalue">{{orderDetails?.externalOrderNumber}}</div>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="exphead"> Order Received Date</div>
+                        <div class="expvalue">{{orderDetails?.orderDate}}</div>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="exphead"> Parent Order</div>
+                        <div class="expvalue">{{orderDetails?.parentOrder}}</div>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="exphead"> Order Status</div>
+                        <div style="display: flex;flex-wrap: nowrap;">
+                            <mat-icon class="tiny error float-left" *ngIf="checkStatusIsError(orderDetails?.status)">
+                                info</mat-icon>
+                            <mat-icon class="tiny warning float-left"
+                                *ngIf="checkStatusIsWarning(orderDetails?.status)">warning</mat-icon>
+                            <div class="expvalue" [class.warning]="checkStatusIsWarning(orderDetails?.status)"
+                                [class.error]="checkStatusIsError(orderDetails?.status)"> {{orderDetails?.status}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex flex-row" style="width: 100%; padding-left: 24px; padding-right: 24px;">
+                    <div style="width: 25%;">
+                        <div class="exphead"> Job ID</div>
+                        <div class="expvalue">{{orderDetails?.jobId}}</div>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="exphead"> Status Reason Type(s)</div>
+                        <div class="expvalue"></div>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="exphead"> Program Name</div>
+                        <div class="expvalue">{{orderDetails?.programName}}</div>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="exphead"> Modified By</div>
+                        <div class="expvalue">{{orderDetails?.modifiedByUsername}}, {{orderDetails?.modifiedByTime}}
+                        </div>
+                    </div>
+                </div>
+
+                <div style="width: 100%; padding-left: 24px; padding-right: 24px;" *ngIf="!loading">
+                    <div class="form-group">
+                        <label class="with-colon" style="margin-bottom: 10px;">Order Life Cycle</label>
+                        <samplicity-stepper [stepHeaders]="lifeCycleHeaders"></samplicity-stepper>
+                    </div>
+                </div>
+
+                <div style="width: 100%; padding: 24px;">
+                    <mat-expansion-panel class="inner-expansion" expanded=true>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title style="font-size: 18px !important;font-weight: bold !important;">
+                                Order Header Details
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="d-flex flex-row"
+                            style="width: 100%; padding-left: 24px; padding-right: 24px;padding-bottom: 24px;">
+                            <div style="width: 20%;">
+                                <div class="exphead"> Order Source Type </div>
+                                <div class="expvalue"> {{orderDetails?.orderSource}}</div>
+                            </div>
+                            <div style="width: 20%;">
+                                <div class="exphead"> Related Offer ID </div>
+                                <div class="expvalue">{{orderDetails?.relatedOfferId}}</div>
+                            </div>
+                            <div style="width: 20%;">
+                                <div class="exphead"> Form ID </div>
+                                <div class="expvalue">{{orderDetails?.formId}}</div>
+                            </div>
+                            <div style="width: 20%;">
+                                <div class="exphead"> Batch Number </div>
+                                <div class="expvalue">{{orderDetails?.batchNumber}}</div>
+                            </div>
+                            <div style="width: 20%;">
+                                <div class="exphead"> Batch Date </div>
+                                <div class="expvalue">{{orderDetails?.batchDate}}</div>
+                            </div>
+                        </div>
+
+                    </mat-expansion-panel>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="expansionPanel light-expansion" expanded=true>
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-size: 24px !important;font-weight: bold !important;">
+                        Products ({{orderDetails?.orderLineItems.length}})
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <samplicity-responsive-datatable #table [perPage]="perPage" [selectEnabled]=false [dialog]="false"
+                    name="hcpTableSet" [columns]="columnSchema" [disableDefaultPagination]="true"
+                    (showMoreClick)="showMoreClick()" (showLessClick)="showLessClick()" [staticItems]="orderLineItems"
+                    [showEndOfList]="false" [disableSorting]="loading" (columnSortChange)="updateColumnSort($event)">
+                    <ng-template let-item="item" let-column="column">
+                        <div *ngIf="column?.name === 'delete' && item.status !== 'Canceled'"
+                            style="display:flex;width: 36px;height: 36px;  border: solid 2px #bd0004;background-color: #bd0004;border-radius: 2px;color: white;">
+                            <div style="height: fit-content; width: fit-content; margin: auto;"><mat-icon style="font-size:2em;height: fit-content; width: fit-content;">delete</mat-icon></div>
+                        </div>
+                        <div *ngIf="column?.name === 'productName'">
+                            {{item?.productName}}<br /> ({{item?.productCode}})
+                        </div>
+                        <div *ngIf="column?.name === 'productDescription'" style="width: 240px;"
+                        [innerHtml]=" (item?.productDescription) | safeHtml"
+                        >
+                        </div>
+                        <div *ngIf="column?.name === 'orderQty'">
+                            {{item?.orderQty}} <span *ngIf="item?.uom">/ {{item.uom}}</span>
+                        </div>
+                        <div *ngIf="column?.name === 'adjustedOrderQty'">
+                            {{item?.adjustedOrderQty}} <span *ngIf="item?.uom">/ {{item.uom}}</span>
+                        </div>
+                        <div *ngIf="column?.name === 'shippedQty'">
+                            {{item?.shippedQty}} <span *ngIf="item?.uom">/ {{item.uom}}</span>
+                        </div>
+                        <div *ngIf="column?.name === 'deliveredQty'">
+                            {{item?.deliveredQty}} <span *ngIf="item?.uom">/ {{item.uom}}</span>
+                        </div>
+                        <div *ngIf="column?.name === 'adjustedDeliveredQty'">
+                            {{item?.adjustedDeliveredQty}} <span *ngIf="item?.uom">/ {{item.uom}}</span>
+                        </div>
+                        <div *ngIf="column?.name === 'returnedQty'">
+                            {{item?.returnedQty}} <span *ngIf="item?.uom">/ {{item.uom}}</span>
+                        </div>
+                    </ng-template>
+                </samplicity-responsive-datatable>
+            </mat-expansion-panel>
+        </div>
+    </div>
+</div>

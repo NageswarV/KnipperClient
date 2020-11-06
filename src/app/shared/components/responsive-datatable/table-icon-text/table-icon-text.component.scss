@@ -1,0 +1,40 @@
+@import '../../../../styles/variables';
+
+mat-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.default mat-icon, .default p, .charcoal mat-icon, .charcoal p {
+  color: $charcoal !important;
+}
+
+.valid mat-icon, .valid p, .green mat-icon, .green p {
+  color: $green !important;
+}
+
+.error mat-icon, .error p, .red mat-icon, .red p {
+  color: $knipper-red !important;
+}
+
+.warning mat-icon, .warning p, .darkOrange mat-icon, .darkOrange p {
+  color: $active-dark-orange !important;
+}
+
+.icon {
+  height: 1rem;
+  padding-right: 1rem;
+}
+
+.icon-text {
+  height: 1rem;
+
+  p {
+    padding-bottom: 0px;
+    margin-top: 0.125rem;
+  }
+}
+
+.icon-text-expanded {
+  display: none;
+}

@@ -1,0 +1,10 @@
+{
+  "appVersion": "1.0.0.0",
+  "debugMode": "true",
+  "clientId": "ClientPortal.Web",
+  "webApiUrl": "http://localhost:5200",
+  "tokenEndPointUri": "/Token",
+  "refreshTokenLiftime": "1200000",
+  "enableAppInsights": "false",
+  "appInsightsInstrumentationKey": ""
+}

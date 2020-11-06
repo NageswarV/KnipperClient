@@ -1,0 +1,31 @@
+<div class="form-group" [formGroup]="parentFormGroup" [class.is-warning]="warning && showWarning"
+  [class.is-invalid]="isInvalid || control && control.invalid && control.dirty && control.touched" [class.samp-no-label]="noLabel">
+  <samplicity-field-label *ngIf="!table && (!!label || isInlineRequired)" [colon]="colon" [inputId]="id" [labelTranslated]="labelTranslated"
+    [label]="label" [required]="required || forceRequiredLabel || isRequired" [labelParameters]="labelParameters"></samplicity-field-label>
+    <samplicity-field-description *ngIf="description && descriptionAboveInput" [description]="description"></samplicity-field-description>
+  <div *ngIf="control && (!control.disabled || disabledType === 'disabled')" class="addon-wrapper {{inputWidth}}" [ngClass]="{'inline-required': isInlineRequired, 'input-group': addonIconLeft || addonTextLeft || addonIconRight || addonTextRight || isInlineRequired}" >
+    <span class="input-group-addon left" *ngIf="addonIconLeft || addonTextLeft">
+      <mat-icon *ngIf="addonIconLeft">{{addonIconLeft}}</mat-icon>
+      <span *ngIf="addonTextLeft">{{inputTextAlreadyTranslated ? addonTextLeft : addonTextLeft | translate:lang}}</span>
+    </span>
+    <input *ngIf="!textMask" [type]="type" [attr.disabled]="disabled ? '' : null" class="form-control" [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''" [formControlName]="name"
+           [attr.maxlength]="maxLength" (blur)="onBlur()" (keyup)="keyUp.emit($event)">
+    <input *ngIf="textMask" [type]="type" [attr.disabled]="disabled ? '' : null" class="form-control" [id]="id" [placeholder]="placeholder ? (placeholder | translate:lang) : ''" [formControlName]="name"
+           [attr.maxlength]="maxLength" [textMask]="{mask: masks[textMask]}" (blur)="onBlur()" (keyup)="keyUp.emit($event)">
+    <span class="input-group-addon" *ngIf="addonIconRight || addonTextRight">
+      <mat-icon *ngIf="addonIconRight">{{addonIconRight}}</mat-icon>
+      <span *ngIf="addonTextRight">{{inputTextAlreadyTranslated ? addonTextRight : addonTextRight | translate:lang}}</span>
+    </span>
+    <span class="required ml-2" *ngIf="table && (required || forceRequiredLabel)" l10nTranslate>Required</span>
+  </div>
+  <div *ngIf="control && control.disabled && disabledType === 'readonly'" >
+    <p class="readonly">
+      <span *ngIf="addonTextLeft">{{inputTextAlreadyTranslated ? addonTextLeft : addonTextLeft | translate:lang}}</span>
+      <span>{{!!control.value ? control.value : ''}}</span>
+      <span *ngIf="addonTextRight">{{inputTextAlreadyTranslated ? addonTextRight : addonTextRight | translate:lang}}</span>
+    </p>
+  </div>
+  <samplicity-field-errors [message]="error" [control]="control"></samplicity-field-errors>
+  <samplicity-field-warnings *ngIf="showWarning" [message]="warning" [control]="control" ></samplicity-field-warnings>
+  <samplicity-field-description *ngIf="description && !descriptionAboveInput && !control.disabled" [description]="description"></samplicity-field-description>
+</div>

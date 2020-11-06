@@ -1,0 +1,44 @@
+<div class="container" *ngIf="!isHidden">
+  <div class="row footer-content">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img src="../../resources/images/logo.jpg"
+                 class="media-object"
+                 alt="Logo" />
+          </a>
+        </div>
+        <div class="media-body">
+          <p class="media-body_content" translate="yes">
+            <span translate="yes">hcpportal-knipper-footer-content</span>
+            <span translate="yes" class="center-block">hcpportal-knipper-footer-content-point1</span>
+            <span translate="yes" class="center-block">hcpportal-knipper-footer-content-point2</span>
+            <span translate="yes" class="center-block">hcpportal-knipper-footer-content-point3</span>
+            <span translate="yes" class="center-block">hcpportal-knipper-footer-content-point4</span>
+            <span translate="yes" class="center-block">hcpportal-knipper-footer-content-point5</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer container-fluid">
+  <div class="footer-line"></div>
+  <div class="row footer-content">
+    <div class="col-xs-12">
+      <span class="pull-center nofloat blockcenter768">
+        Customer Support: 1-800-123-4567 | Copyright 2020. All Rights Reserved.
+      </span>
+    </div>
+  </div>
+  <div class="row footer-content">
+      <div class="col-xs-12">
+      <span class="pull-center nofloat clearfix blockcenter768">
+        <a [routerLink]="['/safeandsecure']" translate="yes">Safe & Secure</a>
+        <span> | </span>
+        <a href="https://www.knipper.com/privacy-policy/" target="_blank" translate="yes">Privacy Policy</a>
+      </span>
+    </div>
+  </div>
+</div>

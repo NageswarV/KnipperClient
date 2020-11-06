@@ -1,0 +1,18 @@
+<div class="dialog-header dialog-info d-flex">
+  <span class="dialog-header-text align-middle">{{modalTitle}}</span>
+  <mat-icon class="dialog-close align-middle ml-auto" (click)="closeModal()">close</mat-icon>
+</div>
+<div class="dialog-body">
+  <div class="col-12"><label class="with-colon">{{tableTitle}}</label>
+    <div *ngIf="orderListItems.length == 0" class="d-flex justify-content-center">
+      <p l10nTranslate><em>Dashboard.Charts.Orders.NoOrdersMessage</em></p>
+    </div>
+    <samplicity-responsive-datatable *ngIf="orderListItems.length > 0" [columns]="orderListColumns" [staticItems]="orderListItems" [disableSorting]="loading">
+    </samplicity-responsive-datatable>
+  </div>
+</div>
+<div class="dialog-footer d-flex">
+  <button mat-raised-button (click)="closeModal()" color="default" l10nTranslate>
+    <span l10nTranslate>Dashboard.OrderListModal.OK</span>
+  </button>
+</div>

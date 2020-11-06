@@ -1,0 +1,21 @@
+<ng-template #dialog>
+  <ng-container *ngIf="options">
+    <div class="dialog-header d-flex">
+      <h3 class="dialog-header-text align-middle">
+        <span l10nTranslate>{{options?.dialogTitle}}</span>
+        <span>{{options?.entityName}}</span>
+      </h3>
+      <mat-icon aria-label="close" class="dialog-close align-middle ml-auto" (click)="dialogRef.close()">close</mat-icon>
+    </div>
+    <div class="dialog-body">
+      <div class="modal-form-container">
+        <label class="table-label" l10nTranslate>{{options?.dialogMessage}}</label> <label class="table-label with-colon">{{options?.count}}</label>
+        <samplicity-responsive-datatable [staticItems]="items" [columns]="options?.columns" [disableSorting]="loading" [dialog]="true">
+        </samplicity-responsive-datatable>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button mat-raised-button (click)="dialogRef.close()" color="default" class="ml-auto float-right" type="submit" l10nTranslate>{{ options?.closeButtonText }}</button>
+    </div>
+  </ng-container>
+</ng-template>
